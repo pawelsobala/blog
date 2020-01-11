@@ -1,4 +1,4 @@
-baseurl = "https://example.com/"
+baseurl = "https://pawelsobala.netlify.com"
 publishdir = "docs"
 theme = "cocoa-eh-hugo-theme"
 builddrafts = true
@@ -11,6 +11,8 @@ title = "Pawel Sobala"
 disqusshortname = ""
 pluralizelisttitles = false
 disableKinds = ["taxonomy", "taxonomyTerm"]
+ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+
 
 [permalinks]
 blog = "blog/:slug/"
@@ -18,35 +20,31 @@ blog = "blog/:slug/"
 [params]
 dateform = "Jan 2, 2006"
 dateformfull = "Mon Jan 2 2006 15:04:05 MST"
-description = "Pawel Sobala's personal blog"
+description = "A blog by Pawel Sobala"
 # copyright = "Copyright © 2020-{year} Pawel Sobala"
 copyright = "Copyright © 2020 Pawel Sobala"
 copyrightUrl = "https://creativecommons.org/licenses/by-sa/4.0/"
 logofile = "img/logo.png"
-faviconfile = "img/logo.png"
+faviconfile = "img/favicon.ico"
 highlightjs = true
+# options for highlight.js (version, additional languages, and theme)
+highlightjsVersion = "9.11.0"
+highlightjsCDN = "https://cdn.bootcss.com"
+highlightjsLang = ["r", "yaml"]
+highlightjsTheme = "github"
 progressively = true
-share = true
-# Share to googleplus, twitter, fb, linkedin by default
-# disable by setting share_on_<social network> = false
-# example: share_on_googleplus = false
 latestpostcount = 5
-github = "pawelsobala"
-#email = "you@example.com"
-#linkedin = "john-example-aa80ue8è"
+share = true
 share_on_googleplus = false
 share_on_facebook = false
 share_on_instagram = false
+github = "pawelsobala"
 twitter = "pawel_sobala"
-#facebook = "facebook_id"
-#instagram = "instagram_id"
-#untappd = "untappd_id"
-#itch_io = "itch_io_id"
-#social_banner = "img/banner.png"
+#linkedin = "john-example-aa80ue8è"
+#email = "you@example.com"
 usesmallsummarycard = true
 posts_navigation = true
-# issoHost = "comments.domain.tld:1234"
-# githubRepo = "githubUsername/repositoryName/tree/master"
+social_banner = "img/logo.png"
 small_banner_logo = false
 
 [params.utteranc]
