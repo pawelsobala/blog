@@ -48,7 +48,7 @@ social_banner = "img/logo.png"
 
 
 [params.utteranc]
-enable = true
+enable = false
 repo = "mtn/cocoa-eh-hugo-theme"
 issueTerm = "title"
 
