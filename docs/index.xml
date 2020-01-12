@@ -68,14 +68,5 @@
 </description>
     </item>
     
-    <item>
-      <title>Projects</title>
-      <link>/projects/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/projects/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
