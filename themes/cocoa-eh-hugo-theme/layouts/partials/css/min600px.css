@@ -12,7 +12,7 @@ padding: 0 16px;
 margin-left: 100px;
 margin-right: 100px;
 {{ if .Site.Params.enlarged }}
-max-width: 825px;
+max-width: 1237px;
 {{ else }}
 max-width: 750px;
 {{ end }}
@@ -20,7 +20,7 @@ max-width: 750px;
 div.column {
 padding: 0 16px;
 {{ if .Site.Params.enlarged }}
-max-width: 825px;
+max-width: 1237px;
 {{ else }}
 max-width: 750px;
 {{ end }}
