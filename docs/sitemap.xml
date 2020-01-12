@@ -33,11 +33,6 @@
   </url>
   
   <url>
-    <loc>/tags/package/</loc>
-    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url>
@@ -53,6 +48,11 @@
   </url>
   
   <url>
+    <loc>/tags/r-package/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url>
@@ -60,6 +60,21 @@
   <url>
     <loc>/tags/tidyquant/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/hello-r-markdown/</loc>
+    <lastmod>2020-01-10T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/plot/</loc>
+    <lastmod>2020-01-10T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/regression/</loc>
+    <lastmod>2020-01-10T21:13:14-05:00</lastmod>
   </url>
   
   <url>

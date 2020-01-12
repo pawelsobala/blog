@@ -4,14 +4,8 @@ description: tq_get() function from the tidyquant library enables to download fi
 author: Pawel Sobala
 date: '2020-01-12'
 slug: analysis-of-the-tq-get-function
-toc: true
-categories:
-  - R
-tags:
-  - R Markdown
-  - import data
-  - tidyquant
-  - package
+categories: ["R"]
+tags: ["R Markdown", "import data", "tidyquant", "R package"]
 #output: 
 #  html_document:
 #    keep_md: true
@@ -24,7 +18,6 @@ tags:
 #    theme: united  # many options for theme, this one is my favorite.
 #    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
 ---
-
 
 <style>
 body {

@@ -1,15 +1,17 @@
 baseurl = "https://pawelsobala.netlify.com"
+author = "Pawel Sobala"
+title = "Pawel Sobala"
 publishdir = "docs"
+contentdir = "content"
+layoutdir = "layouts"
+languageCode = "en-US"
 theme = "cocoa-eh-hugo-theme"
 builddrafts = true
 canonifyurls = true
-contentdir = "content"
-languageCode = "en-US"
-layoutdir = "layouts"
-author = "Pawel Sobala"
-title = "Pawel Sobala"
-disqusshortname = ""
+enableEmoji = true
 pluralizelisttitles = false
+disqusshortname = ""
+googleAnalytics = ""
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 
 [permalinks]
@@ -39,11 +41,8 @@ share_on_instagram = false
 github = "pawelsobala"
 twitter = "pawel_sobala"
 linkedin = "pawel-sobala-17560310b"
-#email = "you@example.com"
-usesmallsummarycard = true
 posts_navigation = true
 social_banner = "img/logo.png"
-small_banner_logo = false
 
 [taxonomies]
   category = "categories"

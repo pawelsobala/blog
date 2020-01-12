@@ -17,7 +17,18 @@
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/analysis-of-the-tq-get-function/</guid>
-      <description>truebody {text-align: justify}IntroductionOne of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data diretcly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code.</description>
+      <description>body {text-align: justify}IntroductionOne of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data diretcly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/blog/hello-r-markdown/</link>
+      <pubDate>Fri, 10 Jan 2020 21:13:14 -0500</pubDate>
+      
+      <guid>/blog/hello-r-markdown/</guid>
+      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
     </item>
     
   </channel>
