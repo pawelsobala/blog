@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/ideas/</loc>
+    <lastmod>2020-01-12T09:00:37-12:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-01-12T09:00:37-12:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/analysis-of-the-tq-get-function/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url>
@@ -13,27 +23,22 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/about/</loc>
     <lastmod>2020-01-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/projects/small-project/</loc>
+    <loc>/project/small-project/</loc>
     <lastmod>2017-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/projects/</loc>
+    <loc>/project/</loc>
     <lastmod>2017-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/projects/projects/</loc>
+    <loc>/project/project/</loc>
     <lastmod>2015-08-19T20:29:37-07:00</lastmod>
   </url>
   

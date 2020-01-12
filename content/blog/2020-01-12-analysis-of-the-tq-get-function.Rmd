@@ -12,17 +12,17 @@ tags:
   - import data
   - tidyquant
   - package
-output: 
-  html_document:
-    keep_md: true
-    toc: true
-    toc_depth: 3
-    toc_float: 
-      collapsed: false
-      smooth_scroll: true
-    number_sections: true  ## if you want number sections at each table header
-    theme: united  # many options for theme, this one is my favorite.
-    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
+#output: 
+#  html_document:
+#    keep_md: true
+#    toc: true
+#    toc_depth: 3
+#    toc_float: 
+#      collapsed: false
+#      smooth_scroll: true
+#    number_sections: true  ## if you want number sections at each table header
+#    theme: united  # many options for theme, this one is my favorite.
+#    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
 ---
 
 

@@ -6,10 +6,20 @@
     <description>Recent content on Pawel Sobala</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jan 2020 09:00:37 -1200</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ideas</title>
+      <link>/ideas/</link>
+      <pubDate>Sun, 12 Jan 2020 09:00:37 -1200</pubDate>
+      
+      <guid>/ideas/</guid>
+      <description>In preparation or in my mind are articles related to the following topics. The author reserves the right to publish them in no particular order.
+ Analysis of the tq_get() function Cyber Insurance Model Gold/Silver ratio analysis Analysis on relation between ISM, stock returns, [inspiration] Analysis of webscraped data from Willhaben and Allegro Modelling Stock Market using Kohonen Map, [idea] Create a R course, [inspiration] Creating a R package based on some codes that I wrote Financial analysis including machine learning/deep learning techniques  </description>
+    </item>
     
     <item>
       <title>Analysis of the tq_get() function</title>
@@ -33,10 +43,10 @@
     
     <item>
       <title>A small project example : add yours !</title>
-      <link>/projects/small-project/</link>
+      <link>/project/small-project/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/projects/small-project/</guid>
+      <guid>/project/small-project/</guid>
       <description>Along with Ford Prefect, Dent barely escapes the Earth&#39;s destruction as it is demolished to make way for a hyperspace bypass. Arthur spends the next several years, still wearing his dressing gown, helplessly launched from crisis to crisis while trying to straighten out his lifestyle.
  He rather enjoys tea, but seems to have trouble obtaining it in the far reaches of the galaxy.
  In time, he learns how to fly and carves a niche for himself as a sandwich-maker.</description>
@@ -44,10 +54,10 @@
     
     <item>
       <title>Projects</title>
-      <link>/projects/projects/</link>
+      <link>/project/project/</link>
       <pubDate>Wed, 19 Aug 2015 20:29:37 -0700</pubDate>
       
-      <guid>/projects/projects/</guid>
+      <guid>/project/project/</guid>
       <description>In this theme, it is possible to add sections like a Projects one for example. You can add plenty of articles about your projects and a presentation page that will be displayed before the list. All is modulable, if you don&#39;t want something.
 A Hollywood-funded film version, produced and filmed in the UK, was released in April 2005, and radio adaptations of the third, fourth, and fifth novels were broadcast from 2004 to 2005.</description>
     </item>

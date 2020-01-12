@@ -16,11 +16,11 @@ ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 
 [taxonomies]
 # Use singular rather than plural for default taxonomies
-tag = "tag"
+tag = "tags"
 category = "category"
 
-[permalinks]
-blog = "blog/:slug/"
+#[permalinks]
+#blog = "blog/:slug/"
 
 [params]
 dateform = "Jan 2, 2006"
