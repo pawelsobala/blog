@@ -1,5 +1,5 @@
 {{ partial "header.html" . }}
-<div class="main column">
+<section class="main">
     <div class="container">
         <div class="content">
             {{ range where .Data.Pages "Title" "Home" }}
@@ -10,15 +10,13 @@
 
             {{ if isset .Site.Params "latestpostcount" }}
                 <div class="posts">
-                {{ $blogPosts := (where .Site.RegularPages "Section" "blog") }}
-                {{ $nbPosts := len $blogPosts }}
+                {{ $nbPosts := len (where .Data.Pages "Section" "blog") }}
                 {{ if gt $nbPosts 0 }}
                     <div class="page-heading">Latest posts</div>
                     <ul>
-                    
-                    {{ range (first .Site.Params.latestpostcount $blogPosts).GroupByDate "Jan, 2006" "desc" }}
+                    {{ range (first .Site.Params.latestpostcount (where .Pages "Section" "blog")).GroupByDate "Jan, 2006" "desc" }}
                         <li class="groupby">{{ .Key }}</li>
-                        {{ range sort .Pages "Date" "desc" }}
+                        {{ range .Pages.ByPublishDate }}
                             {{ partial "li.html" . }}
                         {{ end }}
                     {{ end }}
@@ -36,7 +34,7 @@
             {{ if gt $nbPosts 0 }}
                 <div class="page-heading">Best posts</div>
                 <ul>
-                {{ range sort .Data.Pages "Date" "desc" }}
+                {{ range .Data.Pages.ByPublishDate }}
                     {{ if eq .Params.best true }}
                         {{ partial "li.html" . }}
                     {{ end }}
@@ -46,5 +44,6 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 {{ partial "footer.html" . }}
+

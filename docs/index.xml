@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pawel Sobala</title>
@@ -8,7 +7,7 @@
     <language>en-US</language>
     <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,18 +16,24 @@
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>My name is Pawel Sobala and I am a data science enthusiast. My interests encompass (but are not limited to) the statistical programming language R, data analysis, financial markets, cyber insurance and football. For my professional experience, please refer to my LinkedIn page.
-In addition to the blog entries I am posting regularly on Twitter (some tweets are in polish though).
-You can reach me via social media on Twitter and GitHub.</description>
+      <description>&lt;p&gt;My name is Pawel Sobala and I am a data science enthusiast. My interests encompass (but are not limited to) the statistical programming language R, data analysis, financial markets, cyber insurance and football. For my professional experience, please refer to my &lt;a href=&#34;https://linkedin.com/pawel-sobala-17560310b&#34;&gt;LinkedIn&lt;/a&gt; page.&lt;/p&gt;
+&lt;p&gt;In addition to the blog entries I am posting regularly on &lt;a href=&#34;https://twitter,com/pawel_sobala&#34;&gt;Twitter&lt;/a&gt; (some tweets are in polish though).&lt;/p&gt;
+&lt;p&gt;You can reach me via social media on &lt;a href=&#34;https://twitter,com/pawel_sobala&#34;&gt;Twitter&lt;/a&gt; and &lt;a href=&#34;https://github.com/pawelsobala&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This site is built using &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; and &lt;a href=&#34;https://bookdown.org/yihui/blogdown&#34;&gt;blogdown&lt;/a&gt;. It is deployed using &lt;a href=&#34;https://netlify.com&#34;&gt;Netlify&lt;/a&gt;. The theme was forked from &lt;a href=&#34;https://github.com/mtn/cocoa-eh-hugo-theme&#34;&gt;cocoa-eh&lt;/a&gt;. The logo is created utilizing &lt;a href=&#34;https://hatchful.shopify.com&#34;&gt;Hatchful&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A goal without a plan is just a wish.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Night Flight by Antoine de Saint-Exupery&lt;/strong&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
-      <title>Analysis of the tq_get() function</title>
-      <link>/blog/analysis-of-the-tq-get-function/</link>
+      <title>Blog</title>
+      <link>/blog/</link>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/analysis-of-the-tq-get-function/</guid>
-      <description>body {text-align: justify}IntroductionOne of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data diretcly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code.</description>
+      <guid>/blog/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -37,8 +42,30 @@ You can reach me via social media on Twitter and GitHub.</description>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/ideas/</guid>
-      <description>In preparation or in my mind are articles related to the following topics:
- Analysis of the tq_get() function Implementating the Cyber Insurance Pricing Model Performing a Gold/Silver ratio analysis Analysis on relation between ISM, stock returns, [inspiration] Analysis of webscraped data from Willhaben and Allegro Modelling Stock Market using Kohonen Map, [idea] Creating a R course, [inspiration] Creating a R package based on some codes that I wrote Financial analysis including machine learning/deep learning techniques Sharing experiences on participating in a Kaggle competition DALEX package Tidy Text Mining with R &amp;hellip;   The author reserves the right to publish those articles in no particular order.</description>
+      <description>&lt;p&gt;&lt;em&gt;In preparation or in my mind are articles related to the following topics:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Analysis of the tq_get() function&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Implementating the Cyber Insurance Pricing Model&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Performing a Gold/Silver ratio analysis&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Analysis on relation between ISM, stock returns, [&lt;a href=&#34;https://t.co/jgSjlf67QM?amp=1&#34;&gt;inspiration&lt;/a&gt;]&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Analysis of webscraped data from &lt;a href=&#34;https://willhaben.at&#34;&gt;Willhaben&lt;/a&gt; and &lt;a href=&#34;https://allegro.pl&#34;&gt;Allegro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Modelling Stock Market using Kohonen Map, [&lt;a href=&#34;https://github.com/KaroRonty/SelfOrganizingStockMarket/blob/master/SelfOrganizingStockMarket.r&#34;&gt;idea&lt;/a&gt;]&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Creating a R course, [&lt;a href=&#34;https://supervised-ml-course.netlify.com/&#34;&gt;inspiration&lt;/a&gt;]&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Creating a R package based on some codes that I wrote&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Financial analysis including machine learning/deep learning techniques&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Sharing experiences on participating in a &lt;a href=&#34;https://kaggle.com&#34;&gt;Kaggle&lt;/a&gt; competition&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;&lt;a href=&#34;https://github.com/ModelOriented/DALEX&#34;&gt;DALEX package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;&lt;a href=&#34;https://www.tidytextmining.com/&#34;&gt;Tidy Text Mining with R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The author reserves the right to publish those articles in no particular order.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;Some enhancements I wish to apply to the &lt;a href=&#34;https://github.com/mtn/cocoa-eh-hugo-theme&#34;&gt;cocoa-eh&lt;/a&gt; Hugo theme:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;Add inbuilt contact form&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

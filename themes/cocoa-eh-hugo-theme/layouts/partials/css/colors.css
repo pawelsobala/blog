@@ -6,20 +6,20 @@ a:hover {
     color: {{ .Param "colors.identifier_dark" }};
 }
 
-div.main .content .markdown, div.header .name, div.header nav ul a:hover {
+section.main .content .markdown, section.header .name, section.header nav ul li:hover {
     color: {{ .Param "colors.foreground" }};
 }
 
-div.header nav ul a {
+section.header nav ul li {
     color: {{ .Param "colors.trivial" }};
 }
 
-div.main .content .markdown code {
+section.main .content .markdown code {
     background-color: {{ .Param "colors.background" }};
     color: {{ .Param "colors.identifier" }};
 }
 
-div.main .content .markdown pre, div.main .content .markdown pre code {
+section.main .content .markdown pre, section.main .content .markdown pre code {
     background-color: {{ .Param "colors.background_dark" }};
     color: {{ .Param "colors.code" }};
 }
@@ -58,8 +58,4 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 .hljs-built_in, .hljs-bullet, .hljs-code, .hljs-addition {
     color: {{ .Param "colors.type" }};
-}
-
-.ssk {
-    background-color: {{ .Param "colors.trivial" }};
 }

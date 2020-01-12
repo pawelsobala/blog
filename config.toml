@@ -11,7 +11,7 @@ canonifyurls = true
 enableEmoji = true
 pluralizelisttitles = false
 disqusshortname = ""
-googleAnalytics = ""
+googleAnalytics = "UA-156020229-1"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 
 [permalinks]
