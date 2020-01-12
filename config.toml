@@ -10,17 +10,10 @@ author = "Pawel Sobala"
 title = "Pawel Sobala"
 disqusshortname = ""
 pluralizelisttitles = false
-disableKinds = ["taxonomy", "taxonomyTerm"]
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 
-
-[taxonomies]
-# Use singular rather than plural for default taxonomies
-tag = "tags"
-category = "category"
-
-#[permalinks]
-#blog = "blog/:slug/"
+[permalinks]
+blog = "blog/:slug/"
 
 [params]
 dateform = "Jan 2, 2006"
@@ -45,12 +38,18 @@ share_on_facebook = false
 share_on_instagram = false
 github = "pawelsobala"
 twitter = "pawel_sobala"
-#linkedin = "john-example-aa80ue8è"
+linkedin = "pawel-sobala-17560310b"
 #email = "you@example.com"
 usesmallsummarycard = true
 posts_navigation = true
 social_banner = "img/logo.png"
 small_banner_logo = false
+
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+
 
 [params.utteranc]
 enable = true

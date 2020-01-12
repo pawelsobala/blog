@@ -1,5 +1,5 @@
 ---
-date: "2020-01-12T09:00:37-12:00"
+date: "2020-01-12"
 title: Ideas
 ---
 
@@ -15,3 +15,8 @@ _In preparation or in my mind are articles related to the following topics. The 
 - [ ] Create a R course, [[inspiration](https://supervised-ml-course.netlify.com/)]
 - [ ] Creating a R package based on some codes that I wrote
 - [ ] Financial analysis including machine learning/deep learning techniques
+- [ ] Share experiences on participating in a [Kaggle](https://kaggle.com) competition.
+
+_Some enhancements I wish to apply to the [cocoa-eh](https://github.com/mtn/cocoa-eh-hugo-theme) Hugo theme:_
+
+- [ ] Add inbuilt contact form
