@@ -3,7 +3,7 @@ date: "2020-01-12"
 title: About
 ---
 
-My name is Pawel Sobala and I am a data science enthusiast. My interests encompass (but are not limited to) the statistical programming language R, data analysis, financial markets, cyber insurance and football. For my professional experience, please refer to [LinkedIn](https://linkedin.com/pawel-sobala-17560310b).
+My name is Pawel Sobala and I am a data science enthusiast. My interests encompass (but are not limited to) the statistical programming language R, data analysis, financial markets, cyber insurance and football. For my professional experience, please refer to my [LinkedIn](https://linkedin.com/pawel-sobala-17560310b) page.
 
 
 In addition blog entries I am posting regularly on [Twitter](https://twitter,com/pawel_sobala).
