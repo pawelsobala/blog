@@ -28,6 +28,12 @@
   </style>
 {{ end }}
 
+{{ if .Site.Params.share }}
+  <style type="text/css" media="screen">
+    {{ partial "css/social-share-kit.css" . | safeCSS }}
+  </style>
+{{ end }}
+
 {{ if .Site.Params.colors }}
   <style type="text/css" media="screen">
     {{ partial "css/colors.css" . | safeCSS }}
@@ -35,13 +41,13 @@
 {{ end }}
 
 {{ range .Site.Params.extracssfiles }}
-  <link rel="stylesheet" href="{{ . | absURL }}">
+  <link rel="stylesheet" href="{{ . | relURL }}">
 {{ end }}
 
 <!-- Icon -->
 <link rel="shortcut icon"
 {{ if .Site.Params.faviconfile }}
-    href="{{ .Site.Params.faviconfile | absURL }}"
+    href="{{ .Site.Params.faviconfile | relURL }}"
 {{ else }}
     href="{{ .Site.BaseURL }}img/favicon.ico"
 {{ end }}
