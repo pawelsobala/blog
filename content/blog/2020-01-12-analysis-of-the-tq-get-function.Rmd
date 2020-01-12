@@ -2,7 +2,7 @@
 title: Analysis of the tq_get() function
 description: tq_get() function from the tidyquant library enables to download financial and economic data from various sources
 author: Pawel Sobala
-date: '2020-01-05'
+date: '2020-01-12'
 slug: analysis-of-the-tq-get-function
 toc: true
 categories:

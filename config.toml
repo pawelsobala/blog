@@ -14,6 +14,11 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 
 
+[taxonomies]
+# Use singular rather than plural for default taxonomies
+tag = "tag"
+category = "category"
+
 [permalinks]
 blog = "blog/:slug/"
 
