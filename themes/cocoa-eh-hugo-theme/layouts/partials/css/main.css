@@ -166,7 +166,7 @@ div.header .container .logo {
 }
 div.header .name {
   padding-top: 24px;
-  font-size: 34px;
+  font-size: 40px;
   font-family: 'Nexa Bold', 'Helvetica Neue', 'Arial', sans-serif;
   letter-spacing: -0.005rem;
   {{ if isset .Site.Params "titlestyle" }}
@@ -482,7 +482,7 @@ div.main .content {
 }
 div.main .content .markdown {
   font-size: 1.1em;
-  line-height: 1.5em;
+  line-height: 1.25em;
   color: #313537;
   font-family: serif;
   font-weight: 300;
