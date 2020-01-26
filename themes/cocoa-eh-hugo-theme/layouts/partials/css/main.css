@@ -295,7 +295,7 @@ div.main .content .posts {
   {{ end }}
 }
 div.main .content .page-heading {
-  font-size: 20px;
+  font-size: 40px;
   font-weight: 700;
   font-family: 'Helvetica Neue', 'Arial', sans-serif;
   letter-spacing: -0.005rem;
@@ -310,7 +310,7 @@ div.main .content .front-matter .page-heading {
   margin-bottom: 0;
 }
 div.main .content .front-matter .meta {
-  font-size: 12px;
+  font-size: 20px;
   color: #666666;
   display: -webkit-flex;
   display: -moz-flex;
