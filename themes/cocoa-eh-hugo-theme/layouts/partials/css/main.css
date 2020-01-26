@@ -565,7 +565,7 @@ div.main .content .markdown p {
   text-align: justify;
   {{end}}
   margin-top: 0;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1em;
 }
 div.main .content .markdown ul,
 div.main .content .markdown ol,
