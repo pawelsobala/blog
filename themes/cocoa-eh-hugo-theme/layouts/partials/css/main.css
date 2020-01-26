@@ -19,7 +19,7 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
+  font-size: 70%;
   font: inherit;
   vertical-align: baseline;
 }
@@ -505,28 +505,28 @@ div.main .content .markdown h6 {
   margin-top: 1.75rem;
 }
 div.main .content .markdown h1 {
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   margin-bottom: 2rem;
 }
 div.main .content .markdown h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-bottom: 1.5rem;
 }
 div.main .content .markdown h3 {
-  font-size: 1em;
+  font-size: 1.75em;
   margin-bottom: 1rem;
 }
 div.main .content .markdown h4,
 div.main .content .markdown h5,
 div.main .content .markdown h6 {
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
   letter-spacing: none;
 }
 div.main .content .markdown code,
 div.main .content .markdown pre {
   font-family: 'Menlo', monospace;
-  font-size: 0.98rem;
+  font-size: 1.2rem;
   background-color: #f7f7f7;
   width: 85%;
 }
@@ -550,7 +550,7 @@ div.main .content .markdown pre {
 div.main .content .markdown pre code {
   /* enclosed by 4 backticks (````) */
   padding: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 div.main .content .markdown a code {
   color: #428bca !important;
