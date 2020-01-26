@@ -295,7 +295,7 @@ div.main .content .posts {
   {{ end }}
 }
 div.main .content .page-heading {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 700;
   font-family: 'Helvetica Neue', 'Arial', sans-serif;
   letter-spacing: -0.005rem;
@@ -310,7 +310,7 @@ div.main .content .front-matter .page-heading {
   margin-bottom: 0;
 }
 div.main .content .front-matter .meta {
-  font-size: 20px;
+  font-size: 16px;
   color: #666666;
   display: -webkit-flex;
   display: -moz-flex;
@@ -505,15 +505,15 @@ div.main .content .markdown h6 {
   margin-top: 1.75rem;
 }
 div.main .content .markdown h1 {
-  font-size: 2.25rem;
+  font-size: 2rem;
   margin-bottom: 2rem;
 }
 div.main .content .markdown h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
   margin-bottom: 1.5rem;
 }
 div.main .content .markdown h3 {
-  font-size: 1.75em;
+  font-size: 1.5em;
   margin-bottom: 1rem;
 }
 div.main .content .markdown h4,
@@ -582,14 +582,14 @@ div.main .content .markdown dd {
 div.main .content .markdown ul {
   list-style-type: disc;
   list-style-position: outside;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 div.main .content .markdown ol {
   list-style-type: decimal;
   margin-bottom: 1.25rem;
 }
 div.main .content .markdown li {
-  margin-left: 2em;
+  margin-left: 1em;
 }
 div.main .content .markdown em {
   font-style: italic;
