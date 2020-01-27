@@ -1,8 +1,8 @@
 ---
-title: "Self Organizing Map for WSE"
+title: Self Organizing Map for WSE
 description: Creating a Self Organizing Map for the Warsaw Stock Exchange and using financial & economic data as explanatory variables
-date: '2020-01-27'
 author: Pawel Sobala
+date: '2020-01-27'
 slug: self-organizing-map-wse
 categories: ["R", "SOM"]
 tags: ["R Markdown", "Self Organizing Map", "Kohonen"]
