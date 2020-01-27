@@ -6,7 +6,6 @@ date: '2020-01-27'
 slug: self-organizing-map-wse
 categories: ["R", "SOM"]
 tags: ["R Markdown", "Self Organizing Map", "Kohonen"]
-# output: html_document
 #output: 
 #  html_document:
 #    keep_md: true
@@ -19,6 +18,7 @@ tags: ["R Markdown", "Self Organizing Map", "Kohonen"]
 #    theme: united  # many options for theme, this one is my favorite.
 #    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
 ---
+
 <style>
 body {
 text-align: justify}
