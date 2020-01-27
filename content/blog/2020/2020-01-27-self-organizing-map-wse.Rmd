@@ -56,6 +56,7 @@ To get to know better or the basics of Self Organizing Maps, I recommend to read
 ## Getting Data
 
 In the previous blog post I tried various ways to download the financial data using funciton `tq_get()`{.r} from the `tidyquant`{.r} package. This time however I will utilize a slightly different approach. I will write my own function to download the data from the [stooq](https://stooq.com) website, which uses data provided by [VWD](https://www.vwd.com/home/). Unfortunately, the stooq website is available only in polish language. Although the approach to get the data doesn't require the knowledge of polish. The first step is to specify the tickers for the following financial/economic data:
+
 * Warsaw Stock Exchange Index
 * price/equity ratio for the whole stock market
 * price/book value ratio for the whole stock market
