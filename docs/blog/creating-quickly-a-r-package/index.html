@@ -15,9 +15,9 @@
 <meta property="og:site_name" content="Pawel Sobala" />
 <meta property="og:locale" content="en-US" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/blog/" />
-<meta property="og:title" content="Blog" />
-<meta property="twitter:title" content="Blog">
+<meta property="og:url" content="/blog/creating-quickly-a-r-package/" />
+<meta property="og:title" content="Creating quickly a R Package" />
+<meta property="twitter:title" content="Creating quickly a R Package">
 
     <meta property="og:image" content="/img/logo.png">
     <meta property="twitter:card" content="summary_large_image">
@@ -29,10 +29,10 @@
 <title>
 
 
-     Pawel Sobala - Blog 
+     Pawel Sobala - Creating quickly a R Package 
 
 </title>
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/blog/creating-quickly-a-r-package/">
 
 
 <style media="screen">
@@ -1068,8 +1068,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="/blog/index.xml" rel="alternate" type="application/rss+xml" title="Pawel Sobala" />
-
 
 </head>
 
@@ -1077,7 +1075,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <body>
 
 
-<div class="header header-home column">
+<div class="header column">
 
     <div class="container">
         
@@ -1110,62 +1108,280 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            <div class="posts">
-                <div class="page-heading">Blog</div>
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
-                
+    
+    Creating quickly a R Package
+    
 
-                
-                <ul>
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Fri Feb 7 2020 00:00:00 UTC">Feb 7, 2020</div>
                     
-                      
-                        <li class="groupby">Feb, 2020</li>
                         
-                          
-                            <li class="post-item">
-    <span class="meta">Feb 7, 2020</span>
-    
-    <a href="/blog/creating-quickly-a-r-package/"><span>Creating quickly a R Package</span></a>
-    
-</li>
-
-                          
+                        <div class="author middot" title="Pawel Sobala">Pawel Sobala</div>
                         
-                      
                     
-                      
-                        <li class="groupby">Jan, 2020</li>
-                        
-                          
-                            <li class="post-item">
-    <span class="meta">Jan 27, 2020</span>
-    
-    <a href="/blog/self-organizing-map-wse/"><span>Self Organizing Map for WSE</span></a>
-    
-</li>
-
-                          
-                        
-                          
-                            <li class="post-item">
-    <span class="meta">Jan 12, 2020</span>
-    
-    <a href="/blog/analysis-of-the-tq-get-function/"><span>Analysis of the tq_get() function</span></a>
-    
-</li>
-
-                          
-                        
-                      
                     
-                </ul>
+                    <div class="reading-time middot">8 minute read</div>
+                    
+                    
+                      <div class="tags">
+                    
+                        <ul>
+                          
+                            <li class="middot"><a href="/tags/r-markdown">R Markdown</a> </li>
+                          
+                            <li class="middot"><a href="/tags/self-organizing-map">Self Organizing Map</a> </li>
+                          
+                            <li class="middot"><a href="/tags/kohonen">Kohonen</a> </li>
+                          
+                            <li class="middot"><a href="/tags/r-package">R Package</a> </li>
+                          
+                            <li class="middot"><a href="/tags/git">Git</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+    
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>For my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found <a href="https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICD8051.pdf">this article</a> entilted “Evaluating Self-Organizing Map Quality Measures as Convergence Criteria”, which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this <a href="https://digitalcommons.uri.edu/cgi/viewcontent.cgi?article=2013&amp;context=theses">thesis</a>, which was used in the aforementioned article. The problem was that this code wasn’t available on GitHub or anywhere on the Internet, which could be used easily.
+Therefore, I decide to create a R package consisting of the funtions that are created for the “Evaluating Self-Organizing Map Quality Measures as Convergence Criteria” article purposes.</p>
+</div>
+<div id="setting-up-the-package" class="section level1">
+<h1>Setting up the package</h1>
+<p>In this paragraph it will be described how to set up a basic structure for a R package.</p>
+<div id="copying-the-scripts" class="section level2">
+<h2>Copying the scripts</h2>
+<p>The first thing I did was to copy the code from the PDF file to R script and to a cpp script, which I saved respectively to files <code class="r">som_quality_functions.r</code> and <code class="r">som_quality_functions.cpp</code>. I saved them in a newly created folder and set it as a current working directory. At this stage I didn’t create a project. This might be really helpful during the next steps.
+The most time consuming part, which took 10-15 minutes was to make sure that all whitespaces are correctly copied. Here, I mean cases when a dot <code class="r">.</code> is copied with a whitespace at the beginning <code class="r">.</code>, at the end <code class="r">.</code> or both whitespaces are added <code class="r">.</code>. This was the case for many characters as <code>",", "&lt;", "&gt;", ")", "("</code>, etc.
+Additionally, I used the <code>library(styler)</code> to style the R script properly. I highly recommend this package, which on RStudio works as an Addin and is extermely efficient and easy to use. Only selecting the script and pressing the <code class="r">style_selection()</code> option from the Addin is needed to neatly style the code.</p>
+</div>
+<div id="creating-the-r-package-structure" class="section level2">
+<h2>Creating the R Package structure</h2>
+<p>I decided to use the following way of creating a R package, which is to use the ‘library(usethis)’{.r} functionality. <a href="https://www.rdocumentation.org/packages/usethis/versions/1.5.1">Here</a> all of the set up is well-written. The main idea of this approach is create a skelton of a package and then add to it whatever is needed.</p>
+<blockquote>
+<p>In this article I won’t desribe the structure of a R package. An interested reader is adviced to take a look at the <a href="http://r-pkgs.had.co.nz/">R packages</a> book created by Hadley Wickham. In this book one can find the full and complete description of R pakcage, its contents and many useful tips.</p>
+</blockquote>
+<p>Therefore, I exectued the following code:</p>
+<pre class="r"><code>path &lt;- file.path(getwd(), &quot;SomQualityCheck&quot;)
+create_package(path)
+proj_activate(path)
+### At this stage I had to operate in the new RStudio process, where the package was loaded
+#&gt; ✔ Changing working directory to &#39;/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T/RtmpWNMVxG/mypkg/&#39;
+#&gt; ✔ Setting active project to &#39;/private/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T/RtmpWNMVxG/mypkg&#39;
+use_mit_license(&quot;&quot;)
+#&gt; ✔ Setting License field in DESCRIPTION to &#39;MIT + file LICENSE&#39;
+#&gt; ✔ Writing &#39;LICENSE.md&#39;
+#&gt; ✔ Adding &#39;^LICENSE\\.md$&#39; to &#39;.Rbuildignore&#39;
+#&gt; ✔ Writing &#39;LICENSE&#39;
+use_package(&quot;MASS&quot;, &quot;Suggests&quot;)
+#&gt; ✔ Adding &#39;MASS&#39; to Suggests field in DESCRIPTION
+#&gt; ● Use `requireNamespace(&quot;MASS&quot;, quietly = TRUE)` to test if package is installed
+#&gt; ● Then directly refer to functons like `MASS::fun()` (replacing `fun()`).
+# Set up various packages ---------------------------------------------
+use_roxygen_md()
+#&gt; ✔ Setting Roxygen field in DESCRIPTION to &#39;list(markdown = TRUE)&#39;
+#&gt; ✔ Setting RoxygenNote field in DESCRIPTION to &#39;6.1.1&#39;
+#&gt; ● Run `devtools::document()`
+use_rcpp()
+#&gt; ✔ Creating &#39;src/&#39;
+#&gt; ✔ Adding &#39;*.o&#39;, &#39;*.so&#39;, &#39;*.dll&#39; to &#39;src/.gitignore&#39;
+#&gt; ✔ Adding &#39;Rcpp&#39; to LinkingTo field in DESCRIPTION
+#&gt; ✔ Adding &#39;Rcpp&#39; to Imports field in DESCRIPTION
+# Set up other files -------------------------------------------------
+use_readme_md()
+#&gt; ✔ Writing &#39;README.md&#39;
+use_news_md()
+#&gt; ✔ Writing &#39;NEWS.md&#39;
+# Use git ------------------------------------------------------------
+use_git()
+#&gt; ✔ Initialising Git repo
+#&gt; ✔ Adding &#39;.Rhistory&#39;, &#39;.RData&#39;, &#39;.Rproj.user&#39; to &#39;.gitignore&#39;</code></pre>
+<p>After a copule of seconds (maybe one minute in the worst case) - viola, the R package is there!
+As a result I obtained new project called <code>SomQualityCheck</code>, which is now my new package.
+In the package there are currently no R functions.</p>
+<p>Please note that I didn’t execute all of the code that is mentioned on the <a href="https://www.rdocumentation.org/packages/usethis/versions/1.5.1">usethis</a> package website. I just wanted to make sure that I meet the minimal requirement to create a package as quick as possible without any unimportant (at this stage) features.
+I omitted following lines:</p>
+<pre class="r"><code>use_revdep()
+use_test(&quot;my-test&quot;)
+x &lt;- 1
+y &lt;- 2
+use_data(x, y)</code></pre>
+<p>Setting up following files is also not necessary. However, as I would like to maintain this packageand keep track of any changes in the package I decided to add following lines:</p>
+<pre class="r"><code>use_readme_md()
+use_news_md()
+use_git()</code></pre>
+<div id="description-file" class="section level3">
+<h3>DESCRIPTION FILE</h3>
+<p>To finish up setting the package - once the pakcage is craeted, I have to describe its contents briefly in the <code>DESCRIPTION.txt</code> file.
+I ended up changing the standard description is such a way:</p>
+<pre class="r"><code># Package: SomQualityCheck
+# Title: Assess the quality of Self Organizing Map
+# Version: 0.0.0.9000
+# Authors@R: 
+#     person(given = &quot;Pawel&quot;,
+#            family = &quot;Sobala&quot;,
+#            role = c(&quot;aut&quot;, &quot;cre&quot;),
+#            email = &quot;first.last@example.com&quot;,
+#            comment = c(ORCID = &quot;YOUR-ORCID-ID&quot;))
+# Description: This package contains functions that are aimed at testing the quality of Self Organizing Map.
+#     The source of these functions is the article &quot;Evaluating Self-Or aluating Self-Organizing Map Quality Measur ganizing Map Quality Measures as Conv es as Convergence Criteria&quot; by Greogory T. Breard. 
+# License: MIT
+# Encoding: UTF-8
+# LazyData: true
+# Suggests: 
+#     MASS,
+#     testthat (&gt;= 2.1.0)
+# Roxygen: list(markdown = TRUE)
+# RoxygenNote: 7.0.2
+# LinkingTo: 
+#     Rcpp
+# Imports: 
+#     Rcpp</code></pre>
+</div>
+</div>
+</div>
+<div id="completing-the-package" class="section level1">
+<h1>Completing the package</h1>
+<div id="adding-r-functions" class="section level2">
+<h2>Adding R functions</h2>
+<p>At this stage in the <code>SomQualityCheck</code> project/package there are no functions. I have to add them manually.
+What is important is that during the creation of package skeleton I decided to use the Roxygen2 to write documentation. The purpose of this package is to document all objects that are in the package. One can read more about in <a href="http://r-pkgs.had.co.nz/man.html">this chapter</a> of the aforementioned Hadley’s book.
+Also, <a href="https://rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf">this cheatsheet</a> for package creation might come in handy.</p>
+<p>Therefore, for each of the function I have to write following descriptions:</p>
+<pre class="r"><code>#&#39; Returns the distances between the data, neurons, and across both .
+#&#39;
+#&#39; @param map map; object returned by map.build
+#&#39; @return List containing distances between 3 matrices:
+#&#39; dist.data - distance between all data points
+#&#39; dist.neurons - distance between all map neurons
+#&#39; dist.cross - distance between the data points and the map neurons
+#&#39; dist.proj - distance between the projected data points 
+#&#39;
+#&#39; @export</code></pre>
+<p>I am copying each R function that I previously saved in a <code class="r">som_quality_functions.r</code> to a new file, which has the name of the function. I am saving each file in the <code>/R</code> folder in the <code>SomQualityCheck</code> project directory. As previously noted, for each new R script at the beginning I have to create the <code>Roxygen2</code> notes. Once the package is created, it will serve as a documentation. Such documentation will greatly help to maintain the package and save time when debugging or trying to redisover after some time what has been written in the script.
+Note that for some of the functions I set the description to <code>TODO</code>, as the main purpose currently is to add to the package all functions. One has to keep in mind that all paramteres have to be described in the documentation. Otherwise during the package build an error will occur.</p>
+</div>
+<div id="adding-c-functions" class="section level2">
+<h2>Adding C++ functions</h2>
+<p>There are a couple of cpp functions that need a different treatmentto standard R functions like:
+* GetQuantizationError
+* GetTopographicError
+* GetTopographicFunction
+* GetNeighborhoodPreservation
+* GetVMeasure
+as they have been written as C++ code.</p>
+<p>During the package skeleton creation I used the <code class="r">use_rcpp()</code> function from the <code class="r">library(usethis)</code> to make sure that within the package I can use C++ code. This function created a <code>src/</code> folder. To this folder I copy the previously created <code class="r">som_quality_functions.cpp</code> script.
+Note that in <code>.cpp</code> file it is also possible to add <code>Roxygen2</code> notes. On <a href="https://www.r-bloggers.com/rcpp-and-roxygen2/">r-bloggers</a> is a great article on this topic. For the time being I only add the export option for them to make sure that they are accessible from the package level, as the main purpose is to release the package.</p>
+</div>
+<div id="zzz.r-r-script" class="section level2">
+<h2>zzz.R R script</h2>
+<p>As Hadley Wickham mentions in his book on <a href="http://r-pkgs.had.co.nz/r.html">R packages</a> to the <code>/R</code> folder I am adding also the <code>zzz.R</code> file to make sure that when package is loaded the <code>library(Rcpp)</code> is loaded to work with some C++ functions.
+COntents of the <code>zzz.R</code> file:</p>
+<pre class="r"><code>#&#39; SomQualityCheck
+#&#39;
+#&#39; Description of your package
+#&#39;
+#&#39; @docType package
+#&#39; @author Pawel Sobala
+#&#39; @import Rcpp
+#&#39; @importFrom Rcpp evalCpp
+#&#39; @useDynLib SomQualityCheck
+#&#39; @name SomQualityCheck
+NULL</code></pre>
+</div>
+<div id="namespace-file" class="section level2">
+<h2>NAMESPACE file</h2>
+<p>Normally, I would have to add all exported functions to the NAMESPACE file. However, this step is automatized through <code class="r">Roxygen2</code> library during the package creation.</p>
+</div>
+</div>
+<div id="compiling-the-package" class="section level1">
+<h1>Compiling the package</h1>
+<p>I use RStudio, therefore the easiest way to compile to package is to click on the “Install and Restart” button on the “Build” tab. Usually, the “Build” tab is located on the right side of the screen. If everything was done as described above, there should be no issues. If there would be some, usually there is a message indicating what actually went wrong. In most cases those issues are related to either using a variable that wasn’t define previously in the script or not documenting some parts of the work.</p>
+<div id="pushing-the-package-to-github" class="section level2">
+<h2>Pushing the package to GitHub</h2>
+<p>During the skeleton package creation I used the <code class="r">use_git()</code> function from the <code class="r">library(usethis)</code>. It initialized local git repository, where I can keep track of my work. To use it on GitHub I need to go to the online version of GitHub, create there a new repository and locally connect to it. I recommend reading <a href="https://help.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line">this tutorial</a> if case of any issues.</p>
+</div>
+<div id="final-results-and-next-actions" class="section level2">
+<h2>Final results and next actions</h2>
+<p>I recommend to check the result of this blog article at my <a href="https://github.com/pawelsobala/SomQualityCheck">GitHub</a>. The next steps are defenitely to:
+* document the function description
+* add test cases
+* complete the ReadMe document
+* add News information.</p>
+</div>
+</div>
+
+
+            </div>
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="/img/back.svg" alt="back" />
+                    <a href="/blog/self-organizing-map-wse/">Self Organizing Map for WSE</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                 <div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ps-disqus.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </div>
+            
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
 <div class="footer column">
     <div class="container">
 

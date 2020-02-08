@@ -1,0 +1,220 @@
+---
+title: "Creating quickly a R Package"
+description: 
+author: "Pawel Sobala"
+date: "2020-02-07"
+slug: creating-quickly-a-r-package
+categories: ["R", "SOM", "R Package"]
+tags: ["R Markdown", "Self Organizing Map", "Kohonen", "R Package", "Git"]
+output: html_document
+#output: 
+#  html_document:
+#    keep_md: true
+#    toc: true
+#    toc_depth: 3
+#    toc_float: 
+#      collapsed: false
+#      smooth_scroll: true
+#    number_sections: true  ## if you want number sections at each table header
+#    theme: united  # many options for theme, this one is my favorite.
+#    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
+---
+<style>
+body {
+text-align: justify}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Motivation
+
+For my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found [this article](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICD8051.pdf) entilted "Evaluating Self-Organizing Map Quality Measures as Convergence Criteria", which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this [thesis](https://digitalcommons.uri.edu/cgi/viewcontent.cgi?article=2013&context=theses), which was used in the aforementioned article. The problem was that this code wasn't available on GitHub or anywhere on the Internet, which could be used easily. 
+Therefore, I decide to create a R package consisting of the funtions that are created for the "Evaluating Self-Organizing Map Quality Measures as Convergence Criteria" article purposes.
+
+# Setting up the package
+
+In this paragraph it will be described how to set up a basic structure for a R package.
+
+## Copying the scripts
+
+The first thing I did was to copy the code from the PDF file to R script and to a cpp script, which I saved respectively to files `som_quality_functions.r`{.r} and `som_quality_functions.cpp`{.r}. I saved them in a newly created folder and set it as a current working directory. At this stage I didn't create a project. This might be really helpful during the next steps.
+The most time consuming part, which took 10-15 minutes was to make sure that all whitespaces are correctly copied. Here, I mean cases when a dot `.`{.r} is copied with a whitespace at the beginning ` .`{.r}, at the end ` .`{.r} or both whitespaces are added ` . `{.r}. This was the case for many characters as `",", "<", ">", ")", "("`, etc.
+Additionally, I used the `library(styler)` to style the R script properly. I highly recommend this package, which on RStudio works as an Addin and is extermely efficient and easy to use. Only selecting the script and pressing the `style_selection()`{.r} option from the Addin is needed to neatly style the code.
+
+## Creating the R Package structure
+
+I decided to use the following way of creating a R package, which is to use the 'library(usethis)'{.r} functionality. [Here](https://www.rdocumentation.org/packages/usethis/versions/1.5.1) all of the set up is well-written. The main idea of this approach is create a skelton of a package and then add to it whatever is needed.
+
+>In this article I won't desribe the structure of a R package. An interested reader is adviced to take a look at the [R packages](http://r-pkgs.had.co.nz/) book created by Hadley Wickham. In this book one can find the full and complete description of R pakcage, its contents and many useful tips.
+
+Therefore, I exectued the following code:
+
+```{r Create_Package, eval = FALSE}
+path <- file.path(getwd(), "SomQualityCheck")
+create_package(path)
+proj_activate(path)
+### At this stage I had to operate in the new RStudio process, where the package was loaded
+#> ✔ Changing working directory to '/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T/RtmpWNMVxG/mypkg/'
+#> ✔ Setting active project to '/private/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T/RtmpWNMVxG/mypkg'
+use_mit_license("")
+#> ✔ Setting License field in DESCRIPTION to 'MIT + file LICENSE'
+#> ✔ Writing 'LICENSE.md'
+#> ✔ Adding '^LICENSE\\.md$' to '.Rbuildignore'
+#> ✔ Writing 'LICENSE'
+use_package("MASS", "Suggests")
+#> ✔ Adding 'MASS' to Suggests field in DESCRIPTION
+#> ● Use `requireNamespace("MASS", quietly = TRUE)` to test if package is installed
+#> ● Then directly refer to functons like `MASS::fun()` (replacing `fun()`).
+# Set up various packages ---------------------------------------------
+use_roxygen_md()
+#> ✔ Setting Roxygen field in DESCRIPTION to 'list(markdown = TRUE)'
+#> ✔ Setting RoxygenNote field in DESCRIPTION to '6.1.1'
+#> ● Run `devtools::document()`
+use_rcpp()
+#> ✔ Creating 'src/'
+#> ✔ Adding '*.o', '*.so', '*.dll' to 'src/.gitignore'
+#> ✔ Adding 'Rcpp' to LinkingTo field in DESCRIPTION
+#> ✔ Adding 'Rcpp' to Imports field in DESCRIPTION
+# Set up other files -------------------------------------------------
+use_readme_md()
+#> ✔ Writing 'README.md'
+use_news_md()
+#> ✔ Writing 'NEWS.md'
+# Use git ------------------------------------------------------------
+use_git()
+#> ✔ Initialising Git repo
+#> ✔ Adding '.Rhistory', '.RData', '.Rproj.user' to '.gitignore'
+```
+
+After a copule of seconds (maybe one minute in the worst case) - viola, the R package is there!
+As a result I obtained new project called `SomQualityCheck`, which is now my new package.
+In the package there are currently no R functions.
+
+Please note that I didn't execute all of the code that is mentioned on the [usethis](https://www.rdocumentation.org/packages/usethis/versions/1.5.1) package website. I just wanted to make sure that I meet the minimal requirement to create a package as quick as possible without any unimportant (at this stage) features.
+I omitted following lines:
+
+```{r, eval=FALSE}
+use_revdep()
+use_test("my-test")
+x <- 1
+y <- 2
+use_data(x, y)
+```
+
+Setting up following files is also not necessary. However, as I would like to maintain this packageand keep track of any changes in the package I decided to add following lines:
+
+```{r, eval=FALSE}
+use_readme_md()
+use_news_md()
+use_git()
+```
+
+### DESCRIPTION FILE
+
+To finish up setting the package - once the pakcage is craeted, I have to describe its contents briefly in the `DESCRIPTION.txt` file. 
+I ended up changing the standard description is such a way:
+
+```{r new_DESCRIPTION, eval=FALSE}
+# Package: SomQualityCheck
+# Title: Assess the quality of Self Organizing Map
+# Version: 0.0.0.9000
+# Authors@R: 
+#     person(given = "Pawel",
+#            family = "Sobala",
+#            role = c("aut", "cre"),
+#            email = "first.last@example.com",
+#            comment = c(ORCID = "YOUR-ORCID-ID"))
+# Description: This package contains functions that are aimed at testing the quality of Self Organizing Map.
+#     The source of these functions is the article "Evaluating Self-Or aluating Self-Organizing Map Quality Measur ganizing Map Quality Measures as Conv es as Convergence Criteria" by Greogory T. Breard. 
+# License: MIT
+# Encoding: UTF-8
+# LazyData: true
+# Suggests: 
+#     MASS,
+#     testthat (>= 2.1.0)
+# Roxygen: list(markdown = TRUE)
+# RoxygenNote: 7.0.2
+# LinkingTo: 
+#     Rcpp
+# Imports: 
+#     Rcpp
+```
+
+# Completing the package
+
+## Adding R functions
+
+At this stage in the `SomQualityCheck` project/package there are no functions. I have to add them manually.
+What is important is that during the creation of package skeleton I decided to use the Roxygen2 to write documentation. The purpose of this package is to document all objects that are in the package. One can read more about in [this chapter](http://r-pkgs.had.co.nz/man.html) of the aforementioned Hadley's book.
+Also, [this cheatsheet](https://rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf) for package creation might come in handy.
+
+Therefore, for each of the function I have to write following descriptions:
+```{r, eval=FALSE}
+#' Returns the distances between the data, neurons, and across both .
+#'
+#' @param map map; object returned by map.build
+#' @return List containing distances between 3 matrices:
+#' dist.data - distance between all data points
+#' dist.neurons - distance between all map neurons
+#' dist.cross - distance between the data points and the map neurons
+#' dist.proj - distance between the projected data points 
+#'
+#' @export
+```
+
+I am copying each R function that I previously saved in a `som_quality_functions.r`{.r} to a new file, which has the name of the function. I am saving each file in the `/R` folder in the `SomQualityCheck` project directory. As previously noted, for each new R script at the beginning I have to create the `Roxygen2` notes. Once the package is created, it will serve as a documentation. Such documentation will greatly help to maintain the package and save time when debugging or trying to redisover after some time what has been written in the script.
+Note that for some of the functions I set the description to `TODO`, as the main purpose currently is to add to the package all functions. One has to keep in mind that all paramteres have to be described in the documentation. Otherwise during the package build an error will occur.
+
+## Adding C++ functions
+
+There are a couple of cpp functions that need a different treatmentto standard R functions like:
+* GetQuantizationError
+* GetTopographicError
+* GetTopographicFunction
+* GetNeighborhoodPreservation
+* GetVMeasure
+as they have been written as C++ code.
+
+During the package skeleton creation I used the `use_rcpp()`{.r} function from the `library(usethis)`{.r} to make sure that within the package I can use C++ code. This function created a `src/` folder. To this folder I copy the previously created `som_quality_functions.cpp`{.r} script.
+Note that in `.cpp` file it is also possible to add `Roxygen2` notes. On [r-bloggers](https://www.r-bloggers.com/rcpp-and-roxygen2/) is a great article on this topic. For the time being I only add the export option for them to make sure that they are accessible from the package level, as the main purpose is to release the package.
+
+## zzz.R R script
+
+As Hadley Wickham mentions in his book on [R packages](http://r-pkgs.had.co.nz/r.html) to the `/R` folder I am adding also the `zzz.R` file to make sure that when package is loaded the `library(Rcpp)` is loaded to work with some C++ functions.
+COntents of the `zzz.R` file:
+
+```{r, eval=FALSE}
+#' SomQualityCheck
+#'
+#' Description of your package
+#'
+#' @docType package
+#' @author Pawel Sobala
+#' @import Rcpp
+#' @importFrom Rcpp evalCpp
+#' @useDynLib SomQualityCheck
+#' @name SomQualityCheck
+NULL
+```
+
+## NAMESPACE file
+
+Normally, I would have to add all exported functions to the NAMESPACE file. However, this step is automatized through `Roxygen2`{.r} library during the package creation.
+
+# Compiling the package
+
+I use RStudio, therefore the easiest way to compile to package is to click on the "Install and Restart" button on the "Build" tab. Usually, the "Build" tab is located on the right side of the screen. If everything was done as described above, there should be no issues. If there would be some, usually there is a message indicating what actually went wrong. In most cases those issues are related to either using a variable that wasn't define previously in the script or not documenting some parts of the work.
+
+## Pushing the package to GitHub
+
+During the skeleton package creation I used the `use_git()`{.r} function from the `library(usethis)`{.r}. It initialized local git repository, where I can keep track of my work. To use it on GitHub I need to go to the online version of GitHub, create there a new repository and locally connect to it. I recommend reading [this tutorial](https://help.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line) if case of any issues.
+
+## Final results and next actions
+
+I recommend to check the result of this blog article at my [GitHub](https://github.com/pawelsobala/SomQualityCheck). The next steps are defenitely to:
+* document the function description
+* add test cases
+* complete the ReadMe document
+* add News information.

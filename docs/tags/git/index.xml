@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R Package on Pawel Sobala</title>
-    <link>/tags/r-package/</link>
-    <description>Recent content in R Package on Pawel Sobala</description>
+    <title>Git on Pawel Sobala</title>
+    <link>/tags/git/</link>
+    <description>Recent content in Git on Pawel Sobala</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/r-package/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>/blog/creating-quickly-a-r-package/</guid>
       <description>body {text-align: justify}MotivationFor my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found this article entilted “Evaluating Self-Organizing Map Quality Measures as Convergence Criteria”, which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this thesis, which was used in the aforementioned article.</description>
-    </item>
-    
-    <item>
-      <title>Analysis of the tq_get() function</title>
-      <link>/blog/analysis-of-the-tq-get-function/</link>
-      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/analysis-of-the-tq-get-function/</guid>
-      <description>body {text-align: justify}IntroductionOne of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data diretcly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code.</description>
     </item>
     
   </channel>
