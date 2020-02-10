@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="Pawel Sobala" />
 <meta property="og:locale" content="en-US" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/tags/r-package/" />
-<meta property="og:title" content="R package" />
-<meta property="twitter:title" content="R package">
+<meta property="og:url" content="/blog/how-to-find-packages-on-cran-from-rstudio/" />
+<meta property="og:title" content="How to find packages on CRAN from RStudio" />
+<meta property="twitter:title" content="How to find packages on CRAN from RStudio">
 
     <meta property="og:image" content="/img/logo.png">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:image" content="/img/logo.png">
 
-<meta property="og:description" content="">
-<meta property="twitter:description" content="">
+<meta property="og:description" content="Using librarian package to find packages on CRAN directly from RStudio">
+<meta property="twitter:description" content="Using librarian package to find packages on CRAN directly from RStudio">
 
 <title>
 
 
-     Pawel Sobala - R package 
+     Pawel Sobala - How to find packages on CRAN from RStudio 
 
 </title>
-<link rel="canonical" href="/tags/r-package/">
+<link rel="canonical" href="/blog/how-to-find-packages-on-cran-from-rstudio/">
 
 
 <style media="screen">
@@ -1068,8 +1068,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="/tags/r-package/index.xml" rel="alternate" type="application/rss+xml" title="Pawel Sobala" />
-
 
 </head>
 
@@ -1077,7 +1075,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <body>
 
 
-<div class="header header-home column">
+<div class="header column">
 
     <div class="container">
         
@@ -1110,34 +1108,283 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            <div class="posts">
-                <div class="page-heading">Posts about R package</div>
-                <ul>
-                    
-                        <li class="post-item">
-    <span class="meta">Jan 12, 2020</span>
-    
-    <a href="/blog/analysis-of-the-tq-get-function/"><span>Analysis of the tq_get() function</span></a>
-    
-</li>
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
-                    
-                        <li class="post-item">
-    <span class="meta">Feb 7, 2020</span>
     
-    <a href="/blog/creating-quickly-a-r-package/"><span>Creating quickly a R Package</span></a>
+    How to find packages on CRAN from RStudio
     
-</li>
 
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Mon Feb 10 2020 00:00:00 UTC">Feb 10, 2020</div>
                     
-                </ul>
+                        
+                        <div class="author middot" title="Pawel Sobala">Pawel Sobala</div>
+                        
+                    
+                    
+                    <div class="reading-time middot">5 minute read</div>
+                    
+                    
+                      <div class="tags">
+                    
+                        <ul>
+                          
+                            <li class="middot"><a href="/tags/r-packages">R Packages</a> </li>
+                          
+                            <li class="middot"><a href="/tags/cran">CRAN</a> </li>
+                          
+                            <li class="middot"><a href="/tags/librarian">Librarian</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+    
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>When writing a new blog post on the assessment of quality of fitted Self-Organizing Map (SOM) to data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.</p>
+</div>
+<div id="librarian-package" class="section level1">
+<h1>Librarian Package</h1>
+<p>After googling for a while I found the <code class="r">library(librarian)</code> package which contains a function <code class="r">browse_cran()</code> to search package names and descriptions within CRAN. For example, if you can’t remember what the “colorbrewer” package is actually called, you just type <code class="r">browse_cran("colorbrewer")</code>.</p>
+<p>I decided to test it and to find any packages that are related to the Self Organizing Maps topic.
+I found out that I cannot use the argument <code>som</code> to find any items as all words containing <code>some</code> are also returned. A quote <code>organizing map</code> should work.</p>
+<pre class="r"><code>som_data &lt;- browse_cran(&quot;organizing map&quot;)</code></pre>
+<pre><code>## class 
+## 
+##   Various functions for classification, including k-nearest 
+##   neighbour, Learning Vector Quantization and Self-Organizing Maps. 
+## 
+## EmbedSOM 
+## 
+##   Provides a smooth mapping of multidimensional points into 
+##   low-dimensional space defined by a self-organizing map. 
+## 
+## ggsom 
+## 
+##   The aim of this package is to offer more variability of graphics 
+##   based on the self-organizing maps. 
+## 
+## Numero 
+## 
+##   High-dimensional datasets that do not exhibit a clear intrinsic 
+##   clustered structure pose a challenge to conventional clustering 
+##   algorithms. 
+## 
+## popsom 
+## 
+##   State of the art functions for constructing and evaluating 
+##   self-organizing maps. 
+## 
+## restlos 
+## 
+##   The restlos package provides algorithms for robust estimation of 
+##   location (mean and mode) and scatter based on minimum spanning 
+##   trees (pMST), self-organizing maps (Flood Algorithm), Delaunay 
+##   triangulations (RDELA), and nested minimum volume convex sets 
+##   (MVCH). 
+## 
+## Rsomoclu 
+## 
+##   Somoclu is a massively parallel implementation of self-organizing 
+##   maps. 
+## 
+## som 
+## 
+##   Self-Organizing Map (with application in gene clustering). 
+## 
+## somspace 
+## 
+##   Application of the Self-Organizing Maps technique for spatial 
+##   classification of time series. 
+## 
+## symbolicDA 
+## 
+##   Symbolic data analysis methods: importing/exporting data from ASSO 
+##   XML Files, distance calculation for symbolic data (Ichino-Yaguchi, 
+##   de Carvalho measure), zoom star plot, 3d interval plot, 
+##   multidimensional scaling for symbolic interval data, dynamic 
+##   clustering based on distance matrix, HINoV method for symbolic 
+##   data, Ichino&#39;s feature selection method, principal component 
+##   analysis for symbolic interval data, decision trees for symbolic 
+##   data based on optimal split with bagging, boosting and random 
+##   forest approach (+visualization), kernel discriminant analysis for 
+##   symbolic data, Kohonen&#39;s self-organizing maps for symbolic data, 
+##   replication and profiling, artificial symbolic data generation. 
+##   (Milligan, G.W., Cooper, M.C. (1985)). 
+## 
+## Umatrix 
+## 
+##   By gaining the property of emergence through self-organization, 
+##   the enhancement of SOMs(self organizing maps) is called Emergent 
+##   SOM (ESOM).</code></pre>
+<p>Indeed, it returns a couple of packages that might have some functions to work with Self-Organizing Maps!</p>
+</div>
+<div id="how-does-the-function-work" class="section level1">
+<h1>How does the function work?</h1>
+<p>Let’s check the contents of the function.</p>
+<pre class="r"><code>browse_cran</code></pre>
+<pre><code>## function (query, fuzzy = FALSE, echo = TRUE, ignore.case = TRUE) 
+## {
+##     temp_crandb_file &lt;- file.path(tempdir(), &quot;temp_cran_db.rds&quot;)
+##     if (!file.exists(temp_crandb_file)) {
+##         raw &lt;- tools::CRAN_package_db()[c(&quot;Package&quot;, &quot;Description&quot;)]
+##         raw[&quot;Description&quot;] &lt;- gsub(&quot;\\s+&quot;, &quot; &quot;, raw[[&quot;Description&quot;]])
+##         raw[&quot;Description&quot;] &lt;- gsub(&quot;\\s?&lt;.*&gt;&quot;, &quot;&quot;, raw[[&quot;Description&quot;]])
+##         cran_db &lt;- data.frame(Package = raw[[&quot;Package&quot;]], Description = raw[[&quot;Description&quot;]], 
+##             Haystack = paste(raw[[&quot;Package&quot;]], raw[[&quot;Description&quot;]]), 
+##             stringsAsFactors = FALSE)
+##         saveRDS(cran_db, temp_crandb_file)
+##     }
+##     else {
+##         cran_db &lt;- readRDS(temp_crandb_file)
+##     }
+##     if (fuzzy == TRUE) {
+##         query &lt;- fuzzy_needle(query)
+##     }
+##     matching_rows &lt;- grep(query, cran_db[[&quot;Haystack&quot;]], ignore.case = ignore.case, 
+##         perl = TRUE)
+##     if (length(matching_rows) == 0) {
+##         message(&quot;\nNo CRAN packages matched query: &quot;, query, 
+##             &quot;\n&quot;)
+##         return(invisible(data.frame()))
+##     }
+##     matches &lt;- cran_db[matching_rows, c(&quot;Package&quot;, &quot;Description&quot;)]
+##     matches &lt;- unique(matches)
+##     if (echo == TRUE) {
+##         for (i in 1:nrow(matches)) {
+##             cat(matches[[i, &quot;Package&quot;]], &quot;\n&quot;)
+##             cat(wrap_text(sentence(matches[[i, &quot;Description&quot;]])), 
+##                 &quot;\n\n&quot;)
+##         }
+##     }
+##     return(invisible(matches))
+## }
+## &lt;bytecode: 0x00000000188a2dc0&gt;
+## &lt;environment: namespace:librarian&gt;</code></pre>
+<p>Actually, there is a function <code class="r">CRAN_package_db()</code> from the <code class="r">library(tools)</code> which obtains information about current packages in the CRAN package repository, and their check status.</p>
+<pre class="r"><code>tools::CRAN_package_db</code></pre>
+<pre><code>## function () 
+## as.data.frame(read_CRAN_object(CRAN_baseurl_for_web_area(), &quot;web/packages/packages.rds&quot;), 
+##     stringsAsFactors = FALSE)
+## &lt;bytecode: 0x00000000188a8ae8&gt;
+## &lt;environment: namespace:tools&gt;</code></pre>
+<p>Therefore, it seems that all package info is stored on CRAN in one repository. Let’s check this hypothesis, if any time stamp is available in the function ``{.r}.</p>
+<pre class="r"><code>db &lt;-  tools::CRAN_package_db()
+colnames(db)</code></pre>
+<pre><code>##  [1] &quot;Package&quot;                 &quot;Version&quot;                
+##  [3] &quot;Priority&quot;                &quot;Depends&quot;                
+##  [5] &quot;Imports&quot;                 &quot;LinkingTo&quot;              
+##  [7] &quot;Suggests&quot;                &quot;Enhances&quot;               
+##  [9] &quot;License&quot;                 &quot;License_is_FOSS&quot;        
+## [11] &quot;License_restricts_use&quot;   &quot;OS_type&quot;                
+## [13] &quot;Archs&quot;                   &quot;MD5sum&quot;                 
+## [15] &quot;NeedsCompilation&quot;        &quot;Additional_repositories&quot;
+## [17] &quot;Author&quot;                  &quot;Authors@R&quot;              
+## [19] &quot;Biarch&quot;                  &quot;BugReports&quot;             
+## [21] &quot;BuildKeepEmpty&quot;          &quot;BuildManual&quot;            
+## [23] &quot;BuildResaveData&quot;         &quot;BuildVignettes&quot;         
+## [25] &quot;Built&quot;                   &quot;ByteCompile&quot;            
+## [27] &quot;Classification/ACM&quot;      &quot;Classification/ACM-2012&quot;
+## [29] &quot;Classification/JEL&quot;      &quot;Classification/MSC&quot;     
+## [31] &quot;Classification/MSC-2010&quot; &quot;Collate&quot;                
+## [33] &quot;Collate.unix&quot;            &quot;Collate.windows&quot;        
+## [35] &quot;Contact&quot;                 &quot;Copyright&quot;              
+## [37] &quot;Date&quot;                    &quot;Description&quot;            
+## [39] &quot;Encoding&quot;                &quot;KeepSource&quot;             
+## [41] &quot;Language&quot;                &quot;LazyData&quot;               
+## [43] &quot;LazyDataCompression&quot;     &quot;LazyLoad&quot;               
+## [45] &quot;MailingList&quot;             &quot;Maintainer&quot;             
+## [47] &quot;Note&quot;                    &quot;Packaged&quot;               
+## [49] &quot;RdMacros&quot;                &quot;SysDataCompression&quot;     
+## [51] &quot;SystemRequirements&quot;      &quot;Title&quot;                  
+## [53] &quot;Type&quot;                    &quot;URL&quot;                    
+## [55] &quot;VignetteBuilder&quot;         &quot;ZipData&quot;                
+## [57] &quot;Published&quot;               &quot;Path&quot;                   
+## [59] &quot;X-CRAN-Comment&quot;          &quot;Reverse depends&quot;        
+## [61] &quot;Reverse imports&quot;         &quot;Reverse linking to&quot;     
+## [63] &quot;Reverse suggests&quot;        &quot;Reverse enhances&quot;</code></pre>
+<p>Actually there are <code>64</code> different variables in this data object from CRAN.
+The last 20 available dates are following:</p>
+<pre class="r"><code>date_db &lt;- db$Date %&gt;% as.Date()
+date_db %&gt;% 
+  sort(na.rm = TRUE) %&gt;% 
+  tail(20)</code></pre>
+<pre><code>##  [1] &quot;2020-02-09&quot; &quot;2020-02-09&quot; &quot;2020-02-09&quot; &quot;2020-02-09&quot; &quot;2020-02-09&quot;
+##  [6] &quot;2020-02-09&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot;
+## [11] &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-21&quot; &quot;2020-03-01&quot;
+## [16] &quot;2020-03-02&quot; &quot;2020-03-03&quot; &quot;2020-05-02&quot; &quot;2020-08-01&quot; &quot;2020-12-01&quot;</code></pre>
+<p>There are some outliers but as the lastest sensible dates are from the same day when this analysis is created then it is safe to assume that <code class="r">packages.rds</code> file is up-to-date. Hence, this approach can be used to find out more about R Packages in CRAN directly from RStudio!</p>
+</div>
+
+
+            </div>
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="/img/back.svg" alt="back" />
+                    <a href="/blog/creating-quickly-a-r-package/">Creating quickly a R Package</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                 <div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ps-disqus.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </div>
+            
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
 <div class="footer column">
     <div class="container">
 

@@ -6,10 +6,20 @@
     <description>Recent content in R on Pawel Sobala</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to find packages on CRAN from RStudio</title>
+      <link>/blog/how-to-find-packages-on-cran-from-rstudio/</link>
+      <pubDate>Mon, 10 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/how-to-find-packages-on-cran-from-rstudio/</guid>
+      <description>body {text-align: justify}MotivationWhen writing a new blog post on the assessment of quality of fitted Self-Organizing Map (SOM) to data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.
+Librarian PackageAfter googling for a while I found the library(librarian) package which contains a function browse_cran() to search package names and descriptions within CRAN.</description>
+    </item>
     
     <item>
       <title>Creating quickly a R Package</title>

@@ -1,0 +1,82 @@
+---
+title: "How to find packages on CRAN from RStudio"
+description: Using librarian package to find packages on CRAN directly from RStudio
+author: "Pawel Sobala"
+date: '2020-02-10'
+slug: how-to-find-packages-on-cran-from-rstudio
+categories: ["R", "Packages"]
+tags: ["R Packages", "CRAN", "Librarian"]
+#output: 
+#  html_document:
+#    keep_md: true
+#    toc: true
+#    toc_depth: 3
+#    toc_float: 
+#      collapsed: false
+#      smooth_scroll: true
+#    number_sections: true  ## if you want number sections at each table header
+#    theme: united  # many options for theme, this one is my favorite.
+#    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
+---
+<style>
+body {
+text-align: justify}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+library(librarian)
+library(tidyverse)
+```
+
+# Motivation
+
+When writing a new blog post on the assessment of quality of fitted Self-Organizing Map (SOM) to data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.
+
+# Librarian Package
+
+After googling for a while I found the `library(librarian)`{.r} package which contains a function `browse_cran()`{.r} to search package names and descriptions within CRAN. For example, if you can’t remember what the “colorbrewer” package is actually called, you just type `browse_cran("colorbrewer")`{.r}.
+
+I decided to test it and to find any packages that are related to the Self Organizing Maps topic.
+I found out that I cannot use the argument `som` to find any items as all words containing `some` are also returned. A quote `organizing map` should work.
+
+```{r librarian_browse_cran}
+som_data <- browse_cran("organizing map")
+```
+
+
+Indeed, it returns a couple of packages that might have some functions to work with Self-Organizing Maps!
+
+# How does the function work?
+
+Let's check the contents of the function.
+
+```{r browse_cran_function_contents}
+browse_cran
+```
+
+Actually, there is a function `CRAN_package_db()`{.r} from the `library(tools)`{.r} which obtains information about current packages in the CRAN package repository, and their check status.
+
+```{r}
+tools::CRAN_package_db
+```
+
+Therefore, it seems that all package info is stored on CRAN in one repository. Let's check this hypothesis, if any time stamp is available in the function ``{.r}.
+
+```{r}
+db <-  tools::CRAN_package_db()
+colnames(db)
+```
+
+Actually there are `64` different variables in this data object from CRAN. 
+The last 20 available dates are following:
+
+```{r, warning=FALSE}
+date_db <- db$Date %>% as.Date()
+date_db %>% 
+  sort(na.rm = TRUE) %>% 
+  tail(20)
+```
+
+There are some outliers but as the lastest sensible dates are from the same day when this analysis is created then it is safe to assume that `packages.rds`{.r} file is up-to-date. Hence, this approach can be used to find out more about R Packages in CRAN directly from RStudio!

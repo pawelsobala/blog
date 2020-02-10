@@ -1,0 +1,203 @@
+---
+title: "How to find packages on CRAN from RStudio"
+description: Using librarian package to find packages on CRAN directly from RStudio
+author: "Pawel Sobala"
+date: '2020-02-10'
+slug: how-to-find-packages-on-cran-from-rstudio
+categories: ["R", "Packages"]
+tags: ["R Packages", "CRAN", "Librarian"]
+#output: 
+#  html_document:
+#    keep_md: true
+#    toc: true
+#    toc_depth: 3
+#    toc_float: 
+#      collapsed: false
+#      smooth_scroll: true
+#    number_sections: true  ## if you want number sections at each table header
+#    theme: united  # many options for theme, this one is my favorite.
+#    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
+---
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>When writing a new blog post on the assessment of quality of fitted Self-Organizing Map (SOM) to data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.</p>
+</div>
+<div id="librarian-package" class="section level1">
+<h1>Librarian Package</h1>
+<p>After googling for a while I found the <code class="r">library(librarian)</code> package which contains a function <code class="r">browse_cran()</code> to search package names and descriptions within CRAN. For example, if you can’t remember what the “colorbrewer” package is actually called, you just type <code class="r">browse_cran("colorbrewer")</code>.</p>
+<p>I decided to test it and to find any packages that are related to the Self Organizing Maps topic.
+I found out that I cannot use the argument <code>som</code> to find any items as all words containing <code>some</code> are also returned. A quote <code>organizing map</code> should work.</p>
+<pre class="r"><code>som_data &lt;- browse_cran(&quot;organizing map&quot;)</code></pre>
+<pre><code>## class 
+## 
+##   Various functions for classification, including k-nearest 
+##   neighbour, Learning Vector Quantization and Self-Organizing Maps. 
+## 
+## EmbedSOM 
+## 
+##   Provides a smooth mapping of multidimensional points into 
+##   low-dimensional space defined by a self-organizing map. 
+## 
+## ggsom 
+## 
+##   The aim of this package is to offer more variability of graphics 
+##   based on the self-organizing maps. 
+## 
+## Numero 
+## 
+##   High-dimensional datasets that do not exhibit a clear intrinsic 
+##   clustered structure pose a challenge to conventional clustering 
+##   algorithms. 
+## 
+## popsom 
+## 
+##   State of the art functions for constructing and evaluating 
+##   self-organizing maps. 
+## 
+## restlos 
+## 
+##   The restlos package provides algorithms for robust estimation of 
+##   location (mean and mode) and scatter based on minimum spanning 
+##   trees (pMST), self-organizing maps (Flood Algorithm), Delaunay 
+##   triangulations (RDELA), and nested minimum volume convex sets 
+##   (MVCH). 
+## 
+## Rsomoclu 
+## 
+##   Somoclu is a massively parallel implementation of self-organizing 
+##   maps. 
+## 
+## som 
+## 
+##   Self-Organizing Map (with application in gene clustering). 
+## 
+## somspace 
+## 
+##   Application of the Self-Organizing Maps technique for spatial 
+##   classification of time series. 
+## 
+## symbolicDA 
+## 
+##   Symbolic data analysis methods: importing/exporting data from ASSO 
+##   XML Files, distance calculation for symbolic data (Ichino-Yaguchi, 
+##   de Carvalho measure), zoom star plot, 3d interval plot, 
+##   multidimensional scaling for symbolic interval data, dynamic 
+##   clustering based on distance matrix, HINoV method for symbolic 
+##   data, Ichino&#39;s feature selection method, principal component 
+##   analysis for symbolic interval data, decision trees for symbolic 
+##   data based on optimal split with bagging, boosting and random 
+##   forest approach (+visualization), kernel discriminant analysis for 
+##   symbolic data, Kohonen&#39;s self-organizing maps for symbolic data, 
+##   replication and profiling, artificial symbolic data generation. 
+##   (Milligan, G.W., Cooper, M.C. (1985)). 
+## 
+## Umatrix 
+## 
+##   By gaining the property of emergence through self-organization, 
+##   the enhancement of SOMs(self organizing maps) is called Emergent 
+##   SOM (ESOM).</code></pre>
+<p>Indeed, it returns a couple of packages that might have some functions to work with Self-Organizing Maps!</p>
+</div>
+<div id="how-does-the-function-work" class="section level1">
+<h1>How does the function work?</h1>
+<p>Let’s check the contents of the function.</p>
+<pre class="r"><code>browse_cran</code></pre>
+<pre><code>## function (query, fuzzy = FALSE, echo = TRUE, ignore.case = TRUE) 
+## {
+##     temp_crandb_file &lt;- file.path(tempdir(), &quot;temp_cran_db.rds&quot;)
+##     if (!file.exists(temp_crandb_file)) {
+##         raw &lt;- tools::CRAN_package_db()[c(&quot;Package&quot;, &quot;Description&quot;)]
+##         raw[&quot;Description&quot;] &lt;- gsub(&quot;\\s+&quot;, &quot; &quot;, raw[[&quot;Description&quot;]])
+##         raw[&quot;Description&quot;] &lt;- gsub(&quot;\\s?&lt;.*&gt;&quot;, &quot;&quot;, raw[[&quot;Description&quot;]])
+##         cran_db &lt;- data.frame(Package = raw[[&quot;Package&quot;]], Description = raw[[&quot;Description&quot;]], 
+##             Haystack = paste(raw[[&quot;Package&quot;]], raw[[&quot;Description&quot;]]), 
+##             stringsAsFactors = FALSE)
+##         saveRDS(cran_db, temp_crandb_file)
+##     }
+##     else {
+##         cran_db &lt;- readRDS(temp_crandb_file)
+##     }
+##     if (fuzzy == TRUE) {
+##         query &lt;- fuzzy_needle(query)
+##     }
+##     matching_rows &lt;- grep(query, cran_db[[&quot;Haystack&quot;]], ignore.case = ignore.case, 
+##         perl = TRUE)
+##     if (length(matching_rows) == 0) {
+##         message(&quot;\nNo CRAN packages matched query: &quot;, query, 
+##             &quot;\n&quot;)
+##         return(invisible(data.frame()))
+##     }
+##     matches &lt;- cran_db[matching_rows, c(&quot;Package&quot;, &quot;Description&quot;)]
+##     matches &lt;- unique(matches)
+##     if (echo == TRUE) {
+##         for (i in 1:nrow(matches)) {
+##             cat(matches[[i, &quot;Package&quot;]], &quot;\n&quot;)
+##             cat(wrap_text(sentence(matches[[i, &quot;Description&quot;]])), 
+##                 &quot;\n\n&quot;)
+##         }
+##     }
+##     return(invisible(matches))
+## }
+## &lt;bytecode: 0x00000000188a2dc0&gt;
+## &lt;environment: namespace:librarian&gt;</code></pre>
+<p>Actually, there is a function <code class="r">CRAN_package_db()</code> from the <code class="r">library(tools)</code> which obtains information about current packages in the CRAN package repository, and their check status.</p>
+<pre class="r"><code>tools::CRAN_package_db</code></pre>
+<pre><code>## function () 
+## as.data.frame(read_CRAN_object(CRAN_baseurl_for_web_area(), &quot;web/packages/packages.rds&quot;), 
+##     stringsAsFactors = FALSE)
+## &lt;bytecode: 0x00000000188a8ae8&gt;
+## &lt;environment: namespace:tools&gt;</code></pre>
+<p>Therefore, it seems that all package info is stored on CRAN in one repository. Let’s check this hypothesis, if any time stamp is available in the function ``{.r}.</p>
+<pre class="r"><code>db &lt;-  tools::CRAN_package_db()
+colnames(db)</code></pre>
+<pre><code>##  [1] &quot;Package&quot;                 &quot;Version&quot;                
+##  [3] &quot;Priority&quot;                &quot;Depends&quot;                
+##  [5] &quot;Imports&quot;                 &quot;LinkingTo&quot;              
+##  [7] &quot;Suggests&quot;                &quot;Enhances&quot;               
+##  [9] &quot;License&quot;                 &quot;License_is_FOSS&quot;        
+## [11] &quot;License_restricts_use&quot;   &quot;OS_type&quot;                
+## [13] &quot;Archs&quot;                   &quot;MD5sum&quot;                 
+## [15] &quot;NeedsCompilation&quot;        &quot;Additional_repositories&quot;
+## [17] &quot;Author&quot;                  &quot;Authors@R&quot;              
+## [19] &quot;Biarch&quot;                  &quot;BugReports&quot;             
+## [21] &quot;BuildKeepEmpty&quot;          &quot;BuildManual&quot;            
+## [23] &quot;BuildResaveData&quot;         &quot;BuildVignettes&quot;         
+## [25] &quot;Built&quot;                   &quot;ByteCompile&quot;            
+## [27] &quot;Classification/ACM&quot;      &quot;Classification/ACM-2012&quot;
+## [29] &quot;Classification/JEL&quot;      &quot;Classification/MSC&quot;     
+## [31] &quot;Classification/MSC-2010&quot; &quot;Collate&quot;                
+## [33] &quot;Collate.unix&quot;            &quot;Collate.windows&quot;        
+## [35] &quot;Contact&quot;                 &quot;Copyright&quot;              
+## [37] &quot;Date&quot;                    &quot;Description&quot;            
+## [39] &quot;Encoding&quot;                &quot;KeepSource&quot;             
+## [41] &quot;Language&quot;                &quot;LazyData&quot;               
+## [43] &quot;LazyDataCompression&quot;     &quot;LazyLoad&quot;               
+## [45] &quot;MailingList&quot;             &quot;Maintainer&quot;             
+## [47] &quot;Note&quot;                    &quot;Packaged&quot;               
+## [49] &quot;RdMacros&quot;                &quot;SysDataCompression&quot;     
+## [51] &quot;SystemRequirements&quot;      &quot;Title&quot;                  
+## [53] &quot;Type&quot;                    &quot;URL&quot;                    
+## [55] &quot;VignetteBuilder&quot;         &quot;ZipData&quot;                
+## [57] &quot;Published&quot;               &quot;Path&quot;                   
+## [59] &quot;X-CRAN-Comment&quot;          &quot;Reverse depends&quot;        
+## [61] &quot;Reverse imports&quot;         &quot;Reverse linking to&quot;     
+## [63] &quot;Reverse suggests&quot;        &quot;Reverse enhances&quot;</code></pre>
+<p>Actually there are <code>64</code> different variables in this data object from CRAN.
+The last 20 available dates are following:</p>
+<pre class="r"><code>date_db &lt;- db$Date %&gt;% as.Date()
+date_db %&gt;% 
+  sort(na.rm = TRUE) %&gt;% 
+  tail(20)</code></pre>
+<pre><code>##  [1] &quot;2020-02-09&quot; &quot;2020-02-09&quot; &quot;2020-02-09&quot; &quot;2020-02-09&quot; &quot;2020-02-09&quot;
+##  [6] &quot;2020-02-09&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot;
+## [11] &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-21&quot; &quot;2020-03-01&quot;
+## [16] &quot;2020-03-02&quot; &quot;2020-03-03&quot; &quot;2020-05-02&quot; &quot;2020-08-01&quot; &quot;2020-12-01&quot;</code></pre>
+<p>There are some outliers but as the lastest sensible dates are from the same day when this analysis is created then it is safe to assume that <code class="r">packages.rds</code> file is up-to-date. Hence, this approach can be used to find out more about R Packages in CRAN directly from RStudio!</p>
+</div>

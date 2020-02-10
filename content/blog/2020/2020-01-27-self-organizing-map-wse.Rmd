@@ -264,6 +264,8 @@ A simple Self Organizing Map helping to help explain the Warsaw Stock Exchange m
 
 
 ```{r, echo=FALSE}
+save.image("SOM_data.RData")
+
 #Quality
 # 
 # library(popsom)
