@@ -32,44 +32,43 @@ library(tidyverse)
 
 # Motivation
 
-When writing a new blog post on the assessment of quality of fitted Self-Organizing Map (SOM) to data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.
+When writing a new blog post on the assessment of the quality of fitted Self-Organizing Map (SOM) to the data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.
 
 # Librarian Package
 
-After goggling for a while I found the `library(librarian)`{.r} package which contains a function `browse_cran()`{.r} to search package names and descriptions within CRAN. For example, if you can't remember what the `colorbrewer` package is actually called, you just type `browse_cran("colorbrewer")`{.r}.
+After goggling for a while I found the `library(librarian)`{.r} package which contains a function `browse_cran()`{.r} to search package names and descriptions within CRAN. For example, if you can't remember what the `colorbrewer` package is actually called, you just type `browse_cran("colorbrewer")`{.r} and get the answer.
 
-I decided to test it and to find any packages that are related to the Self Organizing Maps topic.
-I found out that I cannot use the argument `som` to find any items as all words containing `some` are also returned. A quote `organizing map` should work.
+I decided to test it and to find any packages that are related to the topic of Self-Organizing Maps.
+I found out that I cannot use the argument `som` to find any items, as all words containing `some` are also returned - which is a huge list. A quote `organizing map` should work, as in theory no other function should use those words.
 
 ```{r librarian_browse_cran}
 som_data <- browse_cran("organizing map")
 ```
 
-
-Indeed, it returns a couple of packages that might have some functions to work with Self-Organizing Maps!
+Indeed, the function returns a couple of packages that might have some functions to work with Self-Organizing Maps!
 
 # How does the function work?
 
-Let's check the contents of the function.
+Okay, this function works, but the question is how. Let's check the contents of the function.
 
 ```{r browse_cran_function_contents}
 browse_cran
 ```
 
-Actually, there is a function `CRAN_package_db()`{.r} from the `library(tools)`{.r} which obtains information about current packages in the CRAN package repository, and their check status.
+Actually, there is a function `CRAN_package_db()`{.r} from the `library(tools)`{.r} which obtains information about current packages in the CRAN package repository, and their check status. Let's dig further.
 
 ```{r}
 tools::CRAN_package_db
 ```
 
-Therefore, it seems that all package info is stored on CRAN in one repository. Let's check this hypothesis, if any time stamp is available in the function ``{.r}.
+From the above script, it seems that all package info is stored on CRAN in one repository. Let's check this hypothesis, if any time stamp is available in the function ``{.r}.
 
 ```{r}
 db <-  tools::CRAN_package_db()
 colnames(db)
 ```
 
-Actually there are `64` different variables in this data object from CRAN. 
+Actually there are `64` different variables in this data object from CRAN. It's a really extensive data set. Therefore, the question is if it is up-to-date or if it is outdated. Maybe it is archived only once a month?
 The last 20 available dates are following:
 
 ```{r, warning=FALSE}
