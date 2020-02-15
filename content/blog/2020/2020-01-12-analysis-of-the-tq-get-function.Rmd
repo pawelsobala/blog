@@ -141,13 +141,13 @@ markets_yahoo <- c(stocks_nyse_yahoo,etf_yahoo,commodities_yahoo,treasury_yahoo,
 
 Firstly, let's examine what is the default output of the `tq_get`{.r} function, when using `get="stock.prices"`{.r}. Especially, I am interested in the default time range.
 
-```{r stock_prices_default, warning=FALSE}
+```{r, warning=FALSE}
 stock_data_yahoo <- tq_get(stocks_nyse_yahoo, get = "stock.prices")
 stock_data_yahoo %>%
   group_by(symbol) %>%
   select(symbol, date) %>%
   summarise(n_obs = n(), min(date), max(date)) %>%
-  kable(booktabs = TRUE,
+  kable(
         caption = 'Default time ranges - "stock.price" option') %>%
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
@@ -156,7 +156,7 @@ stock_data_yahoo %>%
 It seems that only the last 10 years of data are available dy default (it is not specified in the documentation) using this method, which is not that bad after all.
 In the `getSymbols()`{.r} function there is actually, another argument: `from`{.r} might enhance the number of observations. Let's check it out.
 
-```{r stock_prices_custom, warning=FALSE}
+```{r, warning=FALSE}
 exec_start_time <- Sys.time()
 market_data_yahoo <- tq_get(stocks_nyse_yahoo, get="stock.prices", complete_cases = TRUE,from = "1900-01-01")
 exec_end_time <- Sys.time()
@@ -165,7 +165,7 @@ market_data_yahoo %>%
   group_by(symbol) %>% 
   select(symbol,date) %>% 
   summarise(n_obs=n(),min(date),max(date)) %>% 
-  kable(booktabs = TRUE,
+  kable(
         caption = 'Custom time ranges - "stock.price" option') %>%
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
@@ -182,7 +182,7 @@ As a sanity check, I want to check if all historical data is available. To perfo
 1. the number of trading days for each year is equal to ~250,
 2. between different stocks for each the number of trading days is the same.
 
-```{r stock_prices_sanity_check_1, echo=FALSE, fig.align="center", warning=FALSE}
+```{r, echo=FALSE, fig.align="center", warning=FALSE}
 market_data_yahoo_year <- market_data_yahoo %>%
   mutate(year=year(date)) %>%
   group_by(symbol,year)  %>% 
@@ -204,14 +204,14 @@ ggplotly(plot_market_data) %>%
 
 In general the number of trading days for each stock is ~250. However, from the quick overview, it can be clearly seen that for GE in 1968 something might be wrong. Detailed analysis, if the number of trading days in a year is the same for each stock is presented below.
 
-```{r stock_prices_sanity_check_2, warning=FALSE}
+```{r, warning=FALSE}
 
 market_data_yahoo_year %>% 
   arrange(year) %>% 
   group_by(year) %>% 
   mutate(n_obs_change = ifelse(length(unique(n_obs_year[!is.na(n_obs_year)])) > 1, 1, 0)) %>% 
   filter(n_obs_change==1 & (row_number()==1)) %>% 
-  kable(booktabs = TRUE,
+  kable(
         caption = 'Cases when number of trading dates differed') %>%
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
@@ -220,7 +220,7 @@ market_data_yahoo_year %>%
 
 The only years when the number of trading days is different is when a stock had an IPO. Therefore, both sanity checks proven that our data is complete. One can browse data on number of trading days in year per stock in the below-listed table.
 
-```{r stock_prices_sanity_check, warning=FALSE}
+```{r, warning=FALSE}
 
 market_data_yahoo_year %>% 
   arrange(year) %>% 
@@ -234,13 +234,13 @@ market_data_yahoo_year %>%
 
 On Yahoo Finance it is possible to access also data on ETFs, bonds, commodities, exchange rate. Therefore, let's examine if option `get="stock.prices"`{.r} enables to download this data.
 
-```{r stock_prices_other_markets}
+```{r}
 market_data_all_yahoo <- tq_get(markets_yahoo, get = "stock.prices", from="1900-01-01")
 
 market_data_all_yahoo %>%
   group_by(symbol) %>% 
   summarise(n_obs=n(),min(date),max(date)) %>% 
-  kable(booktabs = TRUE,
+  kable(
         caption = 'Market data - "stock.price" option')%>%
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)  
@@ -253,13 +253,13 @@ There is full history of data available for stocks, ETFs, bonds, cryptocurrencie
 
 Dividends are available only for stocks, so only they will be analyzed.
 
-```{r dividends, warning=FALSE}
+```{r, warning=FALSE}
 dividend_data_yahoo <- tq_get(stocks_nyse_yahoo, get="dividends", from="1900-01-01")
 dividend_data_yahoo %>% 
   group_by(symbol) %>% 
   select(symbol,date,dividends) %>% 
   summarise(n_obs=n(),min(date),max(date),max_dividend=max(round(dividends,2)))%>% 
-  kable(booktabs = TRUE,
+  kable(
         caption = 'Custom time ranges - "dividends" option') %>%
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
@@ -272,13 +272,13 @@ From our data it seems that Tesla is the only company that didn't pay out divide
 For those that are unaware of what a stock split is I recommend to refer to [Investopedia](https://www.investopedia.com/ask/answers/what-stock-split-why-do-stocks-split/).
 Getting data on splits is important as it helps to understand better the changes in stock price, as a stock's price is also affected by a stock split. After a split, the stock price will be reduced since the number of shares outstanding has increased.
 
-```{r splits, warning=FALSE}
+```{r, warning=FALSE}
 splits_data_yahoo <- tq_get(stocks_nyse_yahoo, get="splits", from="1900-01-01")
 # splits_data_yahoo %>% 
 #   group_by(symbol) %>% 
 #   select(symbol,date) %>% 
 #   summarise(n_obs=n(),min(date),max(date)) %>% 
-#   kable(booktabs = TRUE,
+#   kable(
 #         caption = 'Custom time ranges - "splits" option') %>%
 #   kable_styling(bootstrap_options = 
 #                   c("striped", "hover", "condensed", "responsive"), full_width = F)
@@ -298,12 +298,12 @@ This section is going to be covered later.
 
 Metal prices are obtained from [Oanda](https://www.oanda.com).
 
-```{r metal_prices, warning=FALSE}
+```{r, warning=FALSE}
 metal_prices_data_oanda <- tq_get(c("XAG","XAU", "XPD"), get="metal.prices", from="1900-01-01")
 metal_prices_data_oanda  %>%
   group_by(symbol) %>% 
   summarise(n_obs=n(),min(date),max(date)) %>% 
-  kable(booktabs = TRUE,
+  kable(
         caption = 'Custom time ranges - "metal.prices" option') %>% 
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
@@ -315,13 +315,13 @@ Unfortunately, Oanda only provides historical data for the past 180 days. What i
 
 When using `get="exchange.rates"`{.r} option the data is received from the [Oanda](https://www.oanda.com).
 
-```{r fx_rates, echo=FALSE, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 
 exchange_rates_data_oanda <- tq_get(exchange_rates_oanda, get="exchange.rates", from="1900-01-01")
 exchange_rates_data_oanda  %>% 
   group_by(symbol) %>% 
   summarise(n_obs=n(),min(date),max(date)) %>% 
-  kable(booktabs = TRUE,
+  kable(
         caption = 'Custom time ranges - "exchange.rates" option') %>% 
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
@@ -334,7 +334,7 @@ Here, the same situation as in the case of `get="metal.prices"`{.r} when downloa
 
 Once, I have data on precious metals and exchange rates for fiat currencies from 2 different sources I can check what is the spread between them for the past 180 days.
 
-```{r fx_rates_sanity_check, echo=FALSE, fig.align="center", warning=FALSE}
+```{r, echo=FALSE, fig.align="center", warning=FALSE}
 
 exchange_rates_data_yahoo <- tq_get(exchange_rates_yahoo, get="stock.prices")
 exchange_rates_data_yahoo$symbol <- recode(exchange_rates_data_yahoo$symbol,"EURUSD=X"="EUR/USD", "EURPLN=X"="EUR/PLN", "EURRUB=X"="EUR/RUB","EURTRY=X"="EUR/TRY")
@@ -358,11 +358,11 @@ When creating the spread plot, it became visible that Oanda provides data for th
 
 To get data from [Quandl](quandl.com) it is necessary to set API key using:
 
-```{r quandl_api,echo=FALSE}
+```{r,echo=FALSE}
 your_api_key <- "p2TQxFskkLUKFBBea5RM"
 ```
 
-```{r quandl_api_2}
+```{r}
 quandl_api_key(your_api_key) 
 ```
 
@@ -372,7 +372,7 @@ There is no master database containing all data but rather databases from differ
 I couldn't find any free database on Quandl containing data on stocks from NYSE, US bonds, ETFs and some commodities. 
 What suprised me is that contrary to previously tested options, here I have the possibility to download data from Warsaw Stock Exchange.
 
-```{r quandl_data_1, warning=FALSE,echo=FALSE}
+```{r, warning=FALSE,echo=FALSE}
 
 query_xauxag_quandl <- c("NASDAQOMX/XAU","NASDAQOMX/XAG")
 query_rest_quandl <- c("LPPM/PALL","CHRIS/ICE_KC2","ECB/EURUSD",
@@ -389,12 +389,12 @@ data_quandl <- rbind(data_quandl,data_xauxag_quandl)
 
 ```
 
-```{r quandl_data_2, warning=FALSE}
+```{r, warning=FALSE}
 
 data_quandl %>% 
   group_by(symbol) %>% 
   summarise(n_obs=n(),min(date),max(date)) %>% 
-  kable(booktabs = TRUE,
+  kable(
         caption = 'Custom time ranges - "quandl" option') %>%
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
@@ -412,7 +412,7 @@ To use Alpha Vantage once must register with Alpha Vantage in order to derive an
 av_api_key("HCW84RXTAIWECZM4")
 ```
 
-```{r av_data_1}
+```{r }
 data_exchange_rates_av <- tq_get(exchange_rates_av, 
                                  get = "alphavantager", 
                                  av_fun = "TIME_SERIES_INTRADAY", 
@@ -421,7 +421,7 @@ data_exchange_rates_av <- tq_get(exchange_rates_av,
 data_exchange_rates_av %>%  
   group_by(symbol) %>% 
   summarise(n_obs=n(),min(timestamp),max(timestamp)) %>% 
-  kable(booktabs = TRUE,
+  kable(
         caption = 'Custom time ranges - "alphavantager" option') %>%
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
