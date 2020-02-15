@@ -172,8 +172,11 @@ sanity_plots <- ggplot(df, aes(Date,value,group = 1)) +
   geom_line() + 
   facet_grid(series ~ ., scales = "free")
 
-ggplotly(sanity_plots) %>%
-  layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
+# ggplotly(sanity_plots) %>%
+#   layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
+# Plotly plot commented out, as it is weights ~3mb
+sanity_plots
+
 
 ```
 
@@ -262,7 +265,7 @@ A simple Self Organizing Map helping to help explain the Warsaw Stock Exchange m
 
 
 ```{r, echo=FALSE}
-save.image("SOM_data.RData")
+# save.image("SOM_data.RData")
 
 #Quality
 # 
