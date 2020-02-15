@@ -18,7 +18,7 @@
       
       <guid>/blog/how-to-find-packages-on-cran-from-rstudio/</guid>
       <description>body {text-align: justify}MotivationWhen writing a new blog post on the assessment of quality of fitted Self-Organizing Map (SOM) to data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.
-Librarian PackageAfter googling for a while I found the library(librarian) package which contains a function browse_cran() to search package names and descriptions within CRAN.</description>
+Librarian PackageAfter goggling for a while I found the library(librarian) package which contains a function browse_cran() to search package names and descriptions within CRAN.</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/creating-quickly-a-r-package/</guid>
-      <description>body {text-align: justify}MotivationFor my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found this article entilted “Evaluating Self-Organizing Map Quality Measures as Convergence Criteria”, which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this thesis, which was used in the aforementioned article.</description>
+      <description>body {text-align: justify}MotivationFor my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found this article entitled “Evaluating Self-Organizing Map Quality Measures as Convergence Criteria”, which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this thesis, which was used in the aforementioned article.</description>
     </item>
     
     <item>
@@ -46,7 +46,7 @@
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/analysis-of-the-tq-get-function/</guid>
-      <description>body {text-align: justify}IntroductionOne of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data diretcly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code.</description>
+      <description>body {text-align: justify}IntroductionOne of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data directly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code.</description>
     </item>
     
   </channel>

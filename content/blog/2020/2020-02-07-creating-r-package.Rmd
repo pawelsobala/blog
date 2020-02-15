@@ -30,8 +30,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Motivation
 
-For my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found [this article](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICD8051.pdf) entilted "Evaluating Self-Organizing Map Quality Measures as Convergence Criteria", which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this [thesis](https://digitalcommons.uri.edu/cgi/viewcontent.cgi?article=2013&context=theses), which was used in the aforementioned article. The problem was that this code wasn't available on GitHub or anywhere on the Internet, which could be used easily. 
-Therefore, I decide to create a R package consisting of the funtions that are created for the "Evaluating Self-Organizing Map Quality Measures as Convergence Criteria" article purposes.
+For my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found [this article](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICD8051.pdf) entitled "Evaluating Self-Organizing Map Quality Measures as Convergence Criteria", which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this [thesis](https://digitalcommons.uri.edu/cgi/viewcontent.cgi?article=2013&context=theses), which was used in the aforementioned article. The problem was that this code wasn't available on GitHub or anywhere on the Internet, which could be used easily. 
+Therefore, I decide to create a R package consisting of the functions that are created for the "Evaluating Self-Organizing Map Quality Measures as Convergence Criteria" article purposes.
 
 # Setting up the package
 
@@ -40,16 +40,16 @@ In this paragraph it will be described how to set up a basic structure for a R p
 ## Copying the scripts
 
 The first thing I did was to copy the code from the PDF file to R script and to a cpp script, which I saved respectively to files `som_quality_functions.r`{.r} and `som_quality_functions.cpp`{.r}. I saved them in a newly created folder and set it as a current working directory. At this stage I didn't create a project. This might be really helpful during the next steps.
-The most time consuming part, which took 10-15 minutes was to make sure that all whitespaces are correctly copied. Here, I mean cases when a dot `.`{.r} is copied with a whitespace at the beginning ` .`{.r}, at the end ` .`{.r} or both whitespaces are added ` . `{.r}. This was the case for many characters as `",", "<", ">", ")", "("`, etc.
-Additionally, I used the `library(styler)` to style the R script properly. I highly recommend this package, which on RStudio works as an Addin and is extermely efficient and easy to use. Only selecting the script and pressing the `style_selection()`{.r} option from the Addin is needed to neatly style the code.
+The most time consuming part, which took 10-15 minutes was to make sure that all white spaces are correctly copied. Here, I mean cases when a dot `.`{.r} is copied with a white space at the beginning ` .`{.r}, at the end ` .`{.r} or both white spaces are added ` . `{.r}. This was the case for many characters as `",", "<", ">", ")", "("`, etc.
+Additionally, I used the `library(styler)` to style the R script properly. I highly recommend this package, which on RStudio works as an Addin and is extremely efficient and easy to use. Only selecting the script and pressing the `style_selection()`{.r} option from the Addin is needed to neatly style the code.
 
 ## Creating the R Package structure
 
-I decided to use the following way of creating a R package, which is to use the 'library(usethis)'{.r} functionality. [Here](https://www.rdocumentation.org/packages/usethis/versions/1.5.1) all of the set up is well-written. The main idea of this approach is create a skelton of a package and then add to it whatever is needed.
+I decided to use the following way of creating a R package, which is to use the 'library(usethis)'{.r} functionality. [Here](https://www.rdocumentation.org/packages/usethis/versions/1.5.1) all of the set up is well-written. The main idea of this approach is create a skeleton of a package and then add to it whatever is needed.
 
->In this article I won't desribe the structure of a R package. An interested reader is adviced to take a look at the [R packages](http://r-pkgs.had.co.nz/) book created by Hadley Wickham. In this book one can find the full and complete description of R pakcage, its contents and many useful tips.
+>In this article I won't describe the structure of a R package. An interested reader is advised to take a look at the [R packages](http://r-pkgs.had.co.nz/) book created by Hadley Wickham. In this book one can find the full and complete description of R package, its contents and many useful tips.
 
-Therefore, I exectued the following code:
+Therefore, I executed the following code:
 
 ```{r Create_Package, eval = FALSE}
 path <- file.path(getwd(), "SomQualityCheck")
@@ -88,7 +88,7 @@ use_git()
 #> ✔ Adding '.Rhistory', '.RData', '.Rproj.user' to '.gitignore'
 ```
 
-After a copule of seconds (maybe one minute in the worst case) - viola, the R package is there!
+After a couple of seconds (maybe one minute in the worst case) - viola, the R package is there!
 As a result I obtained new project called `SomQualityCheck`, which is now my new package.
 In the package there are currently no R functions.
 
@@ -103,7 +103,7 @@ y <- 2
 use_data(x, y)
 ```
 
-Setting up following files is also not necessary. However, as I would like to maintain this packageand keep track of any changes in the package I decided to add following lines:
+Setting up following files is also not necessary. However, as I would like to maintain this package and keep track of any changes in the package I decided to add following lines:
 
 ```{r, eval=FALSE}
 use_readme_md()
@@ -113,7 +113,7 @@ use_git()
 
 ### DESCRIPTION FILE
 
-To finish up setting the package - once the pakcage is craeted, I have to describe its contents briefly in the `DESCRIPTION.txt` file. 
+To finish up setting the package - once the package is created, I have to describe its contents briefly in the `DESCRIPTION.txt` file. 
 I ended up changing the standard description is such a way:
 
 ```{r new_DESCRIPTION, eval=FALSE}
@@ -164,12 +164,12 @@ Therefore, for each of the function I have to write following descriptions:
 #' @export
 ```
 
-I am copying each R function that I previously saved in a `som_quality_functions.r`{.r} to a new file, which has the name of the function. I am saving each file in the `/R` folder in the `SomQualityCheck` project directory. As previously noted, for each new R script at the beginning I have to create the `Roxygen2` notes. Once the package is created, it will serve as a documentation. Such documentation will greatly help to maintain the package and save time when debugging or trying to redisover after some time what has been written in the script.
-Note that for some of the functions I set the description to `TODO`, as the main purpose currently is to add to the package all functions. One has to keep in mind that all paramteres have to be described in the documentation. Otherwise during the package build an error will occur.
+I am copying each R function that I previously saved in a `som_quality_functions.r`{.r} to a new file, which has the name of the function. I am saving each file in the `/R` folder in the `SomQualityCheck` project directory. As previously noted, for each new R script at the beginning I have to create the `Roxygen2` notes. Once the package is created, it will serve as a documentation. Such documentation will greatly help to maintain the package and save time when debugging or trying to rediscover after some time what has been written in the script.
+Note that for some of the functions I set the description to `TODO`, as the main purpose currently is to add to the package all functions. One has to keep in mind that all parameters have to be described in the documentation. Otherwise during the package build an error will occur.
 
 ## Adding C++ functions
 
-There are a couple of cpp functions that need a different treatmentto standard R functions like:
+There are a couple of cpp functions that need a different treatment to standard R functions like:
 * GetQuantizationError
 * GetTopographicError
 * GetTopographicFunction
@@ -183,7 +183,7 @@ Note that in `.cpp` file it is also possible to add `Roxygen2` notes. On [r-blog
 ## zzz.R R script
 
 As Hadley Wickham mentions in his book on [R packages](http://r-pkgs.had.co.nz/r.html) to the `/R` folder I am adding also the `zzz.R` file to make sure that when package is loaded the `library(Rcpp)` is loaded to work with some C++ functions.
-COntents of the `zzz.R` file:
+Contents of the `zzz.R` file:
 
 ```{r, eval=FALSE}
 #' SomQualityCheck
@@ -213,7 +213,7 @@ During the skeleton package creation I used the `use_git()`{.r} function from th
 
 ## Final results and next actions
 
-I recommend to check the result of this blog article at my [GitHub](https://github.com/pawelsobala/SomQualityCheck). The next steps are defenitely to:
+I recommend to check the result of this blog article at my [GitHub](https://github.com/pawelsobala/SomQualityCheck). The next steps are definitely to:
 * document the function description
 * add test cases
 * complete the ReadMe document

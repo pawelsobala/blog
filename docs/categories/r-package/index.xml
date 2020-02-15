@@ -17,7 +17,7 @@
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/creating-quickly-a-r-package/</guid>
-      <description>body {text-align: justify}MotivationFor my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found this article entilted “Evaluating Self-Organizing Map Quality Measures as Convergence Criteria”, which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this thesis, which was used in the aforementioned article.</description>
+      <description>body {text-align: justify}MotivationFor my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found this article entitled “Evaluating Self-Organizing Map Quality Measures as Convergence Criteria”, which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this thesis, which was used in the aforementioned article.</description>
     </item>
     
   </channel>

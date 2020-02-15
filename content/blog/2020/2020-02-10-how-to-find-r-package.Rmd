@@ -36,7 +36,7 @@ When writing a new blog post on the assessment of quality of fitted Self-Organiz
 
 # Librarian Package
 
-After googling for a while I found the `library(librarian)`{.r} package which contains a function `browse_cran()`{.r} to search package names and descriptions within CRAN. For example, if you can’t remember what the “colorbrewer” package is actually called, you just type `browse_cran("colorbrewer")`{.r}.
+After goggling for a while I found the `library(librarian)`{.r} package which contains a function `browse_cran()`{.r} to search package names and descriptions within CRAN. For example, if you can't remember what the `colorbrewer` package is actually called, you just type `browse_cran("colorbrewer")`{.r}.
 
 I decided to test it and to find any packages that are related to the Self Organizing Maps topic.
 I found out that I cannot use the argument `som` to find any items as all words containing `some` are also returned. A quote `organizing map` should work.
@@ -79,4 +79,4 @@ date_db %>%
   tail(20)
 ```
 
-There are some outliers but as the lastest sensible dates are from the same day when this analysis is created then it is safe to assume that `packages.rds`{.r} file is up-to-date. Hence, this approach can be used to find out more about R Packages in CRAN directly from RStudio!
+There are some outliers but as the latest sensible dates are from the same day when this analysis is created then it is safe to assume that `packages.rds`{.r} file is up-to-date. Hence, this approach can be used to find out more about R Packages in CRAN directly from RStudio!

@@ -40,10 +40,10 @@ options(scipen=999)
 
 # Introduction
 
-One of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data diretcly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code. Luckily, there are some functions that facilitate getting it in R. Of course it is possible to web scraping the data that is needed. 
+One of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data directly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code. Luckily, there are some functions that facilitate getting it in R. Of course it is possible to web scraping the data that is needed. 
 Recently, I came across [this](http://varianceexplained.org/r/stock-changes/) article, where the `library(tidyquant)`{.r} was utilized.
 There financial data was obtained using `tq_get()`{.r} function, which I didn't know previously.  
-The aim of this article is to analyse thouroughly this function from the tidyquant package.
+The aim of this article is to analyse thoroughly this function from the tidyquant package.
 
 ## tq_get() function
 
@@ -76,7 +76,7 @@ ID | Option | Source of data | Wrapper | Covered in this article
 #https://stackoverflow.com/questions/36723514/referencing-a-hand-made-table-using-bookdown-package
 ```
 
-Please note that in this function there are also some options which are discontinued. Those options are not listed in Table\ref{tab:tab_available_options} . The Yahoo Finance Japan is in japanese language, which I don't understand, so analyzing the `get="stock.prices.japan"`{.r} option doesn't make sense. `get="quandl"`{.r} option doesn't differ significantly from `get="quandl.database"`{.r}. The `get="rblpapi"`{.r} option requires Bloomberg API for which one has to pay. Therefore, those 3 options will not included in the analysis.
+Please note that in this function there are also some options which are discontinued. Those options are not listed in Table\ref{tab:tab_available_options} . The Yahoo Finance Japan is in Japanese language, which I don't understand, so analyzing the `get="stock.prices.japan"`{.r} option doesn't make sense. `get="quandl"`{.r} option doesn't differ significantly from `get="quandl.database"`{.r}. The `get="rblpapi"`{.r} option requires Bloomberg API for which one has to pay. Therefore, those 3 options will not included in the analysis.
 
 # Analysis
 
@@ -153,7 +153,7 @@ stock_data_yahoo %>%
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
 ```
 
-It seems that only the last 10 years of data are available dy default (it is not specified in the documnetation) using this method, which is not that bad after all.
+It seems that only the last 10 years of data are available dy default (it is not specified in the documentation) using this method, which is not that bad after all.
 In the `getSymbols()`{.r} function there is actually, another argument: `from`{.r} might enhance the number of observations. Let's check it out.
 
 ```{r stock_prices_custom, warning=FALSE}
@@ -172,7 +172,7 @@ market_data_yahoo %>%
 
 ```
 
-What I found quiet suprising is that GM had an IPO on November, 18th 2010. I thougth that they were listed on the market since 70s or 80s.
+What I found quiet suprising is that GM had an IPO on November, 18th 2010. I thought that they were listed on the market since 70s or 80s.
 Unfortunately, it is not possible to get data on a more frequent basis than daily and no data on Warsaw Stock Exchange is available on Yahoo Stock Exchange. The whole process of downloading data from Yahoo Finance is relatively fast - it takes only `r exec_end_time - exec_start_time`.
 
 #### Sanity check
@@ -202,7 +202,7 @@ ggplotly(plot_market_data) %>%
   layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
 ```
 
-In general the numbner of trading days for each stock is ~250. However, from the quick overview, it can be clearly seen that for GE in 1968 something might be wrong. Detailed analysis, if the number of trading days in a year is the same for each stock is presented below.
+In general the number of trading days for each stock is ~250. However, from the quick overview, it can be clearly seen that for GE in 1968 something might be wrong. Detailed analysis, if the number of trading days in a year is the same for each stock is presented below.
 
 ```{r stock_prices_sanity_check_2, warning=FALSE}
 
@@ -218,7 +218,7 @@ market_data_yahoo_year %>%
 
 ```
 
-The only years when the number od trading days is different is when a stock had an IPO. Therefore, both sanity checks proven that our data is complete. One can browse data on number of trading days in year per stock in the below-listed table.
+The only years when the number of trading days is different is when a stock had an IPO. Therefore, both sanity checks proven that our data is complete. One can browse data on number of trading days in year per stock in the below-listed table.
 
 ```{r stock_prices_sanity_check, warning=FALSE}
 
@@ -251,10 +251,9 @@ There is full history of data available for stocks, ETFs, bonds, cryptocurrencie
 
 ### dividends
 
-Dividends are available only for stocks, so only they will be analyzied.
+Dividends are available only for stocks, so only they will be analyzed.
 
-```{r dividends}
-
+```{r dividends, warning=FALSE}
 dividend_data_yahoo <- tq_get(stocks_nyse_yahoo, get="dividends", from="1900-01-01")
 dividend_data_yahoo %>% 
   group_by(symbol) %>% 
@@ -264,7 +263,6 @@ dividend_data_yahoo %>%
         caption = 'Custom time ranges - "dividends" option') %>%
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
-
 ```
 
 From our data it seems that Tesla is the only company that didn't pay out dividend to stockholders. [NASDAQ website](https://www.nasdaq.com/market-activity/stocks/tsla/dividend-history) confirms it. Note that I specify the starting date as `1900-01-01` in order to make sure that I download all historic data.
@@ -274,19 +272,20 @@ From our data it seems that Tesla is the only company that didn't pay out divide
 For those that are unaware of what a stock split is I recommend to refer to [Investopedia](https://www.investopedia.com/ask/answers/what-stock-split-why-do-stocks-split/).
 Getting data on splits is important as it helps to understand better the changes in stock price, as a stock's price is also affected by a stock split. After a split, the stock price will be reduced since the number of shares outstanding has increased.
 
-```{r splits}
-
+```{r splits, warning=FALSE}
 splits_data_yahoo <- tq_get(stocks_nyse_yahoo, get="splits", from="1900-01-01")
-splits_data_yahoo %>% 
-  group_by(symbol) %>% 
-  select(symbol,date) %>% 
-  summarise(n_obs=n(),min(date),max(date)) %>% 
-  kable(booktabs = TRUE,
-        caption = 'Custom time ranges - "splits" option') %>%
-  kable_styling(bootstrap_options = 
-                  c("striped", "hover", "condensed", "responsive"), full_width = F)
+# splits_data_yahoo %>% 
+#   group_by(symbol) %>% 
+#   select(symbol,date) %>% 
+#   summarise(n_obs=n(),min(date),max(date)) %>% 
+#   kable(booktabs = TRUE,
+#         caption = 'Custom time ranges - "splits" option') %>%
+#   kable_styling(bootstrap_options = 
+#                   c("striped", "hover", "condensed", "responsive"), full_width = F)
 
 ```
+
+> Note> As of February, 15th the function tq_get() with get="splits" doesn't work. Therefore, this part of the code is commented out.
 
 I compared the number of splits for GE from our database with the data from this [website](https://www.stocksplithistory.com/general-electric/) and it seems that our data is correct. 
 
@@ -310,7 +309,7 @@ metal_prices_data_oanda  %>%
                   c("striped", "hover", "condensed", "responsive"), full_width = F)
 ```
 
-Unfortunately, Oanda only provides historical data for the past 180 days. What is also missing is the fact that rates such as "XAUXAG" or for commodities like coffeee or soybeans are not available.
+Unfortunately, Oanda only provides historical data for the past 180 days. What is also missing is the fact that rates such as "XAUXAG" or for commodities like coffee or soybeans are not available.
 
 ### exchange.rates
 
@@ -329,7 +328,7 @@ exchange_rates_data_oanda  %>%
 
 ```
 
-Here, the same situation as in the case of `get="metal.prices"`{.r} when downloading data from Oanda is observed - only data from last 180 days is available. Therefore, I conclude that data from Yahoo Finance is way more convinient than from Oanda, as more historical data is there.  
+Here, the same situation as in the case of `get="metal.prices"`{.r} when downloading data from Oanda is observed - only data from last 180 days is available. Therefore, I conclude that data from Yahoo Finance is way more convenient than from Oanda, as more historical data is there.  
 
 #### Sanity check
 
@@ -371,7 +370,7 @@ quandl_api_key(your_api_key)
 before executing any code. Registration on Quandl is free, as well as access to free databases. There are some premium databases though.
 There is no master database containing all data but rather databases from different institutions that share data, e.g. ECB, FRED. Therefore, one needs to search the desired data firstly on the quandl website to find the correct ticker and then paste it to the R. Additionally, different databases consist of different time ranges, different column names and types, what poses problems when combining them.  
 I couldn't find any free database on Quandl containing data on stocks from NYSE, US bonds, ETFs and some commodities. 
-What suprised me is that contrary to previously tested options, here I have the possibility to download data from Warsaw Stock Exchnage.
+What suprised me is that contrary to previously tested options, here I have the possibility to download data from Warsaw Stock Exchange.
 
 ```{r quandl_data_1, warning=FALSE,echo=FALSE}
 
@@ -407,7 +406,7 @@ Even though the data on WSE is available through Quandl, it covers only past 7-1
 ### alphavantager
 
 [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/) provides a great way of understanding what can be achieved using this API. However, it doesn't provide any search engine for symbols or tickers.  
-To use Alpha Vantage once must register with Alpha Vantage in order to dreveive an API key to download their data. Contrary to previously analyzed options, the Alpha Vantage site provides also intraday data. Set output.size="full" to obtain the entire available history, for intraday data, the available history is the most recent 10 or 15 days.
+To use Alpha Vantage once must register with Alpha Vantage in order to derive an API key to download their data. Contrary to previously analyzed options, the Alpha Vantage site provides also intraday data. Set output.size="full" to obtain the entire available history, for intraday data, the available history is the most recent 10 or 15 days.
 
 ```{r av_api, echo=FALSE, warning=FALSE}
 av_api_key("HCW84RXTAIWECZM4")
@@ -430,11 +429,11 @@ data_exchange_rates_av %>%
 ```
 
 Unfortunately, getting data from Alpha Vantage is limited for the free use. When I tried to download exchange rates I got following error: `Error: Our standard API call frequency is 5 calls per minute and 500 calls per day.`{.r}. Therefore, I would recommend making use of Alpha Vantage only in the case when you have premium account or you want to get a limited amount of data - 100 in the example/
-What is more, when using `get="alphavantager"`{.r} one need to specify additional paramter `av_fun`{.r}.
+What is more, when using `get="alphavantager"`{.r} one need to specify additional parameter `av_fun`{.r}.
 
 # Summary
 
-The `tq_get()`{.r} function is great when it comes to easily downloading daily histotical data on stocks traded on NYSE (option: `get="stock.prices"`{.r}), including information on splits (option: `get="splits"`{.r}) and dividends (option: `get="dividends"`{.r}). The option: `get="stock.prices"`{.r} is the best to download data on ETFs and bonds. When one needs to download intraday data on NYSE listed stocks then option: `get="alphavantager"`{.r} option comes in handy but with only 100 last observations. For using this functionality, it is reqiured to create an API key. I couldn't find any reliable source on getting data on commodities like coffee or soybeans. It is possible that I didn't find the right ticker. For metal prices the option: `get="metal.prices"`{.r} works the best.  To get exchange rates for fiat currencies I used the ECB database by finding on the Quandl website the desired tickers and then setting the `get="quandl"`{.r} option. When it comes to cryptocurrencies data from Yahoo Finance was sufficient (option: `get="stock.prices"`{.r}).
+The `tq_get()`{.r} function is great when it comes to easily downloading daily historical data on stocks traded on NYSE (option: `get="stock.prices"`{.r}), including information on splits (option: `get="splits"`{.r}) and dividends (option: `get="dividends"`{.r}). The option: `get="stock.prices"`{.r} is the best to download data on ETFs and bonds. When one needs to download intraday data on NYSE listed stocks then option: `get="alphavantager"`{.r} option comes in handy but with only 100 last observations. For using this functionality, it is required to create an API key. I couldn't find any reliable source on getting data on commodities like coffee or soybeans. It is possible that I didn't find the right ticker. For metal prices the option: `get="metal.prices"`{.r} works the best.  To get exchange rates for fiat currencies I used the ECB database by finding on the Quandl website the desired tickers and then setting the `get="quandl"`{.r} option. When it comes to cryptocurrencies data from Yahoo Finance was sufficient (option: `get="stock.prices"`{.r}).
 Based on my analysis, I would recommend using following options for getting data:
 
 ID | Market | Option 

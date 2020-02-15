@@ -31,7 +31,7 @@ text-align: justify}
 </div>
 <div id="librarian-package" class="section level1">
 <h1>Librarian Package</h1>
-<p>After googling for a while I found the <code class="r">library(librarian)</code> package which contains a function <code class="r">browse_cran()</code> to search package names and descriptions within CRAN. For example, if you can’t remember what the “colorbrewer” package is actually called, you just type <code class="r">browse_cran("colorbrewer")</code>.</p>
+<p>After goggling for a while I found the <code class="r">library(librarian)</code> package which contains a function <code class="r">browse_cran()</code> to search package names and descriptions within CRAN. For example, if you can’t remember what the <code>colorbrewer</code> package is actually called, you just type <code class="r">browse_cran("colorbrewer")</code>.</p>
 <p>I decided to test it and to find any packages that are related to the Self Organizing Maps topic.
 I found out that I cannot use the argument <code>som</code> to find any items as all words containing <code>some</code> are also returned. A quote <code>organizing map</code> should work.</p>
 <pre class="r"><code>som_data &lt;- browse_cran(&quot;organizing map&quot;)</code></pre>
@@ -44,6 +44,12 @@ I found out that I cannot use the argument <code>som</code> to find any items as
 ## 
 ##   Provides a smooth mapping of multidimensional points into 
 ##   low-dimensional space defined by a self-organizing map. 
+## 
+## FCPS 
+## 
+##   Many conventional Clustering Algorithms are provided in this 
+##   package with consistent input and output, which enables the user 
+##   to tryout algorithms swiftly. 
 ## 
 ## ggsom 
 ## 
@@ -145,14 +151,14 @@ I found out that I cannot use the argument <code>som</code> to find any items as
 ##     }
 ##     return(invisible(matches))
 ## }
-## &lt;bytecode: 0x00000000188a2dc0&gt;
+## &lt;bytecode: 0x000000001907a9f0&gt;
 ## &lt;environment: namespace:librarian&gt;</code></pre>
 <p>Actually, there is a function <code class="r">CRAN_package_db()</code> from the <code class="r">library(tools)</code> which obtains information about current packages in the CRAN package repository, and their check status.</p>
 <pre class="r"><code>tools::CRAN_package_db</code></pre>
 <pre><code>## function () 
 ## as.data.frame(read_CRAN_object(CRAN_baseurl_for_web_area(), &quot;web/packages/packages.rds&quot;), 
 ##     stringsAsFactors = FALSE)
-## &lt;bytecode: 0x00000000188a8ae8&gt;
+## &lt;bytecode: 0x0000000019080600&gt;
 ## &lt;environment: namespace:tools&gt;</code></pre>
 <p>Therefore, it seems that all package info is stored on CRAN in one repository. Let’s check this hypothesis, if any time stamp is available in the function ``{.r}.</p>
 <pre class="r"><code>db &lt;-  tools::CRAN_package_db()
@@ -195,9 +201,9 @@ The last 20 available dates are following:</p>
 date_db %&gt;% 
   sort(na.rm = TRUE) %&gt;% 
   tail(20)</code></pre>
-<pre><code>##  [1] &quot;2020-02-09&quot; &quot;2020-02-09&quot; &quot;2020-02-09&quot; &quot;2020-02-09&quot; &quot;2020-02-09&quot;
-##  [6] &quot;2020-02-09&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot;
-## [11] &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-10&quot; &quot;2020-02-21&quot; &quot;2020-03-01&quot;
+<pre><code>##  [1] &quot;2020-02-13&quot; &quot;2020-02-13&quot; &quot;2020-02-13&quot; &quot;2020-02-13&quot; &quot;2020-02-13&quot;
+##  [6] &quot;2020-02-13&quot; &quot;2020-02-13&quot; &quot;2020-02-14&quot; &quot;2020-02-14&quot; &quot;2020-02-14&quot;
+## [11] &quot;2020-02-14&quot; &quot;2020-02-14&quot; &quot;2020-02-14&quot; &quot;2020-02-21&quot; &quot;2020-03-01&quot;
 ## [16] &quot;2020-03-02&quot; &quot;2020-03-03&quot; &quot;2020-05-02&quot; &quot;2020-08-01&quot; &quot;2020-12-01&quot;</code></pre>
-<p>There are some outliers but as the lastest sensible dates are from the same day when this analysis is created then it is safe to assume that <code class="r">packages.rds</code> file is up-to-date. Hence, this approach can be used to find out more about R Packages in CRAN directly from RStudio!</p>
+<p>There are some outliers but as the latest sensible dates are from the same day when this analysis is created then it is safe to assume that <code class="r">packages.rds</code> file is up-to-date. Hence, this approach can be used to find out more about R Packages in CRAN directly from RStudio!</p>
 </div>

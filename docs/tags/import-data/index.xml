@@ -17,7 +17,7 @@
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/analysis-of-the-tq-get-function/</guid>
-      <description>body {text-align: justify}IntroductionOne of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data diretcly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code.</description>
+      <description>body {text-align: justify}IntroductionOne of the most important parts of any analysis including financial or economic data is getting the data. Of course it is possible to download data directly from the Internet. However, in some cases there are limitations when downloading data. For example, only last 5 years of data is available, maybe the frequency is not suited to the needs of the analysis or it is cumbersome to update data on a regular basis in the code.</description>
     </item>
     
   </channel>

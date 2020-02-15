@@ -49,13 +49,13 @@ Moreover, in this article I write my simple own function using `data.table`{.r},
 
 ### Self Organizing Maps
 
-To get to know better or the basics of Self Organizing Maps, I recommend to read as an introduction [this Wikipedia article](https://en.wikipedia.org/wiki/Self-organizing_map) and as an extension the article from the authour of [SOM algorithm Teuvo Kohonen](https://page.mi.fu-berlin.de/rojas/neural/chapter/K15.pdf).
+To get to know better or the basics of Self Organizing Maps, I recommend to read as an introduction [this Wikipedia article](https://en.wikipedia.org/wiki/Self-organizing_map) and as an extension the article from the author of [SOM algorithm Teuvo Kohonen](https://page.mi.fu-berlin.de/rojas/neural/chapter/K15.pdf).
 
 # Building the Self Organizing Map
 
 ## Getting Data
 
-In the previous blog post I tried various ways to download the financial data using funciton `tq_get()`{.r} from the `tidyquant`{.r} package. This time however I will utilize a slightly different approach. I will write my own function to download the data from the [stooq](https://stooq.com) website, which uses data provided by [VWD](https://www.vwd.com/home/). Unfortunately, the stooq website is available only in polish language. Although the approach to get the data doesn't require the knowledge of polish. The first step is to specify the tickers for the following financial/economic data:
+In the previous blog post I tried various ways to download the financial data using function `tq_get()`{.r} from the `tidyquant`{.r} package. This time however I will utilize a slightly different approach. I will write my own function to download the data from the [stooq](https://stooq.com) website, which uses data provided by [VWD](https://www.vwd.com/home/). Unfortunately, the stooq website is available only in polish language. Although the approach to get the data doesn't require the knowledge of polish. The first step is to specify the tickers for the following financial/economic data:
 
 * Warsaw Stock Exchange Index
 * price/equity ratio for the whole stock market
@@ -66,7 +66,7 @@ In the previous blog post I tried various ways to download the financial data us
 * wibor pln 1y - interest rate
 * 10y bond yield
 
-Please note that further in the R script and the article I will stick to the tickers mentioned in the folloing block of code.
+Please note that further in the R script and the article I will stick to the tickers mentioned in the following block of code.
 
 ```{r}
 
@@ -131,7 +131,7 @@ som_data <- merged_data  %>%
 
 ```
 
-To make sure that all NA values are properly approximated I use the option `rule=1:2`{.r}. It describes how interpolation is taking place outside the interval [min(x), max(x)]. If rule is 1 then NAs are returned for such points and if it is 2, the value at the closest data extreme is used. Economic data on inflation or unemployment is published only once in a while. In periods in between there were NAs. To fill them I could use either a linear function, a spline or a step-function. I decided to go with a linear function. As a validation setp I apply also the `na.omit()` function to delete any rows with at least one NA value.
+To make sure that all NA values are properly approximated I use the option `rule=1:2`{.r}. It describes how interpolation is taking place outside the interval [min(x), max(x)]. If rule is 1 then NAs are returned for such points and if it is 2, the value at the closest data extreme is used. Economic data on inflation or unemployment is published only once in a while. In periods in between there were NAs. To fill them I could use either a linear function, a spline or a step-function. I decided to go with a linear function. As a validation step I apply also the `na.omit()` function to delete any rows with at least one NA value.
 
 Finally, the resulted data set starts on:
 
@@ -151,7 +151,7 @@ som_data %>%
   as.Date()
 ```
 
-The final step is to ensure that the data used for the SOM is scaled to account for the corectness of distance.
+The final step is to ensure that the data used for the SOM is scaled to account for the correctness of distance.
 
 ```{r, warning=FALSE}
 som_data_no_date <- som_data %>% 
@@ -181,7 +181,7 @@ No apparent errors are visible. Maybe only one a sharp decrease in `wig_dy`{.r} 
 
 ## Building the map
 
-Using `kohonen`{.r} package is effortless. Firstly, the grid for the Self Organizing Map needs to be specified. A simple 5x5 hexagonal grid should work out. Neighbourhood function specifies how the distance between 2 neurons in any step should be calculated. `rlen`{.r} specifies the number of updates. `alpha` is the monotically decreasing learning parameter. Additionally, I'm setting a seed to ensure that this analysis is reproducible.
+Using `kohonen`{.r} package is effortless. Firstly, the grid for the Self Organizing Map needs to be specified. A simple 5x5 hexagonal grid should work out. Neighbourhood function specifies how the distance between 2 neurons in any step should be calculated. `rlen`{.r} specifies the number of updates. `alpha` is the monotonically decreasing learning parameter. Additionally, I'm setting a seed to ensure that this analysis is reproducible.
 
 ```{r, warning=FALSE}
 set.seed(1029)
@@ -194,7 +194,7 @@ som_model <- som(som_data_scaled,
                  keep.data = TRUE)
 ```
 
-The main point of any SOM analysis is to produce a map. Of course a coloful map is more meaningful than a map in different shades of grey or any other color.
+The main point of any SOM analysis is to produce a map. Of course a colorful map is more meaningful than a map in different shades of grey or any other color.
 
 ```{r}
 # Set heat colors palette
@@ -203,7 +203,7 @@ heatColors <- function(n, alpha = 1) {
 }
 ```
 
-Also a function for plotting SOM heatmaps for each variable would be helpful.
+Also a function for plotting SOM heat maps for each variable would be helpful.
 
 ```{r, warning=FALSE}
 plot_som <- function(variable) {
@@ -258,8 +258,6 @@ plot(som_model,
 # Summary
 
 A simple Self Organizing Map helping to help explain the Warsaw Stock Exchange market was created in this article. In the next one it will be assessed in terms of the quality of map, as well as analysis findings.
-
-
 
 
 
