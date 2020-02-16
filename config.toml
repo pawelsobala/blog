@@ -17,6 +17,7 @@ ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 [permalinks]
 blog = "blog/:slug/"
 post = "/:year/:month/:day/:slug/"
+#https://stackoverflow.com/questions/55930617/linking-to-another-post-in-blogdown
 
 [params]
 dateform = "Jan 2, 2006"
