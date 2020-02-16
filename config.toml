@@ -16,6 +16,7 @@ ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 
 [permalinks]
 blog = "blog/:slug/"
+post = "/:year/:month/:day/:slug/"
 
 [params]
 dateform = "Jan 2, 2006"
