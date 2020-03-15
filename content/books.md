@@ -4,6 +4,7 @@ title: Books
 ---
 
 Below is a list of programming books/articles that I recommend:
+This list will be updated.
 
 > General programming in R:
 
