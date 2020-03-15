@@ -6,10 +6,19 @@
     <description>Recent content in R on Pawel Sobala</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 10 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>New Section - &#39;Books&#39;</title>
+      <link>/blog/new-section-books/</link>
+      <pubDate>Sun, 15 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/new-section-books/</guid>
+      <description>I added to the blog a new section called “Books” - available from the toolbar above. Currently, there are books/articles that are related to programming or to different tools that can be used in R. I read those books/articles and I recommend them. This section will be updated step by step. In the future most likely by books that are related to programming in Python/Julia.If you know about any other interesting books about programming in R, please let me know in comments.</description>
+    </item>
     
     <item>
       <title>How to find packages on CRAN from RStudio</title>
@@ -17,7 +26,7 @@
       <pubDate>Mon, 10 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/how-to-find-packages-on-cran-from-rstudio/</guid>
-      <description>body {text-align: justify}MotivationWhen writing a new blog post on the assessment of quality of fitted Self-Organizing Map (SOM) to data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.
+      <description>body {text-align: justify}MotivationWhen writing a new blog post on the assessment of the quality of fitted Self-Organizing Map (SOM) to the data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.
 Librarian PackageAfter goggling for a while I found the library(librarian) package which contains a function browse_cran() to search package names and descriptions within CRAN.</description>
     </item>
     

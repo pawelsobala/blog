@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>programming on Pawel Sobala</title>
+    <link>/categories/programming/</link>
+    <description>Recent content in programming on Pawel Sobala</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 15 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>New Section - &#39;Books&#39;</title>
+      <link>/blog/new-section-books/</link>
+      <pubDate>Sun, 15 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/new-section-books/</guid>
+      <description>I added to the blog a new section called “Books” - available from the toolbar above. Currently, there are books/articles that are related to programming or to different tools that can be used in R. I read those books/articles and I recommend them. This section will be updated step by step. In the future most likely by books that are related to programming in Python/Julia.If you know about any other interesting books about programming in R, please let me know in comments.</description>
+    </item>
+    
+  </channel>
+</rss>

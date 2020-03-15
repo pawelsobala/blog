@@ -1,0 +1,12 @@
+---
+title: New Section - 'Books'
+description: New section in the blog on recommended books has been published
+author: "Pawel Sobala"
+date: '2020-03-15'
+slug: new-section-books
+categories: ["R", "books", "programming"]
+tags: ["R", "books", "programming"]
+---
+
+I added to the blog a new section called "Books" - available from the toolbar above. Currently, there are books/articles that are related to programming or to different tools that can be used in R. I read those books/articles and I recommend them. This section will be updated step by step. In the future most likely by books that are related to programming in Python/Julia. 
+If you know about any other interesting books about programming in R, please let me know in comments.

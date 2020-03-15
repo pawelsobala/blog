@@ -1095,6 +1095,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                     
                         
+                            <li><a href="/books/">Books</a></li>
+                        
+                    
+                        
                             <li><a href="/about/">About</a></li>
                         
                     
@@ -1134,7 +1138,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                         
                     
                     
-                    <div class="reading-time middot">5 minute read</div>
+                    <div class="reading-time middot">6 minute read</div>
                     
                     
                       <div class="tags">
@@ -1169,13 +1173,13 @@ text-align: justify}
 </style>
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
-<p>When writing a new blog post on the assessment of quality of fitted Self-Organizing Map (SOM) to data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.</p>
+<p>When writing a new blog post on the assessment of the quality of fitted Self-Organizing Map (SOM) to the data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.</p>
 </div>
 <div id="librarian-package" class="section level1">
 <h1>Librarian Package</h1>
-<p>After goggling for a while I found the <code class="r">library(librarian)</code> package which contains a function <code class="r">browse_cran()</code> to search package names and descriptions within CRAN. For example, if you can’t remember what the <code>colorbrewer</code> package is actually called, you just type <code class="r">browse_cran("colorbrewer")</code>.</p>
-<p>I decided to test it and to find any packages that are related to the Self Organizing Maps topic.
-I found out that I cannot use the argument <code>som</code> to find any items as all words containing <code>some</code> are also returned. A quote <code>organizing map</code> should work.</p>
+<p>After goggling for a while I found the <code class="r">library(librarian)</code> package which contains a function <code class="r">browse_cran()</code> to search package names and descriptions within CRAN. For example, if you can’t remember what the <code>colorbrewer</code> package is actually called, you just type <code class="r">browse_cran("colorbrewer")</code> and get the answer.</p>
+<p>I decided to test it and to find any packages that are related to the topic of Self-Organizing Maps.
+I found out that I cannot use the argument <code>som</code> to find any items, as all words containing <code>some</code> are also returned - which is a huge list. A quote <code>organizing map</code> should work, as in theory no other function should use those words.</p>
 <pre class="r"><code>som_data &lt;- browse_cran(&quot;organizing map&quot;)</code></pre>
 <pre><code>## class 
 ## 
@@ -1251,11 +1255,11 @@ I found out that I cannot use the argument <code>som</code> to find any items as
 ##   By gaining the property of emergence through self-organization, 
 ##   the enhancement of SOMs(self organizing maps) is called Emergent 
 ##   SOM (ESOM).</code></pre>
-<p>Indeed, it returns a couple of packages that might have some functions to work with Self-Organizing Maps!</p>
+<p>Indeed, the function returns a couple of packages that might have some functions to work with Self-Organizing Maps!</p>
 </div>
 <div id="how-does-the-function-work" class="section level1">
 <h1>How does the function work?</h1>
-<p>Let’s check the contents of the function.</p>
+<p>Okay, this function works, but the question is how. Let’s check the contents of the function.</p>
 <pre class="r"><code>browse_cran</code></pre>
 <pre><code>## function (query, fuzzy = FALSE, echo = TRUE, ignore.case = TRUE) 
 ## {
@@ -1293,16 +1297,16 @@ I found out that I cannot use the argument <code>som</code> to find any items as
 ##     }
 ##     return(invisible(matches))
 ## }
-## &lt;bytecode: 0x000000001907a9f0&gt;
+## &lt;bytecode: 0x000000001908c478&gt;
 ## &lt;environment: namespace:librarian&gt;</code></pre>
-<p>Actually, there is a function <code class="r">CRAN_package_db()</code> from the <code class="r">library(tools)</code> which obtains information about current packages in the CRAN package repository, and their check status.</p>
+<p>Actually, there is a function <code class="r">CRAN_package_db()</code> from the <code class="r">library(tools)</code> which obtains information about current packages in the CRAN package repository, and their check status. Let’s dig further.</p>
 <pre class="r"><code>tools::CRAN_package_db</code></pre>
 <pre><code>## function () 
 ## as.data.frame(read_CRAN_object(CRAN_baseurl_for_web_area(), &quot;web/packages/packages.rds&quot;), 
 ##     stringsAsFactors = FALSE)
-## &lt;bytecode: 0x0000000019080600&gt;
+## &lt;bytecode: 0x0000000019092050&gt;
 ## &lt;environment: namespace:tools&gt;</code></pre>
-<p>Therefore, it seems that all package info is stored on CRAN in one repository. Let’s check this hypothesis, if any time stamp is available in the function ``{.r}.</p>
+<p>From the above script, it seems that all package info is stored on CRAN in one repository. Let’s check this hypothesis, if any time stamp is available in the function ``{.r}.</p>
 <pre class="r"><code>db &lt;-  tools::CRAN_package_db()
 colnames(db)</code></pre>
 <pre><code>##  [1] &quot;Package&quot;                 &quot;Version&quot;                
@@ -1337,16 +1341,16 @@ colnames(db)</code></pre>
 ## [59] &quot;X-CRAN-Comment&quot;          &quot;Reverse depends&quot;        
 ## [61] &quot;Reverse imports&quot;         &quot;Reverse linking to&quot;     
 ## [63] &quot;Reverse suggests&quot;        &quot;Reverse enhances&quot;</code></pre>
-<p>Actually there are <code>64</code> different variables in this data object from CRAN.
+<p>Actually there are <code>64</code> different variables in this data object from CRAN. It’s a really extensive data set. Therefore, the question is if it is up-to-date or if it is outdated. Maybe it is archived only once a month?
 The last 20 available dates are following:</p>
 <pre class="r"><code>date_db &lt;- db$Date %&gt;% as.Date()
 date_db %&gt;% 
   sort(na.rm = TRUE) %&gt;% 
   tail(20)</code></pre>
-<pre><code>##  [1] &quot;2020-02-13&quot; &quot;2020-02-13&quot; &quot;2020-02-13&quot; &quot;2020-02-13&quot; &quot;2020-02-13&quot;
-##  [6] &quot;2020-02-13&quot; &quot;2020-02-13&quot; &quot;2020-02-14&quot; &quot;2020-02-14&quot; &quot;2020-02-14&quot;
-## [11] &quot;2020-02-14&quot; &quot;2020-02-14&quot; &quot;2020-02-14&quot; &quot;2020-02-21&quot; &quot;2020-03-01&quot;
-## [16] &quot;2020-03-02&quot; &quot;2020-03-03&quot; &quot;2020-05-02&quot; &quot;2020-08-01&quot; &quot;2020-12-01&quot;</code></pre>
+<pre><code>##  [1] &quot;2020-03-13&quot; &quot;2020-03-14&quot; &quot;2020-03-14&quot; &quot;2020-03-14&quot; &quot;2020-03-14&quot;
+##  [6] &quot;2020-03-14&quot; &quot;2020-03-14&quot; &quot;2020-03-14&quot; &quot;2020-03-14&quot; &quot;2020-03-14&quot;
+## [11] &quot;2020-03-14&quot; &quot;2020-03-14&quot; &quot;2020-03-14&quot; &quot;2020-03-14&quot; &quot;2020-03-15&quot;
+## [16] &quot;2020-03-24&quot; &quot;2020-04-01&quot; &quot;2020-08-01&quot; &quot;2020-09-03&quot; &quot;2020-12-01&quot;</code></pre>
 <p>There are some outliers but as the latest sensible dates are from the same day when this analysis is created then it is safe to assume that <code class="r">packages.rds</code> file is up-to-date. Hence, this approach can be used to find out more about R Packages in CRAN directly from RStudio!</p>
 </div>
 
@@ -1362,6 +1366,11 @@ date_db %&gt;%
                 </div>
                 
                 <div style="width: 100%;"></div>
+                
+                <div>
+                    <a href="/blog/new-section-books/">New Section - &#39;Books&#39;</a>
+                    <img class="icon" src="/img/next.svg" alt="next" />
+                </div>
                 
             </div>
             

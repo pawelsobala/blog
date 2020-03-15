@@ -17,7 +17,7 @@
       <pubDate>Mon, 10 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/how-to-find-packages-on-cran-from-rstudio/</guid>
-      <description>body {text-align: justify}MotivationWhen writing a new blog post on the assessment of quality of fitted Self-Organizing Map (SOM) to data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.
+      <description>body {text-align: justify}MotivationWhen writing a new blog post on the assessment of the quality of fitted Self-Organizing Map (SOM) to the data I stumbled upon a problem on how to find all R packages that are related to a particular subject on CRAN. In particular, my problem was to find all packages that might contain any items related to the assessment of SOM.
 Librarian PackageAfter goggling for a while I found the library(librarian) package which contains a function browse_cran() to search package names and descriptions within CRAN.</description>
     </item>
     
