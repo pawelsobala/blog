@@ -3,14 +3,8 @@ date: "2020-03-15"
 title: Books
 ---
 
-<<<<<<< HEAD
-Below is a list of programming books/articles that I recommend:
+Below is a list of programming books/articles that I recommend.
 This list will be updated.
-=======
-_Books_
-
-Below is a list of programming books/articles that I recommend:
->>>>>>> 4ac7713315f598bf44cb3f03702c0c8782ef515d
 
 > General programming in R:
 
