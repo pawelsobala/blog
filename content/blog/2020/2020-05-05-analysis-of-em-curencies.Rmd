@@ -1,0 +1,232 @@
+---
+title: "Calculating YTD return of EM curencies"
+description: "Analysis of returns of Emerging Markets currencies in 2020"
+author: "Pawel Sobala"
+date: "2020-05-03"
+slug: analysis-of-em-curencies
+categories: ["R", "programming", "analysis", "EM"]
+tags: ["R", "analysis"]
+output: html_document
+#output: 
+#  html_document:
+#    keep_md: true
+#    toc: true
+#    toc_depth: 3
+#    toc_float: 
+#      collapsed: false
+#      smooth_scroll: true
+#    number_sections: true  ## if you want number sections at each table header
+#    theme: united  # many options for theme, this one is my favorite.
+#    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
+
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd("C:/Users/pawel/Documents/R/New_posts")
+rm(list=ls())
+
+library(data.table)
+library(purrr)
+library(tidyverse)
+library(reshape2)
+library(lubridate)
+require(quantmod)
+
+options(scipen=999)
+
+read_data_stooq <- function(tickers, 
+                            join_type = full_join, 
+                            apply_approx = TRUE) {
+  data_all <- purrr::map(tickers, read_rawdata_stooq)
+  
+  merged_data <- merge_stooq_data(data_all, join_type)
+  if (apply_approx == TRUE) {
+    merged_data <-apply_approx(merged_data)
+  }
+  merged_data
+}
+
+read_rawdata_stooq <- function(x) {
+  fread(paste0("https://stooq.pl/q/d/l/?s=", x, "&i=d"), fill = TRUE) %>%
+    select(Date = Data, !!x := Zamkniecie)
+} #' zamkniecie' means close value
+
+multi_join <- function(list_of_loaded_data, join_func, ...) {
+  output <- Reduce(function(x, y) {
+    join_func(x, y, ...)
+  }, list_of_loaded_data)
+}
+
+approx_ts <- function(x) {
+  na.approx(x, maxgap = 10, rule = 2:2)
+}
+
+merge_stooq_data <- function(input_data = data_all,
+                             join_type = full_join) {
+  merged_data <- multi_join(input_data, join_type) %>%
+    mutate(Date = as.Date(Date)) %>%
+    arrange(Date)
+}
+
+apply_approx <- function(input_data){
+  input_data_approx <- purrr::map_df(
+    input_data[, -1],
+    approx_ts
+  )
+  input_data <- cbind(
+    Date = input_data[, 1],
+    input_data_approx
+  )
+}
+
+generate_returns <- function(input_data, na.rm=FALSE,return_type = "log") {
+  temp_colnames <- input_data %>% colnames()
+  if(na.rm==TRUE){
+    input_data <- na.omit(input_data)
+  }
+  
+  if (return_type == "log") {
+    input_data <- data.frame(
+      cbind.data.frame(
+        Date = input_data[-1, 1],
+        diff(as.matrix(log(input_data[, -1])))
+      )
+    )
+  } else {
+    input_data <- data.frame(
+      cbind.data.frame(
+        Date = input_data[-1, 1],
+        diff(as.matrix(input_data[, -1])) / input_data[-nrow(input_data), -1]
+      )
+    )
+  }
+  colnames(input_data) <- temp_colnames
+  input_data
+}
+
+```
+
+# Introduction
+
+The goal of this short article is to calcuate the returns of Emerging Markets (EM) currencies in 2020.
+The main observation is that all of those currencies since mid-Febraury 2020 (Coronavirus 2020 Financial Crisis) significantly weakened in comparison to EUR or USD.
+The question is also, was there any curency that performed better in EUR than in USD?
+
+## Specification of Currencies
+
+The currencies that are going to be analyzed as a part of this analysis has been chosen arbitrarly.
+Most of them, apart from CZK and UAH are a part of the [iShares Core MSCI World UCITS ETF](https://www.ishares.com/uk/individual/en/products/251882/ishares-msci-world-ucits-etf-acc-fund?switchLocale=y&siteEntryPassthrough=true). 
+CZK and UAH has been added additionally, as both Czechia and Ukraine can be considered as EM.
+
+```{r currencies_spec, warning=FALSE}
+currencies <- c("BRL", "CLP", "MXN", "INR", "IDR","MYR","PHP", "KRW",
+                "TWD", "THB", "PLN", "RUB", "CZK", "UAH", "ZAR", "TRY")
+currencies <- tolower(currencies)
+eur_currencies <- paste0(currencies,"eur")
+usd_currencies <- paste0(currencies,"usd")
+
+```
+
+## Downloading data
+
+Small function `read_data_stooq`{.r} enables to download all data from [stooq.pl](https://stooq.pl). Combining it with the `map`{.r} function from `purr`{.r} package allows to download as a list data for all currencies specified in `currencies`{.r} vector.
+
+```{r currencies_download, warning=FALSE, message=FALSE}
+
+data_all_eur <-read_data_stooq(eur_currencies)
+data_all_usd <-read_data_stooq(usd_currencies)
+
+```
+
+# Preparing Data
+
+Whole data contains data since 1995. For analyzing Coronavirus Crisis only data from 2020 is needed.
+
+```{r data_spec_dates}
+
+data_all_eur_2020 <- data_all_eur %>% 
+  filter(Date > "2020-01-01")
+data_all_usd_2020 <- data_all_usd %>% 
+  filter(Date > "2020-01-01")
+
+```
+
+There are no NAs in the data, as they were extrapolated/intrapolated in the `read_stooq_data` function.
+
+## Calculating Retuns
+
+Let's calculate the returns - namely, log returns - and plot them. As, I am going to use the plot function for 2 different currencies, I will write a function for it.
+
+```{r plot_function}
+plot_log_returns_em_currencies <- function(input_data, currency_name){
+  
+  input_data %>%
+  gather("currency", "price", -Date) %>% #Adapting for ggplot2 format
+  ggplot(aes(x=Date,y=price)) +
+  facet_wrap(~ currency, scales = "free") +
+  geom_line() +
+  theme_minimal() +
+  ggtitle(paste("Log-Returns of EM currencies in 2020 over",currency_name))
+  
+}
+
+```
+
+Firstly, log-returns over EUR.
+
+```{r generate_returns_eur}
+
+data_all_eur_2020_lr <- generate_returns(data_all_eur_2020)
+plot_log_returns_em_currencies(data_all_eur_2020_lr, "EUR")
+
+```
+
+And over USD.
+
+```{r}
+
+data_all_usd_2020_lr <- generate_returns(data_all_usd_2020)
+plot_log_returns_em_currencies(data_all_usd_2020_lr, "USD")
+
+```
+
+# Return Analysis
+
+> What is the mean return for EUR year to date?
+
+```{r, echo=FALSE}
+crisis_2020_eur_ret_mean <- data_all_eur_2020_lr %>% select(-Date)%>% summarise_all(lst(sum))
+crisis_2020_eur_ret_mean %>% t() 
+```
+
+So, the most severly hit are BRL, MXN, RUB, ZAR and TRY.
+
+> What is the mean return for USD yearto date?
+
+```{r, echo=FALSE}
+crisis_2020_usd_ret_mean <- data_all_usd_2020_lr %>% select(-Date)%>% summarise_all(lst(sum))
+crisis_2020_usd_ret_mean %>% t() 
+```
+
+Similarly, BRL, MXN, RUB, ZAR and TRY are the worst hit currencies.
+
+> Are any currencies getting stronger in relation to EUR than to USD?
+
+```{r}
+
+eurusd_com <- crisis_2020_eur_ret_mean[1,]/crisis_2020_usd_ret_mean[1,]
+eurusd_com %>% t()
+
+```
+
+Only PHP and TWD performed better when demonimented in EUR terms rather than USD.
+In both cases the appreciation over EUR was stronger, which makes sense, as the EUR got weaker in relation to USD in 2020.
+All other currencies, lost more in value in USD than in EUR.
+So, USD is still the king. Again.

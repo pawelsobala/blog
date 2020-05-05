@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R on Pawel Sobala</title>
-    <link>/tags/r/</link>
-    <description>Recent content in R on Pawel Sobala</description>
+    <title>analysis on Pawel Sobala</title>
+    <link>/categories/analysis/</link>
+    <description>Recent content in analysis on Pawel Sobala</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 03 May 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/analysis/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       <guid>/blog/analysis-of-em-curencies/</guid>
       <description>body {text-align: justify}IntroductionThe goal of this short article is to calcuate the returns of Emerging Markets (EM) currencies in 2020.The main observation is that all of those currencies since mid-Febraury 2020 (Coronavirus 2020 Financial Crisis) significantly weakened in comparison to EUR or USD.The question is also, was there any curency that performed better in EUR than in USD?
 Specification of CurrenciesThe currencies that are going to be analyzed as a part of this analysis has been chosen arbitrarly.</description>
-    </item>
-    
-    <item>
-      <title>New Section - &#39;Books&#39;</title>
-      <link>/blog/new-section-books/</link>
-      <pubDate>Sun, 15 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/new-section-books/</guid>
-      <description>I added to the blog a new section called “Books” - available from the toolbar above. Currently, there are books/articles that are related to programming or to different tools that can be used in R. I read those books/articles and I recommend them. This section will be updated step by step. In the future most likely by books that are related to programming in Python/Julia.If you know about any other interesting books about programming in R, please let me know in comments.</description>
     </item>
     
   </channel>

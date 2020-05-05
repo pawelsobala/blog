@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="Pawel Sobala" />
 <meta property="og:locale" content="en-US" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/post/" />
-<meta property="og:title" content="Post" />
-<meta property="twitter:title" content="Post">
+<meta property="og:url" content="/blog/analysis-of-em-curencies/" />
+<meta property="og:title" content="Calculating YTD return of EM curencies" />
+<meta property="twitter:title" content="Calculating YTD return of EM curencies">
 
     <meta property="og:image" content="/img/logo.png">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:image" content="/img/logo.png">
 
-<meta property="og:description" content="">
-<meta property="twitter:description" content="">
+<meta property="og:description" content="Analysis of returns of Emerging Markets currencies in 2020">
+<meta property="twitter:description" content="Analysis of returns of Emerging Markets currencies in 2020">
 
 <title>
 
 
-     Pawel Sobala - Post 
+     Pawel Sobala - Calculating YTD return of EM curencies 
 
 </title>
-<link rel="canonical" href="/post/">
+<link rel="canonical" href="/blog/analysis-of-em-curencies/">
 
 
 <style media="screen">
@@ -1068,8 +1068,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Pawel Sobala" />
-
 
 </head>
 
@@ -1077,7 +1075,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <body>
 
 
-<div class="header header-home column">
+<div class="header column">
 
     <div class="container">
         
@@ -1090,12 +1088,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                             <li><a href="/blog/">Blog</a></li>
                     
-                    
-                        
-                            
-                            <li><a href="/post">post</a></li>
-                            
-                        
                     
                         
                             
@@ -1120,37 +1112,231 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            <div class="posts">
-                <div class="page-heading">Post</div>
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
-                
-
-                
-                <ul>
-                    
-                      
-                        <li class="groupby">May, 2020</li>
-                        
-                          
-                            <li class="post-item">
-    <span class="meta">May 3, 2020</span>
     
-    <a href="/2020/05/03/analysis-of-em-curencies/"><span>YTD return of EM curencies</span></a>
+    Calculating YTD return of EM curencies
     
-</li>
 
-                          
-                        
-                      
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Sun May 3 2020 00:00:00 UTC">May 3, 2020</div>
                     
-                </ul>
+                        
+                        <div class="author middot" title="Pawel Sobala">Pawel Sobala</div>
+                        
+                    
+                    
+                    <div class="reading-time middot">3 minute read</div>
+                    
+                    
+                      <div class="tags">
+                    
+                        <ul>
+                          
+                            <li class="middot"><a href="/tags/r">R</a> </li>
+                          
+                            <li class="middot"><a href="/tags/analysis">analysis</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+    
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The goal of this short article is to calcuate the returns of Emerging Markets (EM) currencies in 2020.
+The main observation is that all of those currencies since mid-Febraury 2020 (Coronavirus 2020 Financial Crisis) significantly weakened in comparison to EUR or USD.
+The question is also, was there any curency that performed better in EUR than in USD?</p>
+<div id="specification-of-currencies" class="section level2">
+<h2>Specification of Currencies</h2>
+<p>The currencies that are going to be analyzed as a part of this analysis has been chosen arbitrarly.
+Most of them, apart from CZK and UAH are a part of the <a href="https://www.ishares.com/uk/individual/en/products/251882/ishares-msci-world-ucits-etf-acc-fund?switchLocale=y&amp;siteEntryPassthrough=true">iShares Core MSCI World UCITS ETF</a>.
+CZK and UAH has been added additionally, as both Czechia and Ukraine can be considered as EM.</p>
+<pre class="r"><code>currencies &lt;- c(&quot;BRL&quot;, &quot;CLP&quot;, &quot;MXN&quot;, &quot;INR&quot;, &quot;IDR&quot;,&quot;MYR&quot;,&quot;PHP&quot;, &quot;KRW&quot;,
+                &quot;TWD&quot;, &quot;THB&quot;, &quot;PLN&quot;, &quot;RUB&quot;, &quot;CZK&quot;, &quot;UAH&quot;, &quot;ZAR&quot;, &quot;TRY&quot;)
+currencies &lt;- tolower(currencies)
+eur_currencies &lt;- paste0(currencies,&quot;eur&quot;)
+usd_currencies &lt;- paste0(currencies,&quot;usd&quot;)</code></pre>
+</div>
+<div id="downloading-data" class="section level2">
+<h2>Downloading data</h2>
+<p>Small function <code class="r">read_data_stooq</code> enables to download all data from <a href="https://stooq.pl">stooq.pl</a>. Combining it with the <code class="r">map</code> function from <code class="r">purr</code> package allows to download as a list data for all currencies specified in <code class="r">currencies</code> vector.</p>
+<pre class="r"><code>data_all_eur &lt;-read_data_stooq(eur_currencies)
+data_all_usd &lt;-read_data_stooq(usd_currencies)</code></pre>
+</div>
+</div>
+<div id="preparing-data" class="section level1">
+<h1>Preparing Data</h1>
+<p>Whole data contains data since 1995. For analyzing Coronavirus Crisis only data from 2020 is needed.</p>
+<pre class="r"><code>data_all_eur_2020 &lt;- data_all_eur %&gt;% 
+  filter(Date &gt; &quot;2020-01-01&quot;)
+data_all_usd_2020 &lt;- data_all_usd %&gt;% 
+  filter(Date &gt; &quot;2020-01-01&quot;)</code></pre>
+<p>There are no NAs in the data, as they were extrapolated/intrapolated in the <code>read_stooq_data</code> function.</p>
+<div id="calculating-retuns" class="section level2">
+<h2>Calculating Retuns</h2>
+<p>Let’s calculate the returns - namely, log returns - and plot them. As, I am going to use the plot function for 2 different currencies, I will write a function for it.</p>
+<pre class="r"><code>plot_log_returns_em_currencies &lt;- function(input_data, currency_name){
+  
+  input_data %&gt;%
+  gather(&quot;currency&quot;, &quot;price&quot;, -Date) %&gt;% #Adapting for ggplot2 format
+  ggplot(aes(x=Date,y=price)) +
+  facet_wrap(~ currency, scales = &quot;free&quot;) +
+  geom_line() +
+  theme_minimal() +
+  ggtitle(paste(&quot;Log-Returns of EM currencies in 2020 over&quot;,currency_name))
+  
+}</code></pre>
+<p>Firstly, log-returns over EUR.</p>
+<pre class="r"><code>data_all_eur_2020_lr &lt;- generate_returns(data_all_eur_2020)
+plot_log_returns_em_currencies(data_all_eur_2020_lr, &quot;EUR&quot;)</code></pre>
+<p><img src="/blog/2020/2020-05-05-analysis-of-em-curencies_files/figure-html/generate_returns_eur-1.png" width="672" /></p>
+<p>And over USD.</p>
+<pre class="r"><code>data_all_usd_2020_lr &lt;- generate_returns(data_all_usd_2020)
+plot_log_returns_em_currencies(data_all_usd_2020_lr, &quot;USD&quot;)</code></pre>
+<p><img src="/blog/2020/2020-05-05-analysis-of-em-curencies_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+</div>
+<div id="return-analysis" class="section level1">
+<h1>Return Analysis</h1>
+<blockquote>
+<p>What is the mean return for EUR year to date?</p>
+</blockquote>
+<pre><code>##                   [,1]
+## brleur_sum -0.29838140
+## clpeur_sum -0.08560015
+## mxneur_sum -0.22096427
+## inreur_sum -0.03479488
+## idreur_sum -0.06033487
+## myreur_sum -0.02878800
+## phpeur_sum  0.02639620
+## krweur_sum -0.03418546
+## twdeur_sum  0.03322759
+## thbeur_sum -0.04686028
+## plneur_sum -0.07028674
+## rubeur_sum -0.16867640
+## czkeur_sum -0.06622574
+## uaheur_sum -0.11351509
+## zareur_sum -0.25219778
+## tryeur_sum -0.14379201</code></pre>
+<p>So, the most severly hit are BRL, MXN, RUB, ZAR and TRY.</p>
+<blockquote>
+<p>What is the mean return for USD yearto date?</p>
+</blockquote>
+<pre><code>##                    [,1]
+## brlusd_sum -0.322832913
+## clpusd_sum -0.110034066
+## mxnusd_sum -0.245454057
+## inrusd_sum -0.058303731
+## idrusd_sum -0.083608084
+## myrusd_sum -0.053749292
+## phpusd_sum  0.001737224
+## krwusd_sum -0.059017294
+## twdusd_sum  0.008567960
+## thbusd_sum -0.071343282
+## plnusd_sum -0.094782845
+## rubusd_sum -0.193976252
+## czkusd_sum -0.090236581
+## uahusd_sum -0.131134063
+## zarusd_sum -0.276663192
+## tryusd_sum -0.168305537</code></pre>
+<p>Similarly, BRL, MXN, RUB, ZAR and TRY are the worst hit currencies.</p>
+<blockquote>
+<p>Are any currencies getting stronger in relation to EUR than to USD?</p>
+</blockquote>
+<pre class="r"><code>eurusd_com &lt;- crisis_2020_eur_ret_mean[1,]/crisis_2020_usd_ret_mean[1,]
+eurusd_com %&gt;% t()</code></pre>
+<pre><code>##                     1
+## brleur_sum  0.9242595
+## clpeur_sum  0.7779422
+## mxneur_sum  0.9002266
+## inreur_sum  0.5967866
+## idreur_sum  0.7216391
+## myreur_sum  0.5355977
+## phpeur_sum 15.1944703
+## krweur_sum  0.5792447
+## twdeur_sum  3.8781211
+## thbeur_sum  0.6568282
+## plneur_sum  0.7415555
+## rubeur_sum  0.8695724
+## czkeur_sum  0.7339124
+## uaheur_sum  0.8656415
+## zareur_sum  0.9115697
+## tryeur_sum  0.8543510</code></pre>
+<p>Only PHP and TWD performed better when demonimented in EUR terms rather than USD.
+In both cases the appreciation over EUR was stronger, which makes sense, as the EUR got weaker in relation to USD in 2020.
+All other currencies, lost more in value in USD than in EUR.
+So, USD is still the king. Again.</p>
+</div>
+
+
+            </div>
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="/img/back.svg" alt="back" />
+                    <a href="/blog/new-section-books/">New Section - &#39;Books&#39;</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                 <div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ps-disqus.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </div>
+            
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
 <div class="footer column">
     <div class="container">
 
