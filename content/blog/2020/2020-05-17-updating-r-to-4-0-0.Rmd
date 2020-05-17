@@ -1,0 +1,101 @@
+---
+title: "Updating R to 4.0.0 - challenges"
+description: Updating R to 4.0.0 from 3.6.3 - challenges
+author: "Pawel Sobala"
+date: "2020-05-17"
+slug: updating-r-to-4-0-0-challenges
+categories: ["R", "Packages"]
+tags: ["R", "Self Packages"]
+output: html_document
+#output: 
+#  html_document:
+#    keep_md: true
+#    toc: true
+#    toc_depth: 3
+#    toc_float: 
+#      collapsed: false
+#      smooth_scroll: true
+#    number_sections: true  ## if you want number sections at each table header
+#    theme: united  # many options for theme, this one is my favorite.
+#    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("C:/Users/pawel/Documents/R/New_posts")
+rm(list=ls())
+options(scipen=999)
+### Great tutorial on R Markdown: https://rstudio-pubs-static.s3.amazonaws.com/180546_e2d5bf84795745ebb5cd3be3dab71fca.html#1_welcome
+```
+
+# New R Version!
+
+On the April, 24th a new R version was released - version 4.0.0. The complete list of changes/bug fixes/etc. in the newest version is available [here](https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf). In my opinion, following changes are the most crucial ones:
+
+* A new syntax is offered for specifying `_raw_` character constants similar to the one used in C++, where r `...` can be used to define a literal string. This makes it easier to write strings containing backslashes or both single and double quotes.
+* The language now uses a stringAsFactors = FALSE default, and thus by default no longer converts strings to factors in calls to `data.frame()` and `read.table()`. Many packages relied on the previous behavior and will need updating.
+* matrix() now converts character columns to factors and factors to integers.
+* Packages must be re-installed under the new version of R.
+
+
+Especially, the `stringAsFactors = FALSE` default option might crash some of the older R projects.
+
+# Experience / Challenges
+
+In the past I've updated/reinstalled/uninstalled many R versions, so I thought that nothing is going to suprise me this time. I was wrong. 
+
+This time for installation of the newest R version I used the `updateR()` function from the `installr` package. I run it directly from R and not from RStudio. In the past I had some problems later with packages when I opted for installation from R Studio. It worked perfectly until I wanted to load a package and start working on a small project. Then I reminded myself that for this R version I have to re-install the packages.
+
+## Challenge 1: Reinstalling packages
+
+As a lazy person, I wanted to simply use the RStudio built-in functionality of updating all R packages, by simply clicking on the `Tools` on the toolbar and then `Check for Packages Updates...`. I was so suprised when I got a message that almost all of my packages are up-to-date and on the list there wasn't a package that I tried to load to the R environment. I googled a bit and the simplest solution was to run follwing bit of code to update all packages - inculding dependencies:
+
+```{}
+update.packages(ask=FALSE, checkBuilt=TRUE)
+```
+
+As I have plenty of installed packages, it took roughly 1 hour to get everything installed.
+
+## Challenge 2: Installing new Rtools and changing .Rprofile file
+
+During the installation of many packages I recieved following error:
+
+```{}
+WARNING: Rtools is required to build R packages but no version of Rtools compatible with the currently running version of R was found. Note that the following incompatible version(s) of Rtools were found:
+
+  - Rtools 3.4 (installed at C:\RBuildTools\3.4)
+  - Rtools 3.4 (installed at C:\RBuildTools\3.4)
+  - Rtools 3.5 (installed at C:\Rtools)
+```
+
+I downloaded the newest version of Rtools 4.0 and I thought that it will mute this warning. Unfortunately it didn't. Somehow R couldn't find the path to the new Rtools. By calling following function the new Rtools couldn't be found:
+
+```{}
+Sys.getenv("PATH")
+```
+
+Therefore, I had to add manually `PATH` to the Rtools to the system environment. I used the `edit_r_profile` function from the `usethis` package to edit the Rprofile.
+
+```{}
+library(usethis)
+edit_r_profile()
+```
+
+By adding there a path to the new Rtools programme.
+
+```{}
+Sys.setenv(PATH = paste(Sys.getenv("PATH"), 
+                       "C:\\RTools40\\usr\\bin",
+                       sep = ";"))
+```
+
+Luckily, such changed finally solved the problem with the newest version of Rtools.
+
+Good luck with upgrading your R to 4.0.0 version and happy R coding!
+
+
