@@ -6,10 +6,20 @@
     <description>Recent content in Blog on Pawel Sobala</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 03 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Updating R to 4.0.0 - challenges</title>
+      <link>/blog/updating-r-to-4-0-0-challenges/</link>
+      <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/updating-r-to-4-0-0-challenges/</guid>
+      <description>body {text-align: justify}New R Version!On the April, 24th a new R version was released - version 4.0.0. The complete list of changes/bug fixes/etc. in the newest version is available here. In my opinion, following changes are the most crucial ones:
+A new syntax is offered for specifying _raw_ character constants similar to the one used in C++, where r ... can be used to define a literal string.</description>
+    </item>
     
     <item>
       <title>Calculating YTD return of EM curencies</title>

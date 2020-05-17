@@ -2,7 +2,6 @@
 <html lang="en-US">
 
 <head>
-	<meta name="generator" content="Hugo 0.62.0" />
 <meta charset="utf-8">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -16,24 +15,24 @@
 <meta property="og:site_name" content="Pawel Sobala" />
 <meta property="og:locale" content="en-US" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/" />
-<meta property="og:title" content="Pawel Sobala" />
-<meta property="twitter:title" content="Pawel Sobala">
+<meta property="og:url" content="/blog/updating-r-to-4-0-0-challenges/" />
+<meta property="og:title" content="Updating R to 4.0.0 - challenges" />
+<meta property="twitter:title" content="Updating R to 4.0.0 - challenges">
 
     <meta property="og:image" content="/img/logo.png">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:image" content="/img/logo.png">
 
-<meta property="og:description" content="A blog by Pawel Sobala">
-<meta property="twitter:description" content="A blog by Pawel Sobala">
+<meta property="og:description" content="Updating R to 4.0.0 from 3.6.3 - challenges">
+<meta property="twitter:description" content="Updating R to 4.0.0 from 3.6.3 - challenges">
 
 <title>
 
 
-    Pawel Sobala
+     Pawel Sobala - Updating R to 4.0.0 - challenges 
 
 </title>
-<link rel="canonical" href="/">
+<link rel="canonical" href="/blog/updating-r-to-4-0-0-challenges/">
 
 
 <style media="screen">
@@ -1069,8 +1068,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Pawel Sobala" />
-
 
 </head>
 
@@ -1078,7 +1075,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <body>
 
 
-<div class="header header-home column">
+<div class="header column">
 
     <div class="container">
         
@@ -1115,85 +1112,147 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
-            
-                <div class="posts">
-                
-                
-                
-                    <div class="page-heading">Latest posts</div>
-                    <ul>
-                    
-                    
-                        <li class="groupby">May, 2020</li>
-                        
-                            <li class="post-item">
-    <span class="meta">May 17, 2020</span>
     
-    <a href="/blog/updating-r-to-4-0-0-challenges/"><span>Updating R to 4.0.0 - challenges</span></a>
+    Updating R to 4.0.0 - challenges
     
-</li>
 
-                        
-                            <li class="post-item">
-    <span class="meta">May 3, 2020</span>
-    
-    <a href="/blog/analysis-of-em-curencies/"><span>Calculating YTD return of EM curencies</span></a>
-    
-</li>
+</div>
 
-                        
-                    
-                        <li class="groupby">Mar, 2020</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Mar 15, 2020</span>
-    
-    <a href="/blog/new-section-books/"><span>New Section - &#39;Books&#39;</span></a>
-    
-</li>
-
-                        
-                    
-                        <li class="groupby">Feb, 2020</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Feb 10, 2020</span>
-    
-    <a href="/blog/how-to-find-packages-on-cran-from-rstudio/"><span>How to find packages on CRAN from RStudio</span></a>
-    
-</li>
-
-                        
-                            <li class="post-item">
-    <span class="meta">Feb 7, 2020</span>
-    
-    <a href="/blog/creating-quickly-a-r-package/"><span>Creating quickly a R Package</span></a>
-    
-</li>
-
-                        
-                    
-                    </ul>
-
-                    
-                        <a href="./blog/" class="see-more">See more ...</a>
-                    
-                
                 </div>
-            
-
-            <div class="best-posts">
-            
-            
+                <div class="meta">
+                    <div class="date" title="Sun May 17 2020 00:00:00 UTC">May 17, 2020</div>
+                    
+                        
+                        <div class="author middot" title="Pawel Sobala">Pawel Sobala</div>
+                        
+                    
+                    
+                    <div class="reading-time middot">3 minute read</div>
+                    
+                    
+                      <div class="tags">
+                    
+                        <ul>
+                          
+                            <li class="middot"><a href="/tags/r">R</a> </li>
+                          
+                            <li class="middot"><a href="/tags/self-packages">Self Packages</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+    
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<div id="new-r-version" class="section level1">
+<h1>New R Version!</h1>
+<p>On the April, 24th a new R version was released - version 4.0.0. The complete list of changes/bug fixes/etc. in the newest version is available <a href="https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf">here</a>. In my opinion, following changes are the most crucial ones:</p>
+<ul>
+<li>A new syntax is offered for specifying <code>_raw_</code> character constants similar to the one used in C++, where r <code>...</code> can be used to define a literal string. This makes it easier to write strings containing backslashes or both single and double quotes.</li>
+<li>The language now uses a stringAsFactors = FALSE default, and thus by default no longer converts strings to factors in calls to <code>data.frame()</code> and <code>read.table()</code>. Many packages relied on the previous behavior and will need updating.</li>
+<li>matrix() now converts character columns to factors and factors to integers.</li>
+<li>Packages must be re-installed under the new version of R.</li>
+</ul>
+<p>Especially, the <code>stringAsFactors = FALSE</code> default option might crash some of the older R projects.</p>
+</div>
+<div id="experience-challenges" class="section level1">
+<h1>Experience / Challenges</h1>
+<p>In the past I’ve updated/reinstalled/uninstalled many R versions, so I thought that nothing is going to suprise me this time. I was wrong.</p>
+<p>This time for installation of the newest R version I used the <code>updateR()</code> function from the <code>installr</code> package. I run it directly from R and not from RStudio. In the past I had some problems later with packages when I opted for installation from R Studio. It worked perfectly until I wanted to load a package and start working on a small project. Then I reminded myself that for this R version I have to re-install the packages.</p>
+<div id="challenge-1-reinstalling-packages" class="section level2">
+<h2>Challenge 1: Reinstalling packages</h2>
+<p>As a lazy person, I wanted to simply use the RStudio built-in functionality of updating all R packages, by simply clicking on the <code>Tools</code> on the toolbar and then <code>Check for Packages Updates...</code>. I was so suprised when I got a message that almost all of my packages are up-to-date and on the list there wasn’t a package that I tried to load to the R environment. I googled a bit and the simplest solution was to run follwing bit of code to update all packages - inculding dependencies:</p>
+<pre><code>update.packages(ask=FALSE, checkBuilt=TRUE)</code></pre>
+<p>As I have plenty of installed packages, it took roughly 1 hour to get everything installed.</p>
+</div>
+<div id="challenge-2-installing-new-rtools-and-changing-.rprofile-file" class="section level2">
+<h2>Challenge 2: Installing new Rtools and changing .Rprofile file</h2>
+<p>During the installation of many packages I recieved following error:</p>
+<pre><code>WARNING: Rtools is required to build R packages but no version of Rtools compatible with the currently running version of R was found. Note that the following incompatible version(s) of Rtools were found:
+
+  - Rtools 3.4 (installed at C:\RBuildTools\3.4)
+  - Rtools 3.4 (installed at C:\RBuildTools\3.4)
+  - Rtools 3.5 (installed at C:\Rtools)</code></pre>
+<p>I downloaded the newest version of Rtools 4.0 and I thought that it will mute this warning. Unfortunately it didn’t. Somehow R couldn’t find the path to the new Rtools. By calling following function the new Rtools couldn’t be found:</p>
+<pre><code>Sys.getenv(&quot;PATH&quot;)</code></pre>
+<p>Therefore, I had to add manually <code>PATH</code> to the Rtools to the system environment. I used the <code>edit_r_profile</code> function from the <code>usethis</code> package to edit the Rprofile.</p>
+<pre><code>library(usethis)
+edit_r_profile()</code></pre>
+<p>By adding there a path to the new Rtools programme.</p>
+<pre><code>Sys.setenv(PATH = paste(Sys.getenv(&quot;PATH&quot;), 
+                       &quot;C:\\RTools40\\usr\\bin&quot;,
+                       sep = &quot;;&quot;))</code></pre>
+<p>Luckily, such changed finally solved the problem with the newest version of Rtools.</p>
+<p>Good luck with upgrading your R to 4.0.0 version and happy R coding!</p>
+</div>
+</div>
+
+
+            </div>
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="/img/back.svg" alt="back" />
+                    <a href="/blog/analysis-of-em-curencies/">Calculating YTD return of EM curencies</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                 <div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ps-disqus.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </div>
+            
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
 <div class="footer column">
     <div class="container">
 
