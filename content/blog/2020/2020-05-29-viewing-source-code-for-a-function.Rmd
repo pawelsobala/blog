@@ -1,0 +1,76 @@
+---
+title: Viewing source code for a function
+author: Pawel Sobala
+date: '2020-05-29'
+slug: viewing-source-code-for-a-function
+categories:
+  - R
+  - programming
+  - fucntion
+tags:
+  - R
+description: Desc
+hacker_news_id: ''
+lobsters_id: ''
+meta_img: /images/image.jpg
+---
+
+# Rationale
+
+Yesterday, I wanted to take a look at the source code of `cor.test()`{.r} function in R. I did what I usually do in such case - namely, I called the function and I expected to see the code straight way. 
+
+```{r example_cor_test}
+cor.test
+```
+
+Unfortunately, I didn't get the code but instead I recieved  information that it comes from a S3 generic function. More on this topic can be found in a great book "Advanced R" by Hadley Wickham, which is available for free on his [website](https://adv-r.hadley.nz/s3.html). I forgot, how to perform it, so it is always good to review the basics. 
+
+A great post on the overall topic of viewing source code is available on the [StackOverflow](https://stackoverflow.com/questions/19226816/how-can-i-view-the-source-code-for-a-function). This thread includes topics like:
+* The S3 method dispatch system
+* The S4 method dispatch system
+* Functions that call unexported functions
+* Functions that call compiled code
+* Compiled code in a package
+* Compiled code in a base package
+* Compiled code built into the R interpreter
+* Infix Operators
+
+At the end of this post I will highlight the most useful ideas in my opinion that are mentioned in this thread.
+
+The purpose of this post is to document, how one can quickly and efficiently investigate the underlying code of the `cor.test()`{.r} function.
+
+# Viewing source code
+
+As already noted, the `cor.test`{.r} function is a S3 generic function. For S3 classes, one can use the `methods`{.r} function to investigate it.
+
+```{r}
+methods("cor.test")
+```
+
+It turns out, one needs to call ``{.r} instead of `cor.test`{.r}. Please note that in the following R line `:::`{.r} is used to view the source code.
+
+```{r}
+head(stats:::cor.test.default)
+```
+
+Perfect, it works. Please note, that I used additionally the `head`{.r} function to print only the first 6 lines of the script. 
+
+## Useful tricks
+
+As mentioned in the introduction, below are listed functions that in my opinion are the most commonly used tricks that are mentioned in this [post](https://stackoverflow.com/questions/19226816/how-can-i-view-the-source-code-for-a-function) on StackOverflow.
+
+```{r}
+# Opening in RStudio a new window with a function:
+# invisible(edit(FUNCTION))
+# 
+# Function to find the source of a given function:
+# getAnywhere(FUNCTION)
+# 
+# Opening function in a new r script (outside RStudio):
+# edit(getAnywhere('rfcv'), file='source_rfcv.r')
+# 
+# Opening function in a new script in RStudio:
+# Just click on the function keeping F2 pressed
+```
+
+
