@@ -6,10 +6,20 @@
     <description>Recent content in R on Pawel Sobala</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Viewing source code for a function</title>
+      <link>/blog/viewing-source-code-for-a-function/</link>
+      <pubDate>Fri, 29 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/viewing-source-code-for-a-function/</guid>
+      <description>RationaleYesterday, I wanted to take a look at the source code of cor.test() function in R. I did what I usually do in such case - namely, I called the function and I expected to see the code straight way.
+cor.test## function (x, ...) ## UseMethod(&amp;quot;cor.test&amp;quot;)## &amp;lt;bytecode: 0x000000001463dcb8&amp;gt;## &amp;lt;environment: namespace:stats&amp;gt;Unfortunately, I didn’t get the code but instead I recieved information that it comes from a S3 generic function.</description>
+    </item>
     
     <item>
       <title>Updating R to 4.0.0 - challenges</title>

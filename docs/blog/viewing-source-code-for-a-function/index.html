@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="Pawel Sobala" />
 <meta property="og:locale" content="en-US" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/tags/r/" />
-<meta property="og:title" content="R" />
-<meta property="twitter:title" content="R">
+<meta property="og:url" content="/blog/viewing-source-code-for-a-function/" />
+<meta property="og:title" content="Viewing source code for a function" />
+<meta property="twitter:title" content="Viewing source code for a function">
 
-    <meta property="og:image" content="/img/logo.png">
+    <meta property="og:image" content="//images/image.jpg">
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:image" content="/img/logo.png">
+    <meta property="twitter:image" content="//images/image.jpg">
 
-<meta property="og:description" content="">
-<meta property="twitter:description" content="">
+<meta property="og:description" content="Desc">
+<meta property="twitter:description" content="Desc">
 
 <title>
 
 
-     Pawel Sobala - R 
+     Pawel Sobala - Viewing source code for a function 
 
 </title>
-<link rel="canonical" href="/tags/r/">
+<link rel="canonical" href="/blog/viewing-source-code-for-a-function/">
 
 
 <style media="screen">
@@ -1068,8 +1068,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="/tags/r/index.xml" rel="alternate" type="application/rss+xml" title="Pawel Sobala" />
-
 
 </head>
 
@@ -1077,7 +1075,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <body>
 
 
-<div class="header header-home column">
+<div class="header column">
 
     <div class="container">
         
@@ -1114,50 +1112,156 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            <div class="posts">
-                <div class="page-heading">Posts about R</div>
-                <ul>
-                    
-                        <li class="post-item">
-    <span class="meta">Mar 15, 2020</span>
-    
-    <a href="/blog/new-section-books/"><span>New Section - &#39;Books&#39;</span></a>
-    
-</li>
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
-                    
-                        <li class="post-item">
-    <span class="meta">May 3, 2020</span>
     
-    <a href="/blog/analysis-of-em-curencies/"><span>Calculating YTD return of EM curencies</span></a>
+    Viewing source code for a function
     
-</li>
 
-                    
-                        <li class="post-item">
-    <span class="meta">May 17, 2020</span>
-    
-    <a href="/blog/updating-r-to-4-0-0-challenges/"><span>Updating R to 4.0.0 - challenges</span></a>
-    
-</li>
+</div>
 
+                </div>
+                <div class="meta">
+                    <div class="date" title="Fri May 29 2020 00:00:00 UTC">May 29, 2020</div>
                     
-                        <li class="post-item">
-    <span class="meta">May 29, 2020</span>
-    
-    <a href="/blog/viewing-source-code-for-a-function/"><span>Viewing source code for a function</span></a>
-    
-</li>
-
+                        
+                        <div class="author middot" title="Pawel Sobala">Pawel Sobala</div>
+                        
                     
-                </ul>
+                    
+                    <div class="reading-time middot">3 minute read</div>
+                    
+                    
+                      <div class="tags">
+                    
+                        <ul>
+                          
+                            <li class="middot"><a href="/tags/r">R</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                            
+                          
+                          
+                            
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+    
+
+
+<div id="rationale" class="section level1">
+<h1>Rationale</h1>
+<p>Yesterday, I wanted to take a look at the source code of <code class="r">cor.test()</code> function in R. I did what I usually do in such case - namely, I called the function and I expected to see the code straight way.</p>
+<pre class="r"><code>cor.test</code></pre>
+<pre><code>## function (x, ...) 
+## UseMethod(&quot;cor.test&quot;)
+## &lt;bytecode: 0x000000001463dcb8&gt;
+## &lt;environment: namespace:stats&gt;</code></pre>
+<p>Unfortunately, I didn’t get the code but instead I recieved information that it comes from a S3 generic function. More on this topic can be found in a great book “Advanced R” by Hadley Wickham, which is available for free on his <a href="https://adv-r.hadley.nz/s3.html">website</a>. I forgot, how to perform it, so it is always good to review the basics.</p>
+<p>A great post on the overall topic of viewing source code is available on the <a href="https://stackoverflow.com/questions/19226816/how-can-i-view-the-source-code-for-a-function">StackOverflow</a>. This thread includes topics like:
+* The S3 method dispatch system
+* The S4 method dispatch system
+* Functions that call unexported functions
+* Functions that call compiled code
+* Compiled code in a package
+* Compiled code in a base package
+* Compiled code built into the R interpreter
+* Infix Operators</p>
+<p>At the end of this post I will highlight the most useful ideas in my opinion that are mentioned in this thread.</p>
+<p>The purpose of this post is to document, how one can quickly and efficiently investigate the underlying code of the <code class="r">cor.test()</code> function.</p>
+</div>
+<div id="viewing-source-code" class="section level1">
+<h1>Viewing source code</h1>
+<p>As already noted, the <code class="r">cor.test</code> function is a S3 generic function. For S3 classes, one can use the <code class="r">methods</code> function to investigate it.</p>
+<pre class="r"><code>methods(&quot;cor.test&quot;)</code></pre>
+<pre><code>## [1] cor.test.default* cor.test.formula*
+## see &#39;?methods&#39; for accessing help and source code</code></pre>
+<p>It turns out, one needs to call `<code>{.r} instead of</code>cor.test<code>{.r}. Please note that in the following R line</code>:::`{.r} is used to view the source code.</p>
+<pre class="r"><code>head(stats:::cor.test.default)</code></pre>
+<pre><code>##                                                                    
+## 1 function (x, y, alternative = c(&quot;two.sided&quot;, &quot;less&quot;, &quot;greater&quot;), 
+## 2     method = c(&quot;pearson&quot;, &quot;kendall&quot;, &quot;spearman&quot;), exact = NULL,  
+## 3     conf.level = 0.95, continuity = FALSE, ...)                  
+## 4 {                                                                
+## 5     alternative &lt;- match.arg(alternative)                        
+## 6     method &lt;- match.arg(method)</code></pre>
+<p>Perfect, it works. Please note, that I used additionally the <code class="r">head</code> function to print only the first 6 lines of the script.</p>
+<div id="useful-tricks" class="section level2">
+<h2>Useful tricks</h2>
+<p>As mentioned in the introduction, below are listed functions that in my opinion are the most commonly used tricks that are mentioned in this <a href="https://stackoverflow.com/questions/19226816/how-can-i-view-the-source-code-for-a-function">post</a> on StackOverflow.</p>
+<pre class="r"><code># Opening in RStudio a new window with a function:
+# invisible(edit(FUNCTION))
+# 
+# Function to find the source of a given function:
+# getAnywhere(FUNCTION)
+# 
+# Opening function in a new r script (outside RStudio):
+# edit(getAnywhere(&#39;rfcv&#39;), file=&#39;source_rfcv.r&#39;)
+# 
+# Opening function in a new script in RStudio:
+# Just click on the function keeping F2 pressed</code></pre>
+</div>
+</div>
+
+
+            </div>
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="/img/back.svg" alt="back" />
+                    <a href="/blog/updating-r-to-4-0-0-challenges/">Updating R to 4.0.0 - challenges</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                 <div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://ps-disqus.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </div>
+            
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
 <div class="footer column">
     <div class="container">
 
