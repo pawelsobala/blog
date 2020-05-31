@@ -1,0 +1,130 @@
+---
+title: "Thoughts on using the pins package"
+description: Pins package - pin, discover and share resources
+author: "Pawel Sobala"
+date: "2020-05-31"
+slug: thoughts-on-using-the-pins-package
+categories: ["R", "Packages", "pins", "git"]
+tags: ["R", "Git", "R Package"]
+output: html_document
+#output: 
+#  html_document:
+#    keep_md: true
+#    toc: true
+#    toc_depth: 3
+#    toc_float: 
+#      collapsed: false
+#      smooth_scroll: true
+#    number_sections: true  ## if you want number sections at each table header
+#    theme: united  # many options for theme, this one is my favorite.
+#    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+# library(rstudioapi)
+library(pins)
+# setwd("~/Documents/R/Blogdown/pawel_hugo_blog/content/post")
+rm(list=ls())
+options(scipen=999)
+
+# rstudioapi::isAvailable()
+pins::board_register("github", 
+                      name = "rstudio_data", 
+                      repo = "pawelsobala/rstudio_data", 
+                      # token = rstudioapi::askForPassword("Please provide your password"))
+                     # token =askpass::askpass())
+)
+# Other option that didn't work was to use either rstudioapi or askpass R package.
+# 
+# Please note that I had to wrap a standard `pin()`{.r} function in a `rstudioapi::isAvailable()`{.r} function to compile this post. More info on this issue at the end of this post.
+### Great tutorial on R Markdown: https://rstudio-pubs-static.s3.amazonaws.com/180546_e2d5bf84795745ebb5cd3be3dab71fca.html#1_welcome
+```
+
+
+Today while reading a great post on IPO returns and in general IPO exploration on the [Reproducible Finance](http://www.reproduciblefinance.com/2019/11/15/ipo-exploration-part-ii/) blog, I have stumbled upon a `pins`{.r} package which I never heard of. I instantly loved the concepts that this package presents to its users. In the following, I am not going to write about how to install the package and about many use cases. I will focus on my thoughts on using this package and simple use cases. In case you're interested in reading more about `pins`{.r} package, then I recommend following [post](https://blog.rstudio.com/2019/09/09/pin-discover-and-share-resources/) on the RStudio blog or a [dedicated site](http://pins.rstudio.com) for the `pins`{.r} package. More details on the general data connection from the RStudio are available in [this](https://blog.rstudio.com/2017/08/16/rstudio-preview-connections/) blog post on the RStudio blog. 
+
+# What's the fuss all about?
+
+Well, the fuss is not only about sharing resources with other users to many services (e.g. Kaggle, GitHub, Azure, Google Cloud) or about connecting to any data source on your system. It is also about discovering remote resources. Firstly, I will focus on the former case - sharing resources. In my case, for my projects I download financial, economic data from many sources, which I reuse later in another projects. What is more, I am using multiple machines, so storing data on a local drive is not an option. In the past I already utilized github, as a storage for resources but it was a bit more complicated than the approach provided by the `pins`{.r} package. I am not going to bother you with description of a sub-optimal process. The short message is that the `pins`{.r} package makes coding and storing data sets way easier than before. Speaking about the latter case - discovering remote resources, I will explore later this feature in this blog post.  
+
+# Sharing resources
+
+The first step to store own data on a github straight from RStudio is to register a board. In other words, enable connection to external resource/storage. It is also possible to activate a connection though a "Connections" pane on the right-hand side in RStudio.
+
+```{r board_register_fun}
+# board_register(board, name = board, cache = board_cache_path(),
+#   versions = NULL, ...)
+# board="github"
+# name = "your_dataset_name" 
+# repo = "your_github_name/repo_name",
+```
+
+Saving a data set in github is extremely quick and easy. 
+
+```{r warning=FALSE}
+test_tibble <- mtcars %>% 
+  as_tibble()
+
+pins::pin(
+  x = test_tibble,
+  name = "test_tibble",
+  description = "as.tibble(mtcars)",
+  board = "rstudio_data"
+)
+
+```
+
+Accessing any data set saved on github is easy as one-two-three.
+
+```{r warning=FALSE}
+test_tibble_gh <-
+  pins::pin_get(
+  name = "test_tibble",
+  board = "rstudio_data"
+)
+```
+
+What is important is that the structure of the data is preserved. In the following I compare object `test_tibble`{.r}, which was created within RStudio and `test_tibble_gh`{.r} that is downloaded from github.
+
+```{r warning=FALSE}
+(
+  test_tibble_gh == test_tibble
+) %>% 
+  all()
+```
+
+All in all, sharing resources is a great feature that was already available but now it is extremely user friendly.
+
+# Discovering remote resources
+
+What is new to me is the feature of discovering remote resources from the level of RStudio. Let's say I am interested in finding any stock
+related resources in existing packages.
+
+```{r warning=FALSE}
+stock_found_db <- pin_find("stock", board = "packages")
+stock_found_db %>% glimpse()
+stock_found_db %>% 
+  head()
+```
+
+I got a list of `nrow(stock_found_dbs)`{.r} resources, where any data related to stocks is stored. I explored `stock_found_db`{.r} data set and I became interested in exploring the `stocks/vanguard_stock_etfs`{.r} data set from the `stocks`{.r} package. This package is from 2018, so I don't expect up-to-date data. On the other hand, it is a quiet convenient way to look for packages in a specific area that you're working in.  
+
+
+```{r warning=FALSE}
+vanguard_stock_etfs_list <- pin_get("stocks/vanguard_stock_etfs")
+vanguard_stock_etfs_list %>% 
+  head()
+```
+
+In the above example I covered only a basic board. To get more details on available boards please refer to [this](https://pins.rstudio.com/articles/boards-understanding.html) article on RStudio blog. To sum up, I highly recommend this package to anyone who frequently reuses data objects in various different projects. It can be also a great way to create a process for automatic update of your data - more details [here](https://pins.rstudio.com/articles/use-cases/automate-dataset-updates.html).
+
+### Note
+
+This post wouldn't be created without solving "RStudio not running" issue, which occurred when connecting to GitHub through `pins`{.r} package. When a .Rmd document is being knit, a new R session is created. Therefore, an external connection is established and needs to be either automatically assess or created via a 'rstudioapi'{.r} package. The `rstudioapi` approach didn't work for me. In case you're interested in this approach - more details on this issue and how to solve it, can be found [here](https://github.com/rstudio/rstudio/issues/1738). What finally worked for me was a modification of a `.Renviron` file using `usethis`{.r} package. More details on this approach in a fantastic book [Happy Git with R](https://happygitwithr.com/github-pat.html#step-by-step).

@@ -4,21 +4,66 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2020-05-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-05-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/fucntion/</loc>
-    <lastmod>2020-05-29T00:00:00+00:00</lastmod>
+    <loc>/tags/git/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/git/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/packages/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/pins/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r-package/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/thoughts-on-using-the-pins-package/</loc>
+    <lastmod>2020-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/fucntion/</loc>
     <lastmod>2020-05-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -28,28 +73,8 @@
   </url>
   
   <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2020-05-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2020-05-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-05-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/blog/viewing-source-code-for-a-function/</loc>
     <lastmod>2020-05-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/packages/</loc>
-    <lastmod>2020-05-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -63,12 +88,12 @@
   </url>
   
   <url>
-    <loc>/categories/analysis/</loc>
+    <loc>/tags/analysis/</loc>
     <lastmod>2020-05-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/analysis/</loc>
+    <loc>/categories/analysis/</loc>
     <lastmod>2020-05-03T00:00:00+00:00</lastmod>
   </url>
   
@@ -133,11 +158,6 @@
   </url>
   
   <url>
-    <loc>/tags/git/</loc>
-    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/kohonen/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url>
@@ -149,11 +169,6 @@
   
   <url>
     <loc>/categories/r-package/</loc>
-    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r-package/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url>
   

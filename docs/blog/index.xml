@@ -6,10 +6,19 @@
     <description>Recent content in Blog on Pawel Sobala</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 29 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Thoughts on using the pins package</title>
+      <link>/blog/thoughts-on-using-the-pins-package/</link>
+      <pubDate>Sun, 31 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/thoughts-on-using-the-pins-package/</guid>
+      <description>body {text-align: justify}Today while reading a great post on IPO returns and in general IPO exploration on the Reproducible Finance blog, I have stumbled upon a pins package which I never heard of. I instantly loved the concepts that this package presents to its users. In the following, I am not going to write about how to install the package and about many use cases. I will focus on my thoughts on using this package and simple use cases.</description>
+    </item>
     
     <item>
       <title>Viewing source code for a function</title>

@@ -1,0 +1,107 @@
+---
+title: "Thoughts on using the pins package"
+description: Pins package - pin, discover and share resources
+author: "Pawel Sobala"
+date: "2020-05-31"
+slug: thoughts-on-using-the-pins-package
+categories: ["R", "Packages", "pins", "git"]
+tags: ["R", "Git", "R Package"]
+output: html_document
+#output: 
+#  html_document:
+#    keep_md: true
+#    toc: true
+#    toc_depth: 3
+#    toc_float: 
+#      collapsed: false
+#      smooth_scroll: true
+#    number_sections: true  ## if you want number sections at each table header
+#    theme: united  # many options for theme, this one is my favorite.
+#    highlight: tango  # specifies the syntax highlighting style - tango # https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/
+---
+
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<p>Today while reading a great post on IPO returns and in general IPO exploration on the <a href="http://www.reproduciblefinance.com/2019/11/15/ipo-exploration-part-ii/">Reproducible Finance</a> blog, I have stumbled upon a <code class="r">pins</code> package which I never heard of. I instantly loved the concepts that this package presents to its users. In the following, I am not going to write about how to install the package and about many use cases. I will focus on my thoughts on using this package and simple use cases. In case you’re interested in reading more about <code class="r">pins</code> package, then I recommend following <a href="https://blog.rstudio.com/2019/09/09/pin-discover-and-share-resources/">post</a> on the RStudio blog or a <a href="http://pins.rstudio.com">dedicated site</a> for the <code class="r">pins</code> package. More details on the general data connection from the RStudio are available in <a href="https://blog.rstudio.com/2017/08/16/rstudio-preview-connections/">this</a> blog post on the RStudio blog.</p>
+<div id="whats-the-fuss-all-about" class="section level1">
+<h1>What’s the fuss all about?</h1>
+<p>Well, the fuss is not only about sharing resources with other users to many services (e.g. Kaggle, GitHub, Azure, Google Cloud) or about connecting to any data source on your system. It is also about discovering remote resources. Firstly, I will focus on the former case - sharing resources. In my case, for my projects I download financial, economic data from many sources, which I reuse later in another projects. What is more, I am using multiple machines, so storing data on a local drive is not an option. In the past I already utilized github, as a storage for resources but it was a bit more complicated than the approach provided by the <code class="r">pins</code> package. I am not going to bother you with description of a sub-optimal process. The short message is that the <code class="r">pins</code> package makes coding and storing data sets way easier than before. Speaking about the latter case - discovering remote resources, I will explore later this feature in this blog post.</p>
+</div>
+<div id="sharing-resources" class="section level1">
+<h1>Sharing resources</h1>
+<p>The first step to store own data on a github straight from RStudio is to register a board. In other words, enable connection to external resource/storage. It is also possible to activate a connection though a “Connections” pane on the right-hand side in RStudio.</p>
+<pre class="r"><code># board_register(board, name = board, cache = board_cache_path(),
+#   versions = NULL, ...)
+# board=&quot;github&quot;
+# name = &quot;your_dataset_name&quot; 
+# repo = &quot;your_github_name/repo_name&quot;,</code></pre>
+<p>Saving a data set in github is extremely quick and easy.</p>
+<pre class="r"><code>test_tibble &lt;- mtcars %&gt;% 
+  as_tibble()
+
+pins::pin(
+  x = test_tibble,
+  name = &quot;test_tibble&quot;,
+  description = &quot;as.tibble(mtcars)&quot;,
+  board = &quot;rstudio_data&quot;
+)</code></pre>
+<p>Accessing any data set saved on github is easy as one-two-three.</p>
+<pre class="r"><code>test_tibble_gh &lt;-
+  pins::pin_get(
+  name = &quot;test_tibble&quot;,
+  board = &quot;rstudio_data&quot;
+)</code></pre>
+<p>What is important is that the structure of the data is preserved. In the following I compare object <code class="r">test_tibble</code>, which was created within RStudio and <code class="r">test_tibble_gh</code> that is downloaded from github.</p>
+<pre class="r"><code>(
+  test_tibble_gh == test_tibble
+) %&gt;% 
+  all()</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>All in all, sharing resources is a great feature that was already available but now it is extremely user friendly.</p>
+</div>
+<div id="discovering-remote-resources" class="section level1">
+<h1>Discovering remote resources</h1>
+<p>What is new to me is the feature of discovering remote resources from the level of RStudio. Let’s say I am interested in finding any stock
+related resources in existing packages.</p>
+<pre class="r"><code>stock_found_db &lt;- pin_find(&quot;stock&quot;, board = &quot;packages&quot;)
+stock_found_db %&gt;% glimpse()</code></pre>
+<pre><code>## Rows: 112
+## Columns: 4
+## $ name        &lt;chr&gt; &quot;ACSWR/rootstock&quot;, &quot;ACSWR/shelf_stock&quot;, &quot;AER/BenderlyZw...
+## $ description &lt;chr&gt; &quot;Apple of Different Rootstock from ACSWR package.&quot;, &quot;Th...
+## $ type        &lt;chr&gt; &quot;table&quot;, &quot;table&quot;, &quot;table&quot;, &quot;table&quot;, &quot;table&quot;, &quot;table&quot;, &quot;...
+## $ board       &lt;chr&gt; &quot;packages&quot;, &quot;packages&quot;, &quot;packages&quot;, &quot;packages&quot;, &quot;packag...</code></pre>
+<pre class="r"><code>stock_found_db %&gt;% 
+  head()</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   name          description                                         type  board 
+##   &lt;chr&gt;         &lt;chr&gt;                                               &lt;chr&gt; &lt;chr&gt; 
+## 1 ACSWR/rootst~ &quot;Apple of Different Rootstock from ACSWR package.&quot;  table packa~
+## 2 ACSWR/shelf_~ &quot;The Shelf-Stocking Data from ACSWR package.&quot;       table packa~
+## 3 AER/Benderly~ &quot;Benderly and Zwick Data: Inflation, Growth and St~ table packa~
+## 4 AER/USMacroSW &quot;US Macroeconomic Data (1957--2005, Stock \\&amp; Wats~ table packa~
+## 5 AER/USMacroS~ &quot;Monthly US Macroeconomic Data (1947--2004, Stock ~ table packa~
+## 6 AER/USMacroS~ &quot;Quarterly US Macroeconomic Data (1947--2004, Stoc~ table packa~</code></pre>
+<p>I got a list of <code class="r">nrow(stock_found_dbs)</code> resources, where any data related to stocks is stored. I explored <code class="r">stock_found_db</code> data set and I became interested in exploring the <code class="r">stocks/vanguard_stock_etfs</code> data set from the <code class="r">stocks</code> package. This package is from 2018, so I don’t expect up-to-date data. On the other hand, it is a quiet convenient way to look for packages in a specific area that you’re working in.</p>
+<pre class="r"><code>vanguard_stock_etfs_list &lt;- pin_get(&quot;stocks/vanguard_stock_etfs&quot;)
+vanguard_stock_etfs_list %&gt;% 
+  head()</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   ticker start.date
+##   &lt;chr&gt;  &lt;date&gt;    
+## 1 VIG    2006-05-02
+## 2 VUG    2004-01-30
+## 3 VYM    2006-11-16
+## 4 VV     2004-01-30
+## 5 MGC    2007-12-27
+## 6 MGK    2007-12-27</code></pre>
+<p>In the above example I covered only a basic board. To get more details on available boards please refer to <a href="https://pins.rstudio.com/articles/boards-understanding.html">this</a> article on RStudio blog. To sum up, I highly recommend this package to anyone who frequently reuses data objects in various different projects. It can be also a great way to create a process for automatic update of your data - more details <a href="https://pins.rstudio.com/articles/use-cases/automate-dataset-updates.html">here</a>.</p>
+<div id="note" class="section level3">
+<h3>Note</h3>
+<p>This post wouldn’t be created without solving “RStudio not running” issue, which occurred when connecting to GitHub through <code class="r">pins</code> package. When a .Rmd document is being knit, a new R session is created. Therefore, an external connection is established and needs to be either automatically assess or created via a ‘rstudioapi’{.r} package. The <code>rstudioapi</code> approach didn’t work for me. In case you’re interested in this approach - more details on this issue and how to solve it, can be found <a href="https://github.com/rstudio/rstudio/issues/1738">here</a>. What finally worked for me was a modification of a <code>.Renviron</code> file using <code class="r">usethis</code> package. More details on this approach in a fantastic book <a href="https://happygitwithr.com/github-pat.html#step-by-step">Happy Git with R</a>.</p>
+</div>
+</div>

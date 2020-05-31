@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Git on Pawel Sobala</title>
-    <link>/tags/git/</link>
-    <description>Recent content in Git on Pawel Sobala</description>
+    <title>git on Pawel Sobala</title>
+    <link>/categories/git/</link>
+    <description>Recent content in git on Pawel Sobala</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 31 May 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>/blog/thoughts-on-using-the-pins-package/</guid>
       <description>body {text-align: justify}Today while reading a great post on IPO returns and in general IPO exploration on the Reproducible Finance blog, I have stumbled upon a pins package which I never heard of. I instantly loved the concepts that this package presents to its users. In the following, I am not going to write about how to install the package and about many use cases. I will focus on my thoughts on using this package and simple use cases.</description>
-    </item>
-    
-    <item>
-      <title>Creating quickly a R Package</title>
-      <link>/blog/creating-quickly-a-r-package/</link>
-      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/creating-quickly-a-r-package/</guid>
-      <description>body {text-align: justify}MotivationFor my next post on Self Organizing Maps I started researching different ways on how to determine the quality of a map. Firstly, I found this article entitled “Evaluating Self-Organizing Map Quality Measures as Convergence Criteria”, which contains a couple of different measures on approaching the problem. Alongside it, I found R code in this thesis, which was used in the aforementioned article.</description>
     </item>
     
   </channel>
